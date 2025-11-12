@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 public class Ingrediente {
 
 @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="id_ingrediente")
 private int idIngrediente;
 

@@ -30,6 +30,18 @@ public class IngredienteController {
         List<Ingrediente> ingredientes = repo.findAll();
         return ResponseEntity.ok(ingredientes);
     }
+    
+
+    //Prueba de pgv
+
+    @GetMapping("/hello")
+    public String HelloController(@RequestParam(value= "nombre", defaultValue = "world") String nombre) {
+    
+    return String.format("Hello %s %d!", nombre, 2);        
+    }
+
+    //Prueba de pgv
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerIngrediente(@PathVariable int id) {

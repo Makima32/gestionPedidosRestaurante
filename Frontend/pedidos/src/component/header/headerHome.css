@@ -1,0 +1,68 @@
+
+.header {
+  background-color: red;
+  top: 0px;
+  margin-top: 0px;
+  width: 100vw;
+}
+
+.header_div {
+  display: flex;
+  align-items: center;   
+  flex-wrap: nowrap;    
+  flex-direction: row;
+  justify-content: space-between;
+    
+  height: 15vh;
+}
+.header_div_img_div {
+  display: flex;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5rem;
+  height: 100%;
+}
+.header_div_img_div img {
+  width: 8vw;
+  height: 100%;
+}
+.header_nav_div{
+
+    
+    font-size: 1.3rem;
+}
+.header_nav_div a {
+  text-decoration: none; 
+  color: white; 
+  margin: 0 15px; 
+  font-weight: 500; 
+}
+
+.header_nav_div a:hover {
+
+  color: #c28888; 
+
+
+
+}
+
+.header_account_div {
+    display: flex;           
+    align-items: center;        
+    justify-content: baseline;    
+    background-color: #918282;
+    border-radius: 3rem;        
+    height: 40%;              
+    width: 180px;               
+    padding: 0.5rem;          
+    gap: 0.5rem;        
+    margin-right: 3rem;
+}
+
+.header_account_div img {
+    height: 50px;              /* tamaño más pequeño */
+    width: 50px;               /* cuadrado proporcional */
+    border-radius: 50%;        /* opcional: redondear icono */
+}
