@@ -1,0 +1,51 @@
+.headerAdmin {
+  background-color: red;
+  top: 0;
+  margin-top: 0;
+  width: 100vw;
+}
+
+.header_div_Admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  height: 15vh;
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.header_div_img_div_admin {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.header_div_img_div_admin img {
+  width: 8vw;
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+.header_nav_div_Admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; 
+  margin-right: 7rem ;
+  gap: 30px; 
+}
+
+.header_nav_div_Admin a {
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header_nav_div_Admin a:hover {
+  color: #c28888;
+}

@@ -31,9 +31,10 @@
 .header_nav_div{
 
     
-    font-size: 1.3rem;
 }
 .header_nav_div a {
+    font-size: 1.6rem;
+
   text-decoration: none; 
   color: white; 
   margin: 0 15px; 
