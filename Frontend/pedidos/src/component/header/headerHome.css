@@ -1,6 +1,6 @@
 
 .header {
-  background-color: red;
+  background-color: #727D3A;
   top: 0px;
   margin-top: 0px;
   width: 100vw;
@@ -53,7 +53,7 @@
     display: flex;           
     align-items: center;        
     justify-content: baseline;    
-    background-color: #918282;
+    background-color: #D9D9D9;
     border-radius: 3rem;        
     height: 40%;              
     width: 180px;               

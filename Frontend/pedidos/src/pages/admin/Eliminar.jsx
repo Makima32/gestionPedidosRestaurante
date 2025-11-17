@@ -1,19 +1,20 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Visualizar from "../../component/visualizar/Visualizar";
 import Header_admin from "../../component/header_admin/headerAdmin";
+import Eliminar from "../../component/eliminar/eliminar";
 
-function VisualizarPage() {
+function EliminarPage() {
  
   
   return (
 <>
-    <Header_admin/>
-   <Visualizar/>
   
+  <Header_admin/>
+   <Eliminar/>
+
   
   </>
   );
 }
 
-export default VisualizarPage;
+export default EliminarPage;

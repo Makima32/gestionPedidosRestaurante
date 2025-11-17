@@ -6,11 +6,11 @@
   height: 75vh;
 }
 
+
 .crud_div_daugther {
   display: flex;
   flex-direction: column; 
   justify-content: space-between; 
-  align-items: stretch;
   width: 70%;
   height: 80%;
   border-radius: 10px;
@@ -21,6 +21,7 @@
 .crud_row {
   display: flex;
   justify-content: space-between; 
+
 }
 
 .crud_row a {
@@ -36,13 +37,13 @@
   cursor: pointer;
   border: none;
   border-radius: 12px;
-  background-color: #ff6b6b;
+  background-color: #C47F5A;
   color: white;
   transition: background-color 0.3s ease;
 }
 
 .crud_div_daugther button:hover {
-  background-color: #ff4c4c;
+  background-color: #D9D9D9;
 }
 
 h2{

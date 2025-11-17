@@ -12,7 +12,7 @@ function Header_admin() {
        
         <div className="header_div_img_div_admin">
 
-        <img src="logo.png" alt="43" />
+        <img src="/logo.png" alt="logo" />
         </div>
         
         <div className="header_nav_div_Admin">

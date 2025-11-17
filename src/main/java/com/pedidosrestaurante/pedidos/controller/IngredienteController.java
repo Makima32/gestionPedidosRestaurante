@@ -11,8 +11,11 @@ import com.pedidosrestaurante.pedidos.repository.IngredienteRepository;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/ingredientes")
+
 public class IngredienteController {
 
     @Autowired
