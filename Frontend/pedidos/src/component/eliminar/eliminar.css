@@ -5,8 +5,7 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: aliceblue;
-    height: 70vh ;
+    height: 70vh;
     gap: 50px;
 
 }
@@ -53,4 +52,27 @@
 
     font-size: 1.5rem;
     text-align: center;
+}
+
+
+.buttomDeleteDiv button{
+
+    background-color: transparent;
+    border-width: 0px;
+    border-radius: 1.5rem;
+    transition: background-color 0.3s ease;
+
+}
+.buttomDeleteDiv img{
+
+    width: 100px;
+    height: 100px;
+}
+
+
+.buttomDeleteDiv button:hover {
+  transform: scale(1.05); 
+
+
+    
 }

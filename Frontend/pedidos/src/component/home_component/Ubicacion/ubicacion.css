@@ -1,0 +1,26 @@
+.ubicacion_div_father{
+
+    display: flex;
+    align-items: center;
+    align-content: center;
+       flex-direction: column;
+    flex-wrap: wrap;
+  justify-content: center; 
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.ubicacion_div_map_container iframe{
+
+    margin-top: 15px;
+    border-radius: 1rem;
+    height: 65vh;
+    width: 50vw;
+}
+
+.ubicacion_div_father h2{
+
+    font-size: 3rem;
+    color: #AC7E2F;
+}

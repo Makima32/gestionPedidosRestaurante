@@ -1,0 +1,31 @@
+.cards_div_father{
+
+
+    background-color: red;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 35px;
+}
+
+.card {
+    width: 30vw;
+    height: 80vh;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;    /* centra horizontalmente */
+    padding-top: 1rem;      /* espacio opcional desde arriba */
+}
+
+.card img {
+    width: 50%;
+    padding-bottom: 1rem;   /* espacio entre imagen y texto */
+    margin-top: 0;           /* asegura que esté pegada al top */
+}
+
+.card h3 {
+    margin-top: 0;           /* quita margen superior */
+}

@@ -1,0 +1,12 @@
+.paralax {
+  width: 100vw;
+  height: 20vh;
+
+  background-attachment: fixed;
+  /* Asegura que la imagen de fondo cubra todo el área */
+  background-size: cover;
+  /* Define una altura mínima para la sección */
+  min-height: 400px;
+  /* Crea el efecto de centrado para el contenido */
+  position: relative;
+}

@@ -1,0 +1,29 @@
+
+.AboutUs2_div_father{
+
+    display: flex;
+    flex-direction: column;
+
+    height: 90vh;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+
+  
+    font-size: 1.4rem;
+}
+
+.AboutUs2_div_father h2{
+
+    font-size: 3rem;
+}
+
+.AboutUs2_div_father p{
+
+    text-align: center;
+}
+.AboutUs2_div_content{
+  width: 45vw;
+    height: 50vh;
+}

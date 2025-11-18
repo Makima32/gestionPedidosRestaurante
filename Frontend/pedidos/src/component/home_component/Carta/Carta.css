@@ -1,0 +1,78 @@
+.carta_div_father {
+
+  display: flex;
+   align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+  width: 100vw;
+  height: 100vh;
+}
+
+.carta_div_img {
+
+  height: 80vh;
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rem;
+  
+}
+
+.carta_div_img img {
+
+  height: 75%;
+}
+
+.carta_div_information {
+ height: 80vh;
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.carta_div_information h2{
+
+  font-size: 3rem;
+  color: #AC7E2F;
+}
+
+.carta_div_information p{
+
+    color: #323128;
+    font-size: 1.5rem;
+}
+
+
+.carta_div_information_content{
+
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.carta_div_information_content button{
+
+  margin-top: 40px;
+
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  transition: all 0.3s ease; 
+  cursor: pointer;
+}
+
+.carta_div_information_content button:hover{
+
+  background-color: rgb(151, 130, 130);
+}
+
+.carta_div_information_content{
+
+  text-align: center;
+
+}

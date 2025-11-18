@@ -6,9 +6,9 @@ import AdminPedidosPage from "./pages/admin/AdminPedidos";
 import AdminclientesPage from "./pages/admin/adminClientes";
 import AdminMesasPage from "./pages/admin/adminMesas";
 import AdminReservasPage from "./pages/admin/adminReservas";
-import Visualizar from "./pages/admin/visualizar";
 import VisualizarPage from "./pages/admin/visualizar";
 import EliminarPage from "./pages/admin/Eliminar";
+import AboutUsPage from "./pages/AboutUs";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
         <Route path="/adminReservas" element={<AdminReservasPage />} />
         <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
+        <Route path="/aboutUs" element={<AboutUsPage />} />
         
       </Routes>
     </Router>
