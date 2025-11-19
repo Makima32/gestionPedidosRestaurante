@@ -8,7 +8,7 @@ import Ubicacion from "../component/home_component/Ubicacion/ubicacion";
 function Home() {
   return (
     <>
-      <Header_home paginaInicial={false} />
+      <Header_home paginaInicial={true} />
       <StartBanner />
 
       <About_Us />

@@ -3,29 +3,26 @@ import { Link } from "react-router-dom";
 import "./Headerhome.css";
 
 function Header_home({ paginaInicial }) {
-  const [mostrar, setMostrar] = useState(!paginaInicial); 
-  // si paginaInicial = true → empieza oculto (fondo normal)
-  // si false → empieza visible (fondo normal)
+ const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    if (!paginaInicial) return; // si NO es la página inicial, no hacemos nada
+useEffect(() => {
+  if (!paginaInicial) return;
 
-    function handleScroll() {
-      if (window.scrollY >= 100) {
-        setMostrar(true);  // fondo normal
-      } else {
-        setMostrar(false); // fondo negro
-      }
-    }
+  function handleScroll() {
+    setScrolled(window.scrollY >= window.innerHeight);
+  }
+console.log(window.scrollY)
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll); 
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [paginaInicial]);
+}, [paginaInicial]);
 
-  // Solo cambia el background
-  const headerStyle = {
-    backgroundColor: mostrar ? "rgba(48, 45, 45, 0.7)" : "black",
-  };
+const headerStyle = {
+  backgroundColor: scrolled ? "black" : "transparent",
+  height: scrolled ? "200px" : "0px",
+  transition: "all 0.3s ease", 
+};
+
 
 
 
@@ -33,13 +30,13 @@ function Header_home({ paginaInicial }) {
     <header className="header" style={headerStyle}>
       <div className="header_div">
         <div className="header_div_img_div">
-          <img src="logo.png" alt="43" />
+         <Link to="/"> <img src="logo.png" alt="43" /> </Link>
         </div>
 
         <div className="header_nav_div">
           <Link to="/">Inicio</Link>
           <Link to="/pedidos">Pedidos</Link>
-          <Link to="/sobreNosotros">Sobre nosotros</Link>
+          <Link to="/AboutUs">Sobre nosotros</Link>
           <Link to="/ubicacion">Ubicación</Link>
         </div>
 
