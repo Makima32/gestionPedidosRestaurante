@@ -2,24 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Headerhome.css";
 
-function Header_home({ paginaInicial }) {
- const [scrolled, setScrolled] = useState(false);
-
-useEffect(() => {
-  if (!paginaInicial) return;
-
-  function handleScroll() {
-    setScrolled(window.scrollY >= window.innerHeight);
-  }
-console.log(window.scrollY)
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll); 
-
-}, [paginaInicial]);
+function Header_home({ Style }) {
+ 
 
 const headerStyle = {
-  backgroundColor: scrolled ? "black" : "transparent",
-  height: scrolled ? "200px" : "0px",
+  backgroundColor: Style ? "black" : "transparent",
+  height: Style ? "200px" : "0px",
   transition: "all 0.3s ease", 
 };
 
@@ -37,9 +25,9 @@ const headerStyle = {
           <Link to="/">Inicio</Link>
           <Link to="/pedidos">Pedidos</Link>
           <Link to="/AboutUs">Sobre nosotros</Link>
-          <Link to="/ubicacion">Ubicación</Link>
+          <Link to="/carta">Nuestra carta</Link>
         </div>
-
+    
         <div className="header_account_div">
           <img src="UserIcon.png" alt="" />
           <p>Cuenta</p>

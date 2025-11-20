@@ -1,0 +1,25 @@
+.BannerMenu_div{
+
+    display: flex;
+    align-items: center;
+    margin-top: 20vh;
+    background-color: red;
+    background-image: url("/bannerMenu.png");
+    height: 40vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.BannerMenu_div_text{
+
+    color: #CCB185;
+    display: flex;
+    width: 50%;
+    justify-content: center;
+}
+
+.BannerMenu_div_text h2{
+
+    font-size: 3.5rem;
+}

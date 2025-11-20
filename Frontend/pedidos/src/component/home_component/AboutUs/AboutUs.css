@@ -21,7 +21,8 @@
 
 .about_us_div_img img {
 
-  height: 50%;
+  height: 65%;
+  border-radius: 1rem;
 }
 
 .about_us_div_information {

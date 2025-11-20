@@ -7,7 +7,7 @@ function Ingredientes() {
 
         <div className="ingredientes_div_img">
 
-        <img src="/logo.png" alt="" />
+        <img src="/Ingredientes_frescos.png" alt="" />
         </div>
 
         <div className="ingredientes_div_content">

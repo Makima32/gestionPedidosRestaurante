@@ -9,7 +9,7 @@ function About_Us() {
   <div className="about_us_div_father">
     <div className="about_us_div_img">
 
-        <img src="logo.png" alt="img_aboutUs" />
+        <img src="/aboutUs_home.png" alt="img_aboutUs" />
 
     </div>
     <div className="about_us_div_information">

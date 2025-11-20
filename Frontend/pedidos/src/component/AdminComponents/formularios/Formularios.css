@@ -1,0 +1,42 @@
+.div_father{
+
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100vh;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.div_form{
+    margin: 10px;
+    padding: 20px;
+    width: 50%;
+    height: 90vh;
+}
+
+.div_form form {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  width: 100%;     
+  margin: 0 auto;  
+}
+
+label,input,select{
+  margin: 0 auto;  
+    width: 60%;
+}
+
+label{
+    font-size: 1.3rem;
+    
+}
+
+input,select{
+
+    height: 3vh;
+}

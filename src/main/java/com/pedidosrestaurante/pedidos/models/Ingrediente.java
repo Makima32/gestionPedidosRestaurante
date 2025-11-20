@@ -35,19 +35,34 @@ private int stock;
 @Column(name="es_vegano")
 private boolean esVegano;
 
+@Column(name="imagen")
+private String imagen;
 
 public Ingrediente(){};
 
-public Ingrediente(String nombre, String descripcion, String alergenos, int stock, boolean esVegano) {
+public Ingrediente(String nombre, String descripcion, String alergenos, int stock, boolean esVegano, String imagen) {
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.alergenos = alergenos;
     this.stock = stock;
     this.esVegano = esVegano;
+    this.imagen = imagen;
 }
+
+
+
+
 
 public String getNombre() {
     return nombre;
+}
+
+public String getImagen() {
+    return imagen;
+}
+
+public void setImagen(String imagen) {
+    this.imagen = imagen;
 }
 
 public void setNombre(String nombre) {
@@ -89,7 +104,15 @@ public void setEsVegano(boolean esVegano) {
 @Override
 public String toString() {
     return "ingredientes [idCliente=" + idIngrediente + ", nombre=" + nombre + ", descripcion=" + descripcion
-            + ", alergenos=" + alergenos + ", stock=" + stock + ", esVegano=" + esVegano + "]";
+            + ", alergenos=" + alergenos + ", stock=" + stock + ", esVegano=" + esVegano + "]" + imagen +"]";
+}
+
+public int getIdIngrediente() {
+    return idIngrediente;
+}
+
+public void setIdIngrediente(int idIngrediente) {
+    this.idIngrediente = idIngrediente;
 }
 
 

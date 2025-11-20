@@ -21,7 +21,8 @@
 
 .carta_div_img img {
 
-  height: 75%;
+  height: 85%;
+  border-radius: 1rem;
 }
 
 .carta_div_information {

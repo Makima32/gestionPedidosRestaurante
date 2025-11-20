@@ -9,22 +9,30 @@ import AdminReservasPage from "./pages/admin/adminReservas";
 import VisualizarPage from "./pages/admin/visualizar";
 import EliminarPage from "./pages/admin/Eliminar";
 import AboutUsPage from "./pages/AboutUs";
+import AdminPlatoPage from "./pages/admin/adminPlatos";
+import AgregarIngredientePage from "./pages/admin/agregarIngredientePage";
+import CartaPage from "./pages/carta";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Rutas CRUD */}
-        <Route path="/" element={<Home />} />
         <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
-        <Route path="/adminPlatos" element={<AdminPlatosPage />} />
+        <Route path="/adminPlatos" element={<AdminPlatoPage />} />
         <Route path="/adminPedidos" element={<AdminPedidosPage />} />
         <Route path="/adminClientes" element={<AdminclientesPage />} />
         <Route path="/adminMesas" element={<AdminMesasPage />} />
         <Route path="/adminReservas" element={<AdminReservasPage />} />
         <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
+        <Route path="/añadir/ingredientes" element={<AgregarIngredientePage />} />
+        
+       
+        {/* Rutas pagina Usuario */}
         <Route path="/aboutUs" element={<AboutUsPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/carta" element={<CartaPage />} />
         
       </Routes>
     </Router>
