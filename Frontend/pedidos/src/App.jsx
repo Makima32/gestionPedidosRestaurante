@@ -12,6 +12,7 @@ import AboutUsPage from "./pages/AboutUs";
 import AdminPlatoPage from "./pages/admin/adminPlatos";
 import AgregarIngredientePage from "./pages/admin/agregarIngredientePage";
 import CartaPage from "./pages/carta";
+import LoginPage from "./pages/Login";
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/carta" element={<CartaPage />} />
         
+
+
+        {/* Login */}
+        <Route path="/login" element={<LoginPage />} />
+
       </Routes>
     </Router>
   );

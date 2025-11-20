@@ -23,6 +23,7 @@ console.log(window.scrollY)
 
 }, []);
 
+
   return (
     <>
       <Header_home  Style={scrolled}/>

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 
@@ -37,6 +38,8 @@ private boolean esVegano;
 
 @Column(name="imagen")
 private String imagen;
+
+
 
 public Ingrediente(){};
 

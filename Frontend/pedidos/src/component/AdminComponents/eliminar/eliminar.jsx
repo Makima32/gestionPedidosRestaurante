@@ -58,7 +58,7 @@ fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
       </div>
 
       <div className="buttomDeleteDiv">
-        <button type="button" onClick={() => borrarDato(dato.idIngrediente)}>
+        <button id="DeleteButtom" type="button" onClick={() => borrarDato(dato.idIngrediente)}>
           <img src="/deletebuttom.png" alt="" />
         </button>
       </div>
