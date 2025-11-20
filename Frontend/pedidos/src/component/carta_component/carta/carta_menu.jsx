@@ -4,6 +4,8 @@ import "./carta_menu.css";
 function Carta_menu() {
   const [datos, setDatos] = useState([]);
 
+  const [imagenAlergenos, setimagenAlergenos] = useState([]);
+
   function fetchDatos() {
     fetch("http://localhost:8080/ingredientes/listar")
       .then((response) => {
@@ -17,6 +19,21 @@ function Carta_menu() {
   useEffect(() => {
     fetchDatos();
   }, []);
+
+
+
+  //Provisional, probar cuando este platos, la idea es comprobar el string o las string de alergenos y en funcion del alergeno pasarle la iamgen correspondiente del alergeno
+
+  function imagenAlergeno({params}) {
+    
+    if (params == "huevos") {
+      
+      setimagenAlergenos("/alergenos/huevo.png")
+
+    }
+
+    //etc etc. por terminar comparador
+  }
 
   return (
     <>
@@ -32,9 +49,10 @@ function Carta_menu() {
                   <img src={imagen} alt="ingrediente" />
                 </div>
 
+                
                 <div className="menu_card_content">
                   <h2>{dato.nombre}</h2>
-                  <p><strong>Descripcion: </strong> {dato.descripcion} + asd asda sdas das asd asd as asd asdsd asdaasdddddddddddddddddddddddddddddd</p>
+                  <p><strong>Descripcion: </strong> {dato.descripcion} asdasdasdasdas asd asd as asd asdsd asdaasdddddddddddddddddddddddddddddd</p>
                   <p><strong>Alergenos:</strong> {dato.alergenos}</p>
                   <p><strong>Vegano:</strong> {dato.esVegano ? "Sí" : "No"}</p>
                 </div>

@@ -43,7 +43,6 @@ h2 {
   height: 25vw;
   gap: 10px;
 
-  /* border: 2px solid black; */
   border-radius: 1rem;
   box-shadow: 2px 2px 5px rgb(175, 175, 175);
   transition: transform 0.3s ease;

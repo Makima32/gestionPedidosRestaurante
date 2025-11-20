@@ -10,7 +10,7 @@ function AboutUsPage() {
    <>
     <Header_home/>
    <AboutUs2/>
-   <Paralax img={"/BannerHome.png"}/>
+   <Paralax img={"/paralax.png"}/>
     <Ingredientes/>
     <hr />
     <Card/>

@@ -26,6 +26,8 @@ const headerStyle = {
           <Link to="/pedidos">Pedidos</Link>
           <Link to="/AboutUs">Sobre nosotros</Link>
           <Link to="/carta">Nuestra carta</Link>
+          <Link to="/login">Login</Link>
+
         </div>
     
         <div className="header_account_div">
