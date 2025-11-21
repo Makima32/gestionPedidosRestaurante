@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-content: center;
   justify-content: center;
   gap: 50px;
 }
@@ -12,24 +11,20 @@
 .ContactUs_content {
   width: 40vw;
   height: 50vh;
-  /* border: 2px solid rgb(0, 0, 0); 
-  border-radius: 0.5rem; */
-  background-color: #e0dacf;
-  border-radius: 0.5rem;
-  box-shadow: 2px 2px 5px rgb(175, 175, 175);
-  transition: transform 0.3s ease;
-}
-.horario_content {
-  width: 40vw;
-  height: 50vh;
-  /* border: 2px solid rgb(0, 0, 0); 
-  border-radius: 0.5rem; */
   background-color: #e0dacf;
   border-radius: 0.5rem;
   box-shadow: 2px 2px 5px rgb(175, 175, 175);
   transition: transform 0.3s ease;
 }
 
+.horario_content {
+  width: 40vw;
+  height: 50vh;
+  background-color: #e0dacf;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 5px rgb(175, 175, 175);
+  transition: transform 0.3s ease;
+}
 
 .ContactUs_content:hover {
   transform: scale(1.05);
@@ -37,8 +32,8 @@
 
 .horario_content:hover {
   transform: scale(1.05);
-
 }
+
 .horario_content h2 {
   color: #ac7e2f;
   font-size: 2.3rem;
@@ -49,11 +44,54 @@
   font-size: 2.3rem;
 }
 
-
 .ContactDiv {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+
+}
+
+@media (max-width: 1024px) {
+  .ContactUs_div_father {
+    flex-direction: column;
+    height: auto;
+    gap: 30px;
+    padding: 20px 0;
+  }
+
+  .ContactUs_content,
+  .horario_content {
+    width: 70vw;
+    height: fit-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .ContactUs_div_father {
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+    padding: 10px 0;
+  }
+
+  .ContactUs_content,
+  .horario_content {
+    width: 90vw;
+    height: auto;
+    padding: 20px;
+  }
+
+  .ContactUs_content h2,
+  .horario_content h2 {
+    font-size: 1.8rem;
+  }
+
+  .ContactDiv {
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
 }

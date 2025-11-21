@@ -24,3 +24,18 @@
     font-size: 3rem;
     color: #AC7E2F;
 }
+
+@media (max-width: 1024px) {
+ 
+.ubicacion_div_map_container iframe{
+
+    width: 80vw;
+}
+}
+
+@media (max-width: 480px) {
+  .ubicacion_div_map_container iframe{
+
+    width: 80vw;
+}
+}

@@ -70,7 +70,6 @@ function Carta_menu() {
                 <div className="menu_card_content">
                   <h2>{dato.nombre}</h2>
                   <p><strong>Descripcion:</strong> {dato.descripcion}</p>
-                  <p><strong>Alergenos:</strong> {dato.alergenos}</p>
                 
                 <div className="menu_card_alergias">
                   {/* Mostrar icono */}

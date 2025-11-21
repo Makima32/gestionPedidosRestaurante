@@ -1,15 +1,16 @@
 
 .header {
   margin-top: 0;
-  width: 98vw;
+  width: 100vw;
   /* position: sticky; */
   top: 0;
+  
   z-index: 1000;
 }
 
 .header_div {
 
-  background-color: rgba(0,0,0,0.3);
+  background-color: transparent;
   display: flex;
   padding-top: 30px;
   align-items: center;   
