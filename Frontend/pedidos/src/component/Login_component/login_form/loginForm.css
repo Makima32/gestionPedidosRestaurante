@@ -14,7 +14,7 @@
 .loginForm_div_content {
   margin-top: 4rem;
   background: linear-gradient(
-    135deg,
+    145deg,
     rgba(172, 126, 47, 0.9),
     rgba(204, 177, 133, 0.9)
   );
@@ -48,4 +48,9 @@ form {
 
 .loginForm_div_content button {
   margin-top: 2rem;
+}
+
+input:invalid{
+
+  background-color: red;
 }

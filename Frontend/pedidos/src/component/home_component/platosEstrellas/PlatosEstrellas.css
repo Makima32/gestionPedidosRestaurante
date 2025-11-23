@@ -1,0 +1,145 @@
+.PlatosEstrellas_father_div{
+
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+}
+
+.PlatosEstrellas_father_div h2{
+
+    font-size: 3rem;
+    color: #AC7E2F;
+}
+
+.PlatosEstrellas_section{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 80vw;
+    
+}
+section {
+    display: flex;
+    height: 90%;
+    width: 70%;
+}
+
+
+
+
+.card_platoEstrella_div{
+
+    background-color: rebeccapurple;
+    width: 100vw;
+border: 2px solid rgb(0, 0, 0); 
+
+}
+
+
+
+ .card_platoEstrella_div {
+    
+    
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: all 0.5s ease; 
+    background-image: url("/pizzas/Chorizo.png");
+
+    background-repeat: no-repeat;
+background-size: cover;
+
+
+}
+
+
+
+.card_platoEstrella_div img{
+
+    width: 100%;
+    height: 100%;
+}
+
+.card_platoEstrella_div p{
+
+    display: flex;
+    
+    height: 0px;
+     height: 100%;
+  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all .5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.card_platoEstrella_div p span{
+
+    color: rgb(255, 255, 255);
+     background-color: rgba(0, 0, 0,1);
+     height: fit-content;
+    min-width: 12em;
+  padding: .5em;
+  text-align: center;
+  transform: rotate(-90deg);
+  transition: all .5s ease;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+
+.card_platoEstrella_div p:hover{
+
+    flex: 4;
+}
+
+.card_platoEstrella_div p:hover span {
+  transform: rotate(0);
+     background-color: rgba(0, 0, 0,0.3);
+     color: white;
+
+}
+
+.ccard_platoEstrella_divard p:nth-child(1) {
+  background: #e07a7a;
+}
+
+.card_platoEstrella_div p:nth-child(2) {
+  background: #3f5c4d;
+}
+
+.card_platoEstrella_div p:nth-child(3) {
+  background: #b2a58b;
+}
+
+.card_platoEstrella_div p:nth-child(4) {
+  background: #335c81;
+}
+
+.card_platoEstrella_div p:nth-child(5) {
+  background: #c76d3f;
+}
+
+.card_platoEstrella_div p:nth-child(6) {
+  background: #5a6e60;
+}
+
+.card_platoEstrella_div:hover{
+    width: 600px;
+    opacity: 1;
+    filter: contrast(120%);
+
+}
+

@@ -24,12 +24,12 @@ function Eliminar() {
     fetchDatos();
   }, []);
 
-function borrarDato(idIngrediente) {
+function borrarDato(idIngrediente,nombre) {
 fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
   method: "DELETE",
 })
 .then(() => {
-  alert(`${tipo} ${idIngrediente} eliminado`);
+  alert(`${tipo} ${nombre} eliminado`);
   fetchDatos(); // refresca la lista automáticamente
 })
 
@@ -45,12 +45,12 @@ fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
       <div className="cards-container">
         
        {datos.map((dato) => {
-  const imagen = dato.imagen ? dato.imagen : "/logo.png";
+  const imagen = dato.imagen ? dato.imagen : "/default";
 
   return (
     <div className="card_delete" key={dato.idIngrediente}>
       <div className="card_image">
-        <img src={imagen} alt="imagenIngrediente" />
+      <img src={`/CrudImg/Ingredientes/${imagen}.png`} alt="imagenIngrediente" />
       </div>
 
       <div>
@@ -58,7 +58,7 @@ fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
       </div>
 
       <div className="buttomDeleteDiv">
-        <button id="DeleteButtom" type="button" onClick={() => borrarDato(dato.idIngrediente)}>
+        <button id="DeleteButtom" type="button" onClick={() => borrarDato(dato.idIngrediente, dato.nombre)}>
           <img src="/deletebuttom.png" alt="" />
         </button>
       </div>

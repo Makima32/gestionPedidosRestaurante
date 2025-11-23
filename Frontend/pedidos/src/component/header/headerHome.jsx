@@ -1,38 +1,46 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Headerhome.css";
+import { useAuth } from "../../hook/auth/authcontext";
 
-function Header_home({ Style }) {
- 
+function Header_home({ home }) {
+  //Si home es null lo declara false por defecto
+  const [isHome, setIsHome] = useState(home ?? false);
 
-const headerStyle = {
-  backgroundColor: Style ? "black" : "transparent",
-  height: Style ? "200px" : "0px",
-  transition: "all 0.3s ease", 
-};
+  const { user, loading } = useAuth();
 
+  const [nombre, setNombre] = useState("Cuenta");
 
+  function ComprobarUser() {
+    if (user) {
+      if (user) {
+        setNombre(user.name);
+        // nombre = user.name
+      }
+    }
+  }
 
+  useEffect(() => {
+   
+    ComprobarUser();
+  }, [user]);
 
-  return (
-    <header className="header" style={headerStyle}>
+   return (
+    <header className="header" >
       <div className="header_div">
         <div className="header_div_img_div">
-         <Link to="/"> <img src="logo.png" alt="43" /> </Link>
+          <Link to="/"> <img src="logo.png" alt="Logo" /> </Link>
         </div>
-
         <div className="header_nav_div">
-          <Link to="/">Inicio</Link>
-          <Link to="/pedidos">Pedidos</Link>
-          <Link to="/AboutUs">Sobre nosotros</Link>
-          <Link to="/carta">Nuestra carta</Link>
-          <Link to="/login">Login</Link>
-
+          <Link to="/" style={{color: isHome ? "white": "black", textDecoration: "none"}}>Inicio</Link>
+          <Link to="/pedidos" style={{color: isHome ? "white": "black", textDecoration: "none"}}>Pedidos</Link>
+          <Link to="/AboutUs" style={{color: isHome ? "white": "black", textDecoration: "none"}}>Sobre nosotros</Link>
+          <Link to="/carta" style={{color: isHome ? "white": "black", textDecoration: "none"}}>Nuestra carta</Link>
+          <Link to="/login" style={{color: isHome ? "white": "black", textDecoration: "none"}}>Login</Link>
         </div>
-    
         <div className="header_account_div">
           <img src="UserIcon.png" alt="" />
-          <p>Cuenta</p>
+          <p>{nombre}</p>
         </div>
       </div>
     </header>

@@ -32,12 +32,12 @@ function Visualizar() {
       <div className="cards-container">
         
         {datos.map((dato) => {
-  const imagen = dato.imagen ? dato.imagen : "/logo.png";
+const imagen = dato.imagen ? dato.imagen : "default";
 
   return (
     <div className="card" key={dato.idIngrediente}>
       <div className="card_image">
-        <img src={imagen} alt="imagenIngrediente" />
+      <img src={`/CrudImg/Ingredientes/${imagen}.png`} alt="imagenIngrediente" />
       </div>
 
       <div>

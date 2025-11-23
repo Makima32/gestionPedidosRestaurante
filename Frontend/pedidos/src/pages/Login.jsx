@@ -9,7 +9,7 @@ function LoginPage() {
 
         <>
         
-        <Header_home/>
+        <Header_home home={true}/>
         <LoginForm/>
         
         </>

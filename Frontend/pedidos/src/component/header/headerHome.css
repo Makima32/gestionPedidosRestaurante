@@ -2,6 +2,7 @@
 .header {
   margin-top: 0;
   width: 100vw;
+  height: 0px;
   /* position: sticky; */
   top: 0;
   
@@ -41,9 +42,8 @@
 
 .header_nav_div a {
     font-size: 2.3rem;
-
+  
   text-decoration: none; 
-  color: white; 
   margin: 0 15px; 
   font-weight: 500;
   margin: 0 40px; 
