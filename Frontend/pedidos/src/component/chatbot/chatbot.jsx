@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./chatbot.css";
 import { BlinkBlur } from "react-loading-indicators";
 
@@ -10,9 +10,13 @@ function Chatbot() {
 
   async function enviarMensaje(e) {
     e.preventDefault();
+    if (!input.trim()) return;
 
-    if (!input.trim()) return; 
-    setIsLoading(true); 
+    // Añadimos el mensaje del usuario
+    setMensajes(prev => [...prev, { autor: "user", texto: input }]);
+
+    setIsLoading(true);
+
     try {
       const res = await fetch("http://localhost:8000/ia", {
         method: "POST",
@@ -21,41 +25,41 @@ function Chatbot() {
       });
 
       const data = await res.json();
-      console.log("Respuesta :", data);
 
-      // Añadir mensaje(s) de la API
       if (typeof data.respuesta === "string") {
-        setMensajes(prev => [...prev, data.respuesta]);
-      } else if (Array.isArray(data.respuesta)) {
-        setMensajes(prev => [...prev, ...data.respuesta]);
+        setMensajes(prev => [...prev, { autor: "ia", texto: data.respuesta }]);
       }
-
     } catch (error) {
-      console.error("Error al enviar mensaje:", error);
-      setMensajes(prev => [...prev, "Error al obtener respuesta"]);
+      setMensajes(prev => [...prev, { autor: "ia", texto: "Error al obtener respuesta" }]);
     } finally {
-      setIsLoading(false); 
-      setInput(""); 
+      setIsLoading(false);
+      setInput("");
     }
   }
 
+  useEffect(() => {
+    setMensajes(prev => prev.filter(m => m.texto !== "Error al obtener respuesta"));
+  }, [input]);
+
   return (
     <>
-      {/* BOTÓN flotante */}
       <div className="chatbot_button" onClick={() => setIsOpen(!isOpen)}>
         <img src="/chatbotIcon.png" alt="Bot" />
       </div>
 
-      {/* VENTANA del chat */}
       <div className={`chat_window ${isOpen ? "open" : ""}`}>
         <h3>Asistente</h3>
 
         <div className="chat_content">
           {mensajes.map((msg, i) => (
-            <p key={i}>{msg}</p>
+            <div key={i} className={`bubble ${msg.autor}`}>
+              {msg.texto}
+            </div>
           ))}
 
-          {isLoading && <BlinkBlur color="#AC7E2F" size="small" text="Escribbiendo" textColor="#000000" />}
+          {isLoading && (
+            <BlinkBlur color="#AC7E2F" size="small" text="Escribiendo..." textColor="#000" />
+          )}
         </div>
 
         <form onSubmit={enviarMensaje} className="chat_input">

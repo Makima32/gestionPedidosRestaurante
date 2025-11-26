@@ -1,6 +1,7 @@
 import Header_admin from "../component/AdminComponents/header_admin/headerAdmin";
 import Header_home from "../component/header/headerHome";
 import LoginForm from "../component/Login_component/login_form/loginForm";
+import LoginPrueba from "../component/Login_component/LoginPrueba/LoginPrueba";
 
 function LoginPage() {
     
@@ -9,9 +10,10 @@ function LoginPage() {
 
         <>
         
-        <Header_home home={true}/>
+        <Header_home home={false}/>
         <LoginForm/>
         
+        {/* <LoginPrueba/> */}
         </>
     )
 }

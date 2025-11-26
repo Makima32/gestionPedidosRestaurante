@@ -4,7 +4,9 @@ import "./crud.css";
 function Crud({ valor }) {
   return (
     <>
+      <div className="div_title">
       <h2>Gestión de {valor}</h2>
+      </div>
       <div className="crud_div_father">
         <div className="crud_div_daugther">
           <div className="crud_row">

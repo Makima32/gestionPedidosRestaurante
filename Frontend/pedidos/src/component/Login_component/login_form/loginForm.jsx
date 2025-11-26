@@ -16,7 +16,7 @@ function LoginForm() {
       await login(username, password); // <— esto setea user en el contexto
 
       if (username === "admin") {
-    window.location.href = 'adminIngredientes'; // Cambiar de pagina , cambiar por rol a futuro
+    window.location.href = 'adminMenu'; // Cambiar de pagina , cambiar por rol a futuro
       }
     } catch (err) {
       setError(err.message || "No se pudo iniciar sesión");

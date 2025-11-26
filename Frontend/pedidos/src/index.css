@@ -55,3 +55,8 @@ button:active {
   transform: translateY(0px) scale(0.97);
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
+
+h2{
+
+  text-align: center;
+}

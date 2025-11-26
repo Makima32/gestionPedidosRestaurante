@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -54,7 +55,8 @@ public Ingrediente(String nombre, String descripcion, String alergenos, int stoc
 
 
 
-
+@OneToMany(mappedBy = "ingrediente")
+// private List<PlatoIngrediente> platosIngredientes;
 
 public String getNombre() {
     return nombre;
@@ -117,9 +119,6 @@ public int getIdIngrediente() {
 public void setIdIngrediente(int idIngrediente) {
     this.idIngrediente = idIngrediente;
 }
-
-
-
 
 
 }

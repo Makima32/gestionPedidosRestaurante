@@ -35,7 +35,7 @@ function Home() {
 
       <PlatosEstrellas
         pizza1="Carbonara"
-        pizza2="Cuatro Quesos"
+        pizza2="Cuatro_Quesos"
         pizza3="Margarita"
         pizza4="Chorizo"
         pizza5="Peperoni"

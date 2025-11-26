@@ -15,6 +15,7 @@ import CartaPage from "./pages/carta";
 import LoginPage from "./pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminMenuPage from "./pages/admin/adminMenu";
+import LogoutPage from "./pages/Logout";
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
 
         {/* Login */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
+
 
       </Routes>
     </Router>
