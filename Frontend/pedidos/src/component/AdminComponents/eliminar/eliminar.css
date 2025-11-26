@@ -55,12 +55,15 @@
 }
 
 
-.buttomDeleteDiv button{
+#DeleteButtom{
 
+    background-color: transparent ; 
+    border-width: 0px ;
     background-color: transparent;
-    border-width: 0px;
-    border-radius: 1.5rem;
-    transition: background-color 0.3s ease;
+    background: transparent;
+    border-radius: 1.5rem ;
+    transition: background-color 0.3s ease ;
+    box-shadow: none;
 
 }
 .buttomDeleteDiv img{

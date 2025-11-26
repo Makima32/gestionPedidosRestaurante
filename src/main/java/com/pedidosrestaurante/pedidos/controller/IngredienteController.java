@@ -50,12 +50,15 @@ public class IngredienteController {
     public ResponseEntity<String> actualizarIngrediente(@PathVariable int id, @RequestBody Ingrediente cambios) {
         Optional<Ingrediente> opt = repo.findById(id);
 
-        if (opt.isEmpty()) {
+            if (opt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body("Ingrediente no encontrado ");
         }
 
         Ingrediente ing = opt.get();
+
+        
+
         if (cambios.getNombre() != null) ing.setNombre(cambios.getNombre());
         if (cambios.getDescripcion() != null) ing.setDescripcion(cambios.getDescripcion());
         if (cambios.getAlergenos() != null) ing.setAlergenos(cambios.getAlergenos());

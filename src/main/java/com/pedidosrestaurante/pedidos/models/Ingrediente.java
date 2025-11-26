@@ -2,11 +2,15 @@ package com.pedidosrestaurante.pedidos.models;
 
 
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -38,6 +42,8 @@ private boolean esVegano;
 @Column(name="imagen")
 private String imagen;
 
+
+
 public Ingrediente(){};
 
 public Ingrediente(String nombre, String descripcion, String alergenos, int stock, boolean esVegano, String imagen) {
@@ -51,7 +57,8 @@ public Ingrediente(String nombre, String descripcion, String alergenos, int stoc
 
 
 
-
+@OneToMany(mappedBy = "ingrediente")
+private List<PlatoIngrediente> platosIngredientes;
 
 public String getNombre() {
     return nombre;
@@ -114,9 +121,6 @@ public int getIdIngrediente() {
 public void setIdIngrediente(int idIngrediente) {
     this.idIngrediente = idIngrediente;
 }
-
-
-
 
 
 }

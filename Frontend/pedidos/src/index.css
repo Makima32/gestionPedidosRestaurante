@@ -31,3 +31,32 @@ body h2{
   /* font-family: "Cormorant Garamond Bold", serif; */
 
 }
+
+button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #AC7E2F, #CCB185);
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  opacity: 0.95;
+}
+
+button:active {
+  transform: translateY(0px) scale(0.97);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+h2{
+
+  text-align: center;
+}

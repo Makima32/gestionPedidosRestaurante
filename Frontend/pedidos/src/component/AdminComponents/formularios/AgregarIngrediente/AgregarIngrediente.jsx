@@ -1,22 +1,62 @@
+import { useState } from "react";
 import "../formularios.css";
 
 function AgregarIngrediente() {
+  const [Ingrediente, setIngrediente] = useState({
+    nombre: "",
+    descripcion: "",
+    alergenos: "",
+    stock: "",
+    vegano: false,
+    imagen: "",
+  });
+
+  const AñadirIngrediente = async (e) => {
+    e.preventDefault();
+
+    await fetch("http://localhost:8080/ingredientes/crear", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Ingrediente),
+    });
+
+    console.log("Ingrediente enviado:", Ingrediente);
+    alert(Ingrediente.nombre + " añadido");
+  };
+
   return (
     <>
-
       <div className="div_father">
         <h2>Formulario agregacion Ingrediente</h2>
 
         <div className="div_form">
-          <form action="" method="POST">
-            <label for="nombre">Nombre alimento</label>
-            <input type="text" name="nombre" placeholder="Nombre" />
+          <form onSubmit={AñadirIngrediente}>
+            <label htmlFor="nombre">Nombre alimento</label>
+            <input
+              type="text"
+              placeholder="Nombre"
+              onChange={(e) =>
+                setIngrediente({ ...Ingrediente, nombre: e.target.value })
+              }
+            />
 
-            <label for="descripcion">Descripcion del alimento</label>
-            <input type="text" name="descripcion" placeholder="descripcion" />
+            <label htmlFor="descripcion">Descripcion del alimento</label>
+            <input
+              type="text"
+              placeholder="descripcion"
+              onChange={(e) =>
+                setIngrediente({ ...Ingrediente, descripcion: e.target.value })
+              }
+            />
 
-            <label for="alergeno">Alergeno del alimento</label>
-            <select name="alergeno" id="alergeno">
+            <label htmlFor="alergeno">Alergeno del alimento</label>
+            <select
+              name="alergeno"
+              id="alergeno"
+              onChange={(e) =>
+                setIngrediente({ ...Ingrediente, alergenos: e.target.value })
+              }
+            >
               <option value="">Selecciona</option>
               <option value="gluten">Gluten</option>
               <option value="crustaceos">Crustáceos</option>
@@ -33,20 +73,36 @@ function AgregarIngrediente() {
               <option value="moluscos">Moluscos</option>
               <option value="altramuces">Altramuces</option>
             </select>
+            <label htmlFor="stock">Stock del alimento</label>
+            <input
+              type="text"
+              placeholder="stock"
+              onChange={(e) =>
+                setIngrediente({ ...Ingrediente, stock: e.target.value })
+              }
+            />
 
-            <label for="stock">Stock del alimento</label>
-            <input type="text" name="stock" placeholder="stock" />
-
-            <label for="vegano">¿Es vegano el alimento?</label>
-            <select name="vegano" id="vegano">
-              <option value={""}>Selecciona</option>
-              <option value={"True"}>Si</option>
-              <option value={"false"}>No</option>
+            <label htmlFor="vegano">¿Es vegano el alimento?</label>
+            <select
+              onChange={(e) =>
+                setIngrediente({ ...Ingrediente, vegano: e.target.value })
+              }
+            >
+              <option value="">Selecciona</option>
+              <option value="true">Si</option>
+              <option value="false">No</option>
             </select>
 
-            
-            <label for="imagen">Url imagen del alimento</label>
-            <input type="text" name="imagen" placeholder="Url imagen" />
+            <label htmlFor="imagen">Nombre de la imagen</label>
+            <input
+              type="text"
+              placeholder="imagen"
+              onChange={(e) =>
+                setIngrediente({ ...Ingrediente, imagen: e.target.value })
+              }
+            />
+
+            <button type="submit">Enviar ingrediente</button>
           </form>
         </div>
       </div>

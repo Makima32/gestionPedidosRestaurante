@@ -6,38 +6,47 @@ import Carta from "../component/home_component/Carta/Carta";
 import ContacUs from "../component/home_component/ContacUs/ContactUs";
 import StartBanner from "../component/home_component/StartBanner/StartBanner";
 import Ubicacion from "../component/home_component/Ubicacion/ubicacion";
+import Chatbot from "../component/chatbot/chatbot";
+import PlatosEstrellas from "../component/home_component/platosEstrellas/PlatosEstrellas";
 
 function Home() {
+  //NO funciona revisar el porque, scroll da 0 en todo momento
+  const [scrolled, setScrolled] = useState(false);
 
-//NO funciona revisar el porque, scroll da 0 en todo momento
-const [scrolled, setScrolled] = useState(false);
-
-useEffect(() => {
-
-  function handleScroll() {
-    setScrolled(window.scrollY >= window.innerHeight);
-  }
-console.log(window.scrollY)
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll); 
-
-}, []);
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY >= window.innerHeight);
+    }
+    console.log(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <Header_home  Style={scrolled}/>
+      <Chatbot />
+      <Header_home home={true} />
       <StartBanner />
 
       <About_Us />
       <hr />
-
       <Carta />
       <hr />
+
+      <PlatosEstrellas
+        pizza1="Carbonara"
+        pizza2="Cuatro_Quesos"
+        pizza3="Margarita"
+        pizza4="Chorizo"
+        pizza5="Peperoni"
+      />
+      <hr />
+
       <Ubicacion />
       <hr />
-      <ContacUs/>
+      <ContacUs />
 
-      <FooterWeb/>
+      <FooterWeb />
     </>
   );
 }

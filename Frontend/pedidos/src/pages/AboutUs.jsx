@@ -8,7 +8,7 @@ function AboutUsPage() {
   return (
    
    <>
-    <Header_home/>
+    <Header_home home={false}/>
    <AboutUs2/>
    <Paralax img={"/paralax.png"}/>
     <Ingredientes/>

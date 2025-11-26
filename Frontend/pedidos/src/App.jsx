@@ -12,12 +12,19 @@ import AboutUsPage from "./pages/AboutUs";
 import AdminPlatoPage from "./pages/admin/adminPlatos";
 import AgregarIngredientePage from "./pages/admin/agregarIngredientePage";
 import CartaPage from "./pages/carta";
+import LoginPage from "./pages/Login";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminMenuPage from "./pages/admin/adminMenu";
+import LogoutPage from "./pages/Logout";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Rutas CRUD */}
+        
+        <Route element={<ProtectedRoute/>}>
         <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
         <Route path="/adminPlatos" element={<AdminPlatoPage />} />
         <Route path="/adminPedidos" element={<AdminPedidosPage />} />
@@ -26,14 +33,26 @@ function App() {
         <Route path="/adminReservas" element={<AdminReservasPage />} />
         <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
-        <Route path="/añadir/ingredientes" element={<AgregarIngredientePage />} />
-        
+        <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
+        <Route path="/adminMenu" element={<AdminMenuPage />} />
+
+        </Route>
        
         {/* Rutas pagina Usuario */}
         <Route path="/aboutUs" element={<AboutUsPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/carta" element={<CartaPage />} />
         
+
+
+        {/* Login */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
+
+
+
+        <Route path="/*" element={<PageNotFound />} />
+
       </Routes>
     </Router>
   );

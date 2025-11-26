@@ -1,79 +1,122 @@
 .about_us_div_father {
-
   display: flex;
-   align-items: center;
-    justify-content: center;
-    flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   width: 100vw;
   height: 100vh;
 }
 
+/* IMAGEN */
 .about_us_div_img {
-
   height: 80vh;
   width: 50vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2rem;
-  
 }
 
 .about_us_div_img img {
-
   height: 65%;
   border-radius: 1rem;
 }
 
+/* TEXTO */
 .about_us_div_information {
- height: 80vh;
+  height: 80vh;
   width: 50vw;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
-.about_us_div_information h2{
-
+.about_us_div_information h2 {
   font-size: 3rem;
   color: #AC7E2F;
 }
 
-.about_us_div_information p{
-
-    color: #323128;
-    font-size: 1.5rem;
+.about_us_div_information p {
+  color: #323128;
+  font-size: 1.5rem;
 }
 
-
-.about_us_div_information_content{
-
+.about_us_div_information_content {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  text-align: center;
 }
 
-.about_us_div_information_content button{
-
+/* BOTÓN */
+.about_us_div_information_content button {
   margin-top: 40px;
-
   width: 200px;
   height: 50px;
   border-radius: 10px;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.about_us_div_information_content button:hover{
-
+.about_us_div_information_content button:hover {
   background-color: rgb(151, 130, 130);
 }
 
-.about_us_div_information_content{
 
-  text-align: center;
+@media (max-width: 1024px) {
+  .about_us_div_father {
+    flex-direction: column;
+    height: auto;
+    padding: 40px 0;
+  }
 
+  .about_us_div_img,
+  .about_us_div_information {
+    width: 90vw;
+    height: auto;
+  }
+
+  .about_us_div_img img {
+    width: 80%;
+    height: auto;
+  }
+
+  .about_us_div_information h2 {
+    font-size: 2.5rem;
+  }
+
+  .about_us_div_information p {
+    font-size: 1.3rem;
+    width: 90%;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .about_us_div_father {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .about_us_div_img img {
+    width: 95%;
+    height: auto;
+  }
+
+  .about_us_div_information h2 {
+    font-size: 2rem;
+  }
+
+  .about_us_div_information p {
+    font-size: 1.1rem;
+    width: 95%;
+  }
+
+  .about_us_div_information_content button {
+    width: 160px;
+    height: 45px;
+  }
 }

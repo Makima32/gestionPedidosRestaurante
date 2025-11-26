@@ -1,13 +1,17 @@
 
 .header {
   margin-top: 0;
-  width: 98vw;
-  position: sticky;
+  width: 100vw;
+  height: 0px;
+  /* position: sticky; */
   top: 0;
+  
   z-index: 1000;
 }
 
 .header_div {
+
+  background-color: transparent;
   display: flex;
   padding-top: 30px;
   align-items: center;   
@@ -18,6 +22,9 @@
 }
 .header_div_img_div {
   display: flex;
+
+  position: sticky;
+  top: 0;
   width: fit-content;
   display: flex;
   justify-content: center;
@@ -35,9 +42,8 @@
 
 .header_nav_div a {
     font-size: 2.3rem;
-
+  
   text-decoration: none; 
-  color: white; 
   margin: 0 15px; 
   font-weight: 500;
   margin: 0 40px; 
@@ -46,7 +52,7 @@
 
 .header_nav_div a:hover {
 
-  color: #c28888; 
+  color: #AC7E2F; 
 
 
 
