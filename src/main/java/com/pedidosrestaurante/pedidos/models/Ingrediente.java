@@ -2,6 +2,8 @@ package com.pedidosrestaurante.pedidos.models;
 
 
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,7 +58,7 @@ public Ingrediente(String nombre, String descripcion, String alergenos, int stoc
 
 
 @OneToMany(mappedBy = "ingrediente")
-// private List<PlatoIngrediente> platosIngredientes;
+private List<PlatoIngrediente> platosIngredientes;
 
 public String getNombre() {
     return nombre;

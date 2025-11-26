@@ -16,6 +16,7 @@ import LoginPage from "./pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminMenuPage from "./pages/admin/adminMenu";
 import LogoutPage from "./pages/Logout";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -48,6 +49,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
 
+
+
+        <Route path="/*" element={<PageNotFound />} />
 
       </Routes>
     </Router>
