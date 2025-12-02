@@ -21,7 +21,7 @@ function Visualizar() {
 
   useEffect(() => {
     fetchDatos();
-  }, []);
+  }, [tipo]);
 
   if (tipo === "ingredientes") {
     return (
@@ -72,7 +72,10 @@ function Visualizar() {
                   <h2>{dato.nombre}</h2>
                   <p><strong>Descripción:</strong> {dato.descripcion}</p>
                   <p><strong>Precio:</strong> {dato.precio} €</p>
-                  <p><strong>Ingredientes</strong> {dato.ingredientes.nombre}</p>
+                  <strong>Ingredientes:</strong>{" "}
+                  {dato.ingredientes
+                    ?.map((rel) => `${rel.cantidad}x ${rel.ingrediente.nombre}`)
+                    .join(", ")}
                 </div>
               </div>
             );
