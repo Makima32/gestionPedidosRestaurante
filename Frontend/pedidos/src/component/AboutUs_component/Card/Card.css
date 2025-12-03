@@ -67,4 +67,87 @@ margin-bottom: -2rem;
 
     color: #ac7e2f;
     font-size: 3rem;
+}@media (max-width: 1024px) {
+    .card_title_div h2 {
+        font-size: 2.5rem;
+    }
+
+    .card_div_father{
+        height: auto; /* Permitir que se ajuste al contenido apilado */
+        min-height: 80vh; /* Asegurar que no sea muy pequeño */
+        flex-direction: column; /* Apilamos las tarjetas verticalmente */
+        gap: 40px; /* Aumentar el espacio entre las tarjetas apiladas */
+        padding: 40px 20px;
+    }
+
+    .card{
+        height: auto; /* Altura se ajusta al contenido */
+        width: 60vw; /* Ocupar la mayoría del ancho de la tablet */
+        max-width: 450px; /* Limitar el ancho máximo en tablets grandes */
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: añade un poco de sombra para destacarlas */
+    }
+    
+    .card:hover{
+        transform: scale(1.02); /* Menos exagerado en móvil/tablet */
+    }
+
+    .card_img {
+        margin-top: 0; /* Eliminar el margen superior grande */
+        height: auto;
+    }
+    
+    .card_content {
+        margin-top: 0; /* Eliminar el margen negativo */
+        height: auto;
+    }
+    
+    .card_content h2 {
+        font-size: 1.6rem;
+    }
+    
+    .card_content p{
+        font-size: 1.1rem;
+    }
+}
+
+
+
+
+@media (max-width: 480px) {
+    .card_title_div {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .card_title_div h2 {
+        font-size: 2rem;
+    }
+
+    .card_div_father{
+        gap: 30px;
+        padding: 20px 10px;
+    }
+
+    .card{
+        width: 90vw; /* Casi todo el ancho de la pantalla */
+        padding: 15px;
+    }
+    
+    .card_img {
+        margin-bottom: 10px;
+    }
+
+    .card_img img{
+        width: 60%; /* Iconos ligeramente más pequeños */
+        max-width: 100px;
+    }
+    
+    .card_content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .card_content p{
+        font-size: 1rem;
+    }
 }

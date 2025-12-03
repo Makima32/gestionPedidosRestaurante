@@ -11,13 +11,14 @@
 }
 
 .card_delete{
-    
+
     display: flex;
     border-radius: 1rem;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #D9D9D9;
+    width: 20%;
     height:85%;
 }
 
@@ -54,7 +55,7 @@
 }
 
 
-#DeleteButtom{
+#editbutton{
 
     background-color: transparent ; 
     border-width: 0px ;
@@ -65,14 +66,14 @@
     box-shadow: none;
 
 }
-.buttomDeleteDiv img{
+.buttonEditDiv img{
 
     width: 100px;
     height: 100px;
 }
 
 
-.buttomDeleteDiv button:hover {
+.buttonEditDiv button:hover {
   transform: scale(1.05); 
 
 

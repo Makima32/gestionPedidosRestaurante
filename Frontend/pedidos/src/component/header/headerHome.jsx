@@ -29,7 +29,7 @@ function Header_home({ home }) {
           </div>
 
           <div className="header_account_div">
-            <img src="UserIcon.png" alt="" />
+            <img src="gatoweee.jpeg" alt="" />
             <p>{nombre}</p>
           </div>
         </div>
@@ -54,7 +54,7 @@ function Header_home({ home }) {
           </div>
 
           <div className="header_account_div">
-            <img src="UserIcon.png" alt="" />
+            <img src="gatoweee.jpeg" alt="" />
             <p>{nombre}</p>
           </div>
         </div>
@@ -78,7 +78,7 @@ function Header_home({ home }) {
         </div>
 
         <div className="header_account_div">
-          <img src="UserIcon.png" alt="" />
+          <img src="gatoweee.jpeg" alt="" />
           <p>{nombre}</p>
         </div>
       </div>

@@ -8,3 +8,4 @@ import com.pedidosrestaurante.pedidos.models.Ingrediente;
 @Repository
 public interface IngredienteRepository extends JpaRepository<Ingrediente, Integer> {
 }
+    
