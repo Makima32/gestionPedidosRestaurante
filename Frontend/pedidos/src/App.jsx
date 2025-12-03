@@ -17,32 +17,34 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminMenuPage from "./pages/admin/adminMenu";
 import LogoutPage from "./pages/Logout";
 import PageNotFound from "./pages/PageNotFound";
+import AgregarPlatoPage from "./pages/admin/agregarPlatopage";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Rutas CRUD */}
-        
-        <Route element={<ProtectedRoute/>}>
-        <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
-        <Route path="/adminPlatos" element={<AdminPlatoPage />} />
-        <Route path="/adminPedidos" element={<AdminPedidosPage />} />
-        <Route path="/adminClientes" element={<AdminclientesPage />} />
-        <Route path="/adminMesas" element={<AdminMesasPage />} />
-        <Route path="/adminReservas" element={<AdminReservasPage />} />
-        <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
-        <Route path="/eliminar/:tipo" element={<EliminarPage />} />
-        <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
-        <Route path="/adminMenu" element={<AdminMenuPage />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
+          <Route path="/adminPlatos" element={<AdminPlatoPage />} />
+          <Route path="/adminPedidos" element={<AdminPedidosPage />} />
+          <Route path="/adminClientes" element={<AdminclientesPage />} />
+          <Route path="/adminMesas" element={<AdminMesasPage />} />
+          <Route path="/adminReservas" element={<AdminReservasPage />} />
+          <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
+          <Route path="/eliminar/:tipo" element={<EliminarPage />} />
+          <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
+          <Route path="/anadir/platos" element={<AgregarPlatoPage />} />
+          <Route path="/adminMenu" element={<AdminMenuPage />} />
 
         </Route>
-       
+
         {/* Rutas pagina Usuario */}
         <Route path="/aboutUs" element={<AboutUsPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/carta" element={<CartaPage />} />
-        
+
 
 
         {/* Login */}
