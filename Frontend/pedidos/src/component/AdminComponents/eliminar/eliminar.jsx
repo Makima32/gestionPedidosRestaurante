@@ -24,8 +24,8 @@ function Eliminar() {
     fetchDatos();
   }, []);
 
-function borrarDato(idIngrediente,nombre) {
-fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
+function borrarDato(id,nombre) {
+fetch(`http://localhost:8080/${tipo}/eliminar/${id}`, {
   method: "DELETE",
 })
 .then(() => {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import "../../formularios/formularios.css"; // Asegúrate de que esta ruta a tu CSS sea correcta
+import Header_admin from "../../header_admin/headerAdmin";
 
 function EditarIngrediente() {
   const { id } = useParams(); 
@@ -96,6 +97,8 @@ function EditarIngrediente() {
 
   return (
     <>
+
+    <Header_admin/>
       <div className="div_father">
         <h2>Modificar Ingrediente: {Ingrediente.nombre}</h2>
 

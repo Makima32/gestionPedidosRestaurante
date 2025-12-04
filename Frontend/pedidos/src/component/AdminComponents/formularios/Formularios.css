@@ -40,3 +40,12 @@ input,select{
 
     height: 3vh;
 }
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: -10px; 
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin: 0px auto;
+}

@@ -2,100 +2,126 @@ import { useEffect, useState } from "react";
 import "./carta_menu.css";
 
 function Carta_menu() {
-  const [datos, setDatos] = useState([]);
+const [datos, setDatos] = useState([]);
 
-  const [imagenAlergenos, setImagenAlergenos] = useState("");
-  const [stringAlergenos, setStringAlergenos] = useState("Huevos");
+function fetchDatos() {
+fetch("http://localhost:8080/platos/listar")
+.then((response) => {
+if (!response.ok) throw new Error("Error al obtener datos");
+return response.json();
+})
+.then((data) => {
+console.log("Platos recibidos:", data); 
+setDatos(data);
+})
+.catch((error) => console.error("Error al obtener los platos:", error));
+}
 
-  const [Vegano, setVegano] = useState(true);
-  const [imagenVegano, setImagenVegano] = useState();
-  
+useEffect(() => {
+fetchDatos();
+}, []);
 
-  // Solo se ejecuta 1 vez al montar el componente
-  function fetchDatos() {
-    fetch("http://localhost:8080/ingredientes/listar")
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al obtener datos");
-        return response.json();
-      })
-      .then((data) => setDatos(data))
-      .catch((error) => console.error("Error al obtener los datos:", error));
-  }
+// Función para determinar y renderizar los iconos de alérgenos/veganismo
+const renderAlergenosYVegano = (plato) => {
+const alergenosEncontrados = new Set();
+let esPlatoVegano = true;
+const carpetaBase = "/AlergenosIco";
 
-  useEffect(() => {
-    fetchDatos();
-  }, []);
+// Si el plato no tiene ingredientes, no puede ser vegano (salvo si es un plato base)
+// y no tiene alergenos. Asumimos que un plato con lista de ingredientes vacía no es apto.
+if (!plato.ingredientes || plato.ingredientes.length === 0) {
+    esPlatoVegano = false;
+}
 
-  useEffect(() => {
+// 1. Recorrer los ingredientes del plato
+plato.ingredientes?.forEach(relacion => {
+    const ingrediente = relacion.ingrediente;
     
-    if (stringAlergenos === "leche") {
-      setImagenAlergenos("/AlergenosIco/Lacteos.ico");
-    } 
-    else if (stringAlergenos === "Huevos") {
-      setImagenAlergenos("/AlergenosIco/Huevos.ico");
+    // a) Chequear Veganismo
+    if (!ingrediente.esVegano) {
+        esPlatoVegano = false; // Si un solo ingrediente NO es vegano, el plato NO lo es.
     }
-    else {
-      setImagenAlergenos(""); 
+    
+    // b) Chequear Alérgenos (usando la string del ingrediente)
+    const alergenosString = ingrediente.alergenos ? ingrediente.alergenos.toLowerCase() : "";
+
+    if (alergenosString.includes("leche") || alergenosString.includes("lacteos")) {
+        alergenosEncontrados.add("leche");
     }
-
-  }, [stringAlergenos]);
-
-  useEffect(() =>{
-
-    if (Vegano) {
-      setImagenVegano("/AlergenosIco/Vegano.ico")
-    }else{
-      setImagenVegano("")
+    if (alergenosString.includes("huevos")) {
+        alergenosEncontrados.add("huevos");
     }
-  }
+    // Puedes añadir más alérgenos aquí (gluten, soja, pescado, etc.)
+});
 
-  )
 
-  console.log("imagen:", imagenAlergenos);
+// 2. Generar los elementos <img> a mostrar
+const iconos = [];
 
-  return (
-    <>
-      <div className="Menu_content_div_father">
-        <div className="Menu_content_div">
+// Mostrar icono de leche/lácteos
+if (alergenosEncontrados.has("leche")) {
+    iconos.push(
+        <img key="leche" src={`${carpetaBase}/Lacteos.ico`} alt="Contiene Lácteos" title="Contiene Lácteos" />
+    );
+}
 
-          {datos.map((dato) => {
-            const imagen = dato.imagen ? dato.imagen : "/logo.png";
+// Mostrar icono de huevos
+if (alergenosEncontrados.has("huevos")) {
+    iconos.push(
+        <img key="huevos" src={`${carpetaBase}/Huevos.ico`} alt="Contiene Huevos" title="Contiene Huevos" />
+    );
+}
 
-            return (
-              <div className="menu_card" key={dato.idIngrediente}>
-                <div className="menu_card_img">
-                  <img src={imagen} alt="ingrediente" />
-                </div>
+// Mostrar icono Vegano
+if (esPlatoVegano) { 
+    iconos.push(
+        <img id="veganoImg" key="vegano" src={`${carpetaBase}/Vegano.ico`} alt="Vegano" title="Apto para Veganos" />
+    );
+}
 
-                <div className="menu_card_content">
-                  <h2>{dato.nombre}</h2>
-                  <p><strong>Descripcion:</strong> {dato.descripcion}</p>
-                
-                <div className="menu_card_alergias">
-                  {/* Mostrar icono */}
-                  {imagenAlergenos && (
-                    <img 
-                      src={imagenAlergenos} 
-                      alt={imagenAlergenos} 
-                    />
-                  )}
+return iconos;
+};
 
-                  {imagenVegano && (
-                    <img 
-                      src={imagenVegano} 
-                      alt={imagenVegano} 
-                    />
-                  )}
+return (
+<>
+<div className="Menu_content_div_father">
+<div className="Menu_content_div">
+{datos.length === 0 && (
+    <h1 style={{ color: 'red', width: '100%', textAlign: 'center' }}>No hay platos cargados o el servidor no responde.</h1>
+)}
+
+{datos.map((plato) => {
+// **CORRECCIÓN DE NULLS:** Si nombre o descripción son null, usa un valor por defecto para que se vea algo.
+const nombrePlato = plato.nombre || "Sin Nombre";
+const descripcionPlato = plato.descripcion || "Descripción no disponible.";
+const imagen = plato.imagen ? plato.imagen : "/logo.png";
+
+return (
+<div className="menu_card" key={plato.idPlato}>
+<div className="menu_card_img">
+<img src={imagen} alt={`Imagen de ${nombrePlato}`} />
 </div>
-                </div>
-              </div>
-            );
-          })}
 
-        </div>
-      </div>
-    </>
-  );
+<div className="menu_card_content">
+<h2>{nombrePlato}</h2>
+<p>
+<strong>Descripcion:</strong> {descripcionPlato}
+</p>
+<p>
+<strong>Precio:</strong> {plato.precio !== null ? `${plato.precio} €` : 'N/A'}
+</p>
+
+<div className="menu_card_alergias">
+{renderAlergenosYVegano(plato)}
+</div>
+</div>
+</div>
+);
+})}
+</div>
+</div>
+</>
+);
 }
 
 export default Carta_menu;
