@@ -8,6 +8,7 @@ import StartBanner from "../component/home_component/StartBanner/StartBanner";
 import Ubicacion from "../component/home_component/Ubicacion/ubicacion";
 import Chatbot from "../component/chatbot/chatbot";
 import PlatosEstrellas from "../component/home_component/platosEstrellas/PlatosEstrellas";
+import Pedir from "../component/home_component/pedir/pedir";
 
 function Home() {
   //NO funciona revisar el porque, scroll da 0 en todo momento
@@ -44,6 +45,8 @@ function Home() {
 
       <Ubicacion />
       <hr />
+      
+      <Pedir/>
       <ContacUs />
 
       <FooterWeb />
