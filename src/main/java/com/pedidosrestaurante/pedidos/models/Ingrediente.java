@@ -4,12 +4,12 @@ package com.pedidosrestaurante.pedidos.models;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -57,7 +57,7 @@ public Ingrediente(String nombre, String descripcion, String alergenos, int stoc
 
 
 
-@OneToMany(mappedBy = "ingrediente")
+@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL, orphanRemoval = true)
 private List<PlatoIngrediente> platosIngredientes;
 
 public String getNombre() {

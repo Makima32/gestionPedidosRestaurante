@@ -10,7 +10,10 @@ export default function ProtectedRoute() {
   // 1️⃣ Si NO hay usuario → login
   if (!user) return <Navigate to="/login" replace />;
 
- 
+  if (user.name != "admin") {
+    
+    return <Navigate to="/login" replace/>
+  }
 
   // 3️⃣ Si hay usuario normal → dejar pasar
   return <Outlet />;

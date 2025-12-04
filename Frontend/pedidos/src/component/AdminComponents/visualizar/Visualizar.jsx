@@ -7,53 +7,82 @@ function Visualizar() {
   const [datos, setDatos] = useState([]);
 
   function fetchDatos() {
-    fetch("http://localhost:8080/ingredientes/listar")
+    fetch(`http://localhost:8080/${tipo}/listar`)
       .then((response) => {
         if (!response.ok) throw new Error("Error al obtener datos");
-        return response.json(); 
+        return response.json();
       })
       .then((data) => {
         console.log("Datos recibidos:", data);
-        setDatos(data); 
+        setDatos(data);
       })
       .catch((error) => console.error("Error al obtener los datos:", error));
   }
 
   useEffect(() => {
     fetchDatos();
-  }, []);
+  }, [tipo]);
 
-  
-  return (
-    <div>
-      <div className="div_title">
-      <h1>{tipo}</h1>
-      </div>
-      <div className="cards-container">
-        
-        {datos.map((dato) => {
-const imagen = dato.imagen ? dato.imagen : "default";
-
-  return (
-    <div className="card" key={dato.idIngrediente}>
-      <div className="card_image">
-      <img src={`/CrudImg/Ingredientes/${imagen}.png`} alt="imagenIngrediente" />
-      </div>
-
+  if (tipo === "ingredientes") {
+    return (
       <div>
-        <h2>{dato.nombre}</h2>
-        <p><strong>Descripción:</strong> {dato.descripcion}</p>
-        <p><strong>Alergenos:</strong> {dato.alergenos}</p>
-        <p><strong>Stock:</strong> {dato.stock}</p>
-        <p><strong>Vegano:</strong> {dato.esVegano ? "Sí" : "No"}</p>
-      </div>
-    </div>
-  );
-})}
+        <div className="div_title">
+          <h1>{tipo}</h1>
+        </div>
+        <div className="cards-container">
 
+          {datos.map((dato) => {
+            const imagen = dato.imagen ? dato.imagen : "default";
+
+            return (
+              <div className="card" key={dato.idIngrediente}>
+                <div className="card_image">
+                  <img src={`/CrudImg/Ingredientes/${imagen}.png`} alt="imagenIngrediente" />
+                </div>
+
+                <div>
+                  <h2>{dato.nombre}</h2>
+                  <p><strong>Descripción:</strong> {dato.descripcion}</p>
+                  <p><strong>Alergenos:</strong> {dato.alergenos}</p>
+                  <p><strong>Stock:</strong> {dato.stock}</p>
+                  <p><strong>Vegano:</strong> {dato.esVegano ? "Sí" : "No"}</p>
+                </div>
+              </div>
+            );
+          })}
+
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else if (tipo === "platos") {
+    return (
+      <div>
+        <div className="div_title">
+          <h1>{tipo}</h1>
+        </div>
+        <div className="cards-container">
+          {datos.map((dato) => {
+            const imagen = dato.imagen ? dato.imagen : "default";
+            return (
+              <div className="card" key={dato.idPlato}>
+                <div className="card_image">
+                  <img src={`/CrudImg/Platos/${imagen}.png`} alt="imagenPlato" />
+                </div>
+                <div>
+                  <h2>{dato.nombre}</h2>
+                  <p><strong>Descripción:</strong> {dato.descripcion}</p>
+                  <p><strong>Precio:</strong> {dato.precio} €</p>
+                  <strong>Ingredientes:</strong>{" "}
+                  {dato.ingredientes
+                    ?.map((rel) => `${rel.cantidad}x ${rel.ingrediente.nombre}`)
+                    .join(", ")}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 }
-
 export default Visualizar;

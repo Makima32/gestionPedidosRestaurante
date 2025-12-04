@@ -17,17 +17,17 @@ function Header_admin() {
         
         <div className="header_nav_div_Admin">
 
-            <Link to="/adminIngredientes">Ingredientes</Link>
+            <Link to="/adminIngredientes" style={{color:   "black"}} >Ingredientes</Link>
 
-            <Link to="/adminPlatos">Platos</Link>
+            <Link to="/adminPlatos"  style={{color:   "black"}}>Platos</Link>
 
-            <Link to="/adminPedidos">Pedidos </Link>
+            <Link to="/adminPedidos"  style={{color:   "black"}}>Pedidos </Link>
 
-            <Link to="/adminClientes">Clientes </Link>
+            <Link to="/adminClientes"  style={{color:   "black"}}>Clientes </Link>
 
-            <Link to="/adminMesas">Mesas </Link>
+            <Link to="/adminMesas"  style={{color:   "black"}} >Mesas </Link>
 
-            <Link to="/adminReservas">Reservas </Link>
+            <Link to="/adminReservas"  style={{color:   "black"}}>Reservas </Link>
 
         </div>
 

@@ -5,7 +5,7 @@ function PageNotFound() {
  return<>
  
  
- <Header_home/>
+ <Header_home home={false}/>
  <NoEncontrado/>
  </>   
 }

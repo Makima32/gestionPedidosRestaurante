@@ -1,34 +1,47 @@
 import { useEffect, useRef, useState } from "react";
 import "./LoginPrueba.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hook/auth/authcontext";
 
 function LoginPrueba() {
+
+  const { user, login } = useAuth();
+  
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const [genero, setGenero] = useState("Hombre");
   const navigate = useNavigate();
 
+  
   const containerRef = useRef(null);
   const btnSignUp = useRef(null);
   const btnSignIn = useRef(null);
 
-  function handleSignup(e) {
+  
+  // function handleSignup(e) {
+  //   e.preventDefault();
+
+       async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
+    try {
+      await login(username, password); // <— esto setea user en el contexto
 
-    if (genero === "Enfermo") {
-      window.location.href =
-        "https://hospitalessanroque.com/es/especialidades-medicas/psiquiatria?center=husr-en-las-palmas-de-gc";
-      return;
+      if (username === "admin") {
+    window.location.href = 'adminMenu'; // Cambiar de pagina , cambiar por rol a futuro
+      }
+    } catch (err) {
+      setError(err.message || "No se pudo iniciar sesión");
     }
 
-    if (genero === "Hombre") {
-      navigate("/hombre");
-      return;
-    }
 
-    if (genero === "Mujer") {
-      navigate("/mujer");
-      return;
-    }
+    
+  
+
+
+  
   }
 
   useEffect(() => {
@@ -55,7 +68,7 @@ function LoginPrueba() {
 
         {/* Sign Up */}
         <div className="form-container sign-up-container">
-          <form onSubmit={handleSignup}>
+          <form onSubmit={handleSubmit}>
             <h1>Crear una cuenta</h1>
 
             <input type="text" placeholder="Nombre" />
@@ -65,7 +78,6 @@ function LoginPrueba() {
             <select value={genero} onChange={(e) => setGenero(e.target.value)}>
               <option value="Hombre">Hombre</option>
               <option value="Mujer">Mujer</option>
-              <option value="Enfermo">No binarie</option>
             </select>
 
             <button type="submit">Sign Up</button>

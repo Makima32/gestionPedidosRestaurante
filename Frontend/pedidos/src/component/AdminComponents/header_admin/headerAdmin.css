@@ -1,10 +1,13 @@
-.headerAdmin {
-  background-color: rgba(48, 45, 45,0.7);
+.headerAdmin link {
   top: 0;
   margin-top: 0;
   width: 98vw;
 }
 
+.headerAdmin link {
+
+  color: rebeccapurple;
+}
 .header_div_Admin {
   display: flex;
   align-items: center;

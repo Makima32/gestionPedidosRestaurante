@@ -17,6 +17,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminMenuPage from "./pages/admin/adminMenu";
 import LogoutPage from "./pages/Logout";
 import PageNotFound from "./pages/PageNotFound";
+import ModificarIngredientePage from "./pages/admin/modificarIngrediente";
+import EditarIngrediente from "./component/AdminComponents/modificar/editarIngrediente/editarIngrediente";
+import AgregarPlatoPage from "./pages/admin/AgregarPlatoPage";
 
 function App() {
   return (
@@ -35,8 +38,13 @@ function App() {
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
         <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
         <Route path="/adminMenu" element={<AdminMenuPage />} />
+        <Route path="/anadir/platos" element={<AgregarPlatoPage />} />
 
+        <Route path="/modificar/:tipo" element={<ModificarIngredientePage />} />
+        <Route path="/editar-ingrediente/:id" element={<EditarIngrediente />} />
+        
         </Route>
+
        
         {/* Rutas pagina Usuario */}
         <Route path="/aboutUs" element={<AboutUsPage />} />

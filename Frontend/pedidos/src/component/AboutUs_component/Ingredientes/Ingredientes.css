@@ -39,3 +39,57 @@
     text-align: center;
     font-size: 1.2rem;
 }
+
+@media (max-width: 1024px) {
+    .ingredientes_div_father {
+        flex-direction: column; /* Apilar imagen y texto */
+        gap: 40px; /* Reducir la separación */
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .ingredientes_div_img{
+
+        display: none;
+
+    }
+    .ingredientes_div_content {
+        width: 80vw; 
+        max-width: 600px;
+    }
+
+    .ingredientes_div_content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .ingredientes_div_content p {
+        font-size: 1.4rem;
+        text-align: justify; 
+    }
+}
+
+
+
+/* --- Media Query para Teléfonos Móviles (Max 480px) --- */
+@media (max-width: 480px) {
+    .ingredientes_div_father {
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .ingredientes_div_img img{
+        display: none;
+    }
+    .ingredientes_div_content {
+        width: 95vw; /* Casi todo el ancho de la pantalla */
+    }
+
+    .ingredientes_div_content h2 {
+        font-size: 2rem;
+    }
+    
+    .ingredientes_div_content p {
+        font-size: 1rem;
+        text-align: center; /* Mejor centrado en móviles */
+    }
+}

@@ -40,7 +40,7 @@ h2 {
   flex-direction: row;
   flex-wrap: wrap;
   width: 20vw;
-  height: 25vw;
+  min-height: 25vw;
   gap: 10px;
 
   border-radius: 1rem;
@@ -52,16 +52,27 @@ h2 {
   display: flex;
   height: 50%;
   width: 100%;
+  margin-top: 10px;
+
   align-items: center;
 }
+
 .menu_card_img img {
+  margin: 0;
+  margin: auto 0;
   margin: 0 auto;
-  height: 60%;
-  width: 60%;
+  height: auto;
+  width: auto;
+  max-height: 100%; 
+  max-width: 100%; 
+
+  object-fit: contain;
+
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
-.menu_card_alergias img{
 
-
-    height: 32px;
+.menu_card_alergias img {
+  height: 50px;
 }

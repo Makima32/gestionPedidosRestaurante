@@ -143,3 +143,18 @@ background-size: cover;
 
 }
 
+/* @media (max-width: 1024px) */
+@media (max-width: 1024px) {
+    
+      .PlatosEstrellas_father_div {
+        display: none; 
+    }
+
+}/* @media (max-width: 480px) */
+@media (max-width: 480px) {
+
+    .PlatosEstrellas_father_div {
+        display: none; /* ¡Ocultar completamente el componente! */
+    }
+    
+}

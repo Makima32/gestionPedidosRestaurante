@@ -1,42 +1,71 @@
-.div_father{
 
-    margin-top: 4vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100vh;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    
+.div_father {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 40px;
 }
 
-.div_form{
-    margin: 10px;
-    padding: 20px;
-    width: 50%;
-    height: 90vh;
+/* Título */
+.div_father h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 .div_form form {
-  display: flex;
-  flex-direction: column;
-  gap: 2vh;
-  width: 100%;     
-  margin: 0 auto;  
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    /* separación entre inputs */
 }
 
-label,input,select{
-  margin: 0 auto;  
-    width: 60%;
+.div_form label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
-label{
-    font-size: 1.3rem;
-    
+.div_form input,
+.div_form select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
 
-input,select{
+.div_form select {
+    background-color: #fff;
+}
 
-    height: 3vh;
+/* Botón grande y estilizado */
+.btn-submit,
+.div_form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, #bb9457, #d6a86a);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-submit:hover,
+.div_form button[type="submit"]:hover {
+    background: linear-gradient(to right, #b68a43, #e1b26d);
+    transform: scale(1.02);
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin: 0px auto;
 }

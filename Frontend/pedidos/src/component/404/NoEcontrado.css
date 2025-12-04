@@ -1,14 +1,63 @@
-.NoEncontrado_div_father{
 
+.NoEncontrado_div_father{
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    background-color: #f8f8f8; 
+    font-family: sans-serif;
+    color: #333;
 }
 
-.NoEncontrado_div_father h2{
+.error-content {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
 
-    font-size: 4.5rem;
 
+.error-code {
+   
+    font-size: 8rem; 
+    font-weight: 900;
+    color: #AC7E2F; 
+    display: block; 
+    margin-bottom: 0.1em;
+}
+
+
+.main-message {
+    font-size: 2.5rem;
+    margin-top: 0; /* Eliminar margen superior */
+    margin-bottom: 10px;
+    color: #323128;
+}
+
+.sub-message {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+
+.home-button {
+    /* Estilo del botón */
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #AC7E2F; 
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+    background-color: #CCB185; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
