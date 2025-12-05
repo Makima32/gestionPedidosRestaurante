@@ -1,6 +1,5 @@
 package com.pedidosrestaurante.pedidos.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,8 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.pedidosrestaurante.pedidos.models.Plato;
 import com.pedidosrestaurante.pedidos.repository.PlatoRepository;
+import com.pedidosrestaurante.pedidos.dto.ItemDTO;
 import java.util.Optional;
-
+import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,16 +26,27 @@ public class PlatoController {
     @Autowired
     private PlatoRepository platoRepo;
 
-   @PostMapping("/crear")
-public ResponseEntity<?> crearPlato(@RequestBody Plato plato) {
-    platoRepo.save(plato);
-    return ResponseEntity.ok("Plato creado correctamente");
-}
-
+    @PostMapping("/crear")
+    public ResponseEntity<?> crearPlato(@RequestBody Plato plato) {
+        platoRepo.save(plato);
+        return ResponseEntity.ok("Plato creado correctamente");
+    }
 
     @GetMapping("/listar")
-    public ResponseEntity<?> listarPlatos() {
-        return ResponseEntity.ok(platoRepo.findAll());
+    public ResponseEntity<List<ItemDTO>> listarPlatos() {
+        List<ItemDTO> platos = platoRepo.findAll()
+                .stream()
+                .map(plato -> new ItemDTO(
+                        plato.getIdPlato(),
+                        plato.getNombre(),
+                        "/CrudImg/Platos/"
+                                + (plato.getImagen() != null && !plato.getImagen().isEmpty()
+                                        ? plato.getImagen()
+                                        : "default")
+                                + ".png"))
+                .toList();
+
+        return ResponseEntity.ok(platos);
     }
 
     @GetMapping("/{id}")

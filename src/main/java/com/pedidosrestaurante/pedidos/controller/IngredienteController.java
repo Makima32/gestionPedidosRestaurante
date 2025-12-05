@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pedidosrestaurante.pedidos.models.Ingrediente;
 import com.pedidosrestaurante.pedidos.repository.IngredienteRepository;
+import com.pedidosrestaurante.pedidos.dto.ItemDTO;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,15 +25,23 @@ public class IngredienteController {
     public ResponseEntity<String> crearIngrediente(@RequestBody Ingrediente ingrediente) {
         repo.save(ingrediente);
         return ResponseEntity.status(HttpStatus.CREATED)
-                             .body("Ingrediente creado correctamente ");
+                .body("Ingrediente creado correctamente ");
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<Ingrediente>> listarIngredientes() {
-        List<Ingrediente> ingredientes = repo.findAll();
+    public ResponseEntity<List<ItemDTO>> listarIngredientes() {
+        List<ItemDTO> ingredientes = repo.findAll()
+                .stream()
+                .map(ing -> new ItemDTO(
+                        ing.getIdIngrediente(),
+                        ing.getNombre(),
+                        "/CrudImg/Ingredientes/"
+                                + (ing.getImagen() != null ? ing.getImagen() : "default")
+                                + ".png"))
+                .toList();
+
         return ResponseEntity.ok(ingredientes);
     }
-    
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerIngrediente(@PathVariable int id) {
@@ -42,7 +50,7 @@ public class IngredienteController {
             return ResponseEntity.ok(ingrediente.get());
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body("Ingrediente no encontrado");
+                    .body("Ingrediente no encontrado");
         }
     }
 
@@ -50,18 +58,19 @@ public class IngredienteController {
     public ResponseEntity<String> actualizarIngrediente(@PathVariable int id, @RequestBody Ingrediente cambios) {
         Optional<Ingrediente> opt = repo.findById(id);
 
-            if (opt.isEmpty()) {
+        if (opt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body("Ingrediente no encontrado ");
+                    .body("Ingrediente no encontrado ");
         }
 
         Ingrediente ing = opt.get();
 
-        
-
-        if (cambios.getNombre() != null) ing.setNombre(cambios.getNombre());
-        if (cambios.getDescripcion() != null) ing.setDescripcion(cambios.getDescripcion());
-        if (cambios.getAlergenos() != null) ing.setAlergenos(cambios.getAlergenos());
+        if (cambios.getNombre() != null)
+            ing.setNombre(cambios.getNombre());
+        if (cambios.getDescripcion() != null)
+            ing.setDescripcion(cambios.getDescripcion());
+        if (cambios.getAlergenos() != null)
+            ing.setAlergenos(cambios.getAlergenos());
         ing.setStock(cambios.getStock());
         ing.setEsVegano(cambios.isEsVegano());
 
@@ -73,7 +82,7 @@ public class IngredienteController {
     public ResponseEntity<String> eliminarIngrediente(@PathVariable int id) {
         if (!repo.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body("Ingrediente no encontrado ");
+                    .body("Ingrediente no encontrado ");
         }
         repo.deleteById(id);
         return ResponseEntity.ok("Ingrediente eliminado correctamente ");

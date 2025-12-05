@@ -3,27 +3,27 @@ import { useEffect, useState } from "react";
 import "./eliminar.css";
 
 function Eliminar() {
-  const { tipo } = useParams();
+  const { tipo } = useParams();          // "ingredientes" o "platos"
   const [datos, setDatos] = useState([]);
 
-  function fetchDatos() {
-    fetch(`http://localhost:8080/${tipo}/listar`) //Modificar Ingredientes a variable dinamica
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al obtener datos");
-        return response.json(); 
+  useEffect(() => {
+    const url = `http://localhost:8080/${tipo}/listar`;
+
+    fetch(url)
+      .then((r) => {
+        if (!r.ok) throw new Error("Error al obtener datos");
+        return r.json();
       })
       .then((data) => {
-        console.log("Datos recibidos:", data);
-        setDatos(data); 
+        setDatos(data);
       })
-      .catch((error) => console.error("Error al obtener los datos:", error));
-  
-    }
+      .catch((e) => console.error("Error al cargar datos:", e));
+  }, [tipo]);
 
-  useEffect(() => {
-    fetchDatos();
-  }, []);
+  function borrarDato(id, nombre) {
+    const url = `http://localhost:8080/${tipo}/eliminar/${id}`;
 
+<<<<<<< Updated upstream
 function borrarDato(idIngrediente,nombre) {
 fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
   method: "DELETE",
@@ -32,46 +32,57 @@ fetch(`http://localhost:8080/${tipo}/eliminar/${idIngrediente}`, {
   alert(`${tipo} ${nombre} eliminado`);
   fetchDatos(); // refresca la lista automáticamente
 })
+=======
+    fetch(url, { method: "DELETE" })
+      .then((r) => {
+        if (!r.ok) throw new Error("Error al eliminar");
+        alert(`${tipo.slice(0, -1)} ${nombre} eliminado`);
+>>>>>>> Stashed changes
 
-}
+        // Quitar del estado local
+        setDatos((prev) => prev.filter((item) => item.id !== id));
+      })
+      .catch((e) => {
+        console.error("Error al eliminar:", e);
+        alert("No se pudo eliminar");
+      });
+  }
 
   return (
- <>
- 
- <div>
+    <div>
       <div className="div_title">
-      <h1>{tipo}</h1>
+        <h1>{tipo}</h1>
       </div>
+
       <div className="cards-container">
-        
-       {datos.map((dato) => {
-  const imagen = dato.imagen ? dato.imagen : "/default";
+        {datos.map((dato) => (
+          <div className="card_delete" key={dato.id}>
+            <div className="card_image">
+              <img src={dato.imagenUrl} alt={`imagen-${tipo}`} />
+            </div>
 
-  return (
-    <div className="card_delete" key={dato.idIngrediente}>
-      <div className="card_image">
-      <img src={`/CrudImg/Ingredientes/${imagen}.png`} alt="imagenIngrediente" />
-      </div>
+            <div>
+              <h2>{dato.nombre}</h2>
+            </div>
 
-      <div>
-        <h2>{dato.nombre}</h2>
-      </div>
-
-      <div className="buttomDeleteDiv">
-        <button id="DeleteButtom" type="button" onClick={() => borrarDato(dato.idIngrediente, dato.nombre)}>
-          <img src="/deletebuttom.png" alt="" />
-        </button>
-      </div>
-    </div>
-  );
-})}
-
+            <div className="buttomDeleteDiv">
+              <button
+                id="DeleteButtom"
+                type="button"
+                onClick={() => borrarDato(dato.id, dato.nombre)}
+              >
+                <img src="/deletebuttom.png" alt="Eliminar" />
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
- 
- 
- </>
   );
 }
 
 export default Eliminar;
+
+
+
+
