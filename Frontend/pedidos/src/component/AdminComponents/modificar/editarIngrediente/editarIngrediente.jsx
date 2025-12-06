@@ -99,6 +99,7 @@ function EditarIngrediente() {
     <>
 
     <Header_admin/>
+    
       <div className="div_father">
         <h2>Modificar Ingrediente: {Ingrediente.nombre}</h2>
 

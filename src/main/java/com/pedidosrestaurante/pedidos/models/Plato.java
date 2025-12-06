@@ -1,10 +1,10 @@
-// Archivo: com/pedidosrestaurante/pedidos/models/Plato.java
 package com.pedidosrestaurante.pedidos.models;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType; // <-- ¡IMPORTANTE!
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,15 +19,23 @@ public class Plato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_plato") // <--- CONFIRMAMOS el nombre exacto de la columna en la tabla 'platos'
+    @Column(name = "id_plato")
     private int idPlato;
 
-    @OneToMany(mappedBy = "plato")
-    @JsonIgnoreProperties("plato") // <-- ROMPE EL CICLO AQUÍ
+    // 🛑 MODIFICACIÓN CLAVE AQUÍ:
+    @OneToMany(
+        mappedBy = "plato", 
+        // 1. Añadimos CASCADE.ALL: Cuando borras un Plato, todas las filas de PlatoIngrediente asociadas se borran.
+        cascade = CascadeType.ALL,
+        // 2. Añadimos orphanRemoval: Permite que Hibernate gestione automáticamente la eliminación de la asociación.
+        orphanRemoval = true 
+    )
+    @JsonIgnoreProperties("plato") 
     private List<PlatoIngrediente> ingredientes;
 
     @Column(name = "nombre")
     private String nombre;
+// ... (resto de atributos, constructores, getters y setters sin cambios)
 
     @Column(name = "descripcion")
     private String descripcion;

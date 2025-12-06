@@ -24,6 +24,16 @@ public class Ingrediente {
 @Column(name="id_ingrediente")
 private int idIngrediente;
 
+
+@OneToMany(
+        mappedBy = "ingrediente", 
+        // Cuando eliminas el Ingrediente, borra todos los registros asociados 
+        // en la tabla de unión 'PlatoIngrediente'.
+        cascade = CascadeType.ALL, 
+        orphanRemoval = true
+    )
+
+    
 @Column(name="nombre")
 private String nombre;
 
@@ -41,7 +51,6 @@ private boolean esVegano;
 
 @Column(name="imagen")
 private String imagen;
-
 
 
 public Ingrediente(){};

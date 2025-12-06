@@ -42,6 +42,7 @@ function Visualizar() {
 
                 <div>
                   <h2>{dato.nombre}</h2>
+                  
                   <p><strong>Descripción:</strong> {dato.descripcion}</p>
                   <p><strong>Alergenos:</strong> {dato.alergenos}</p>
                   <p><strong>Stock:</strong> {dato.stock}</p>
@@ -68,14 +69,14 @@ function Visualizar() {
                 <div className="card_image">
                   <img src={`/CrudImg/Platos/${imagen}.png`} alt="imagenPlato" />
                 </div>
-                <div>
+                <div className="card_content_div">
                   <h2>{dato.nombre}</h2>
                   <p><strong>Descripción:</strong> {dato.descripcion}</p>
                   <p><strong>Precio:</strong> {dato.precio} €</p>
-                  <strong>Ingredientes:</strong>{" "}
-                  {dato.ingredientes
+                  <p><strong>Ingredientes:</strong>{" "}</p>
+                  <p>{dato.ingredientes
                     ?.map((rel) => `${rel.cantidad}x ${rel.ingrediente.nombre}`)
-                    .join(", ")}
+                    .join(", ")}</p>
                 </div>
               </div>
             );
