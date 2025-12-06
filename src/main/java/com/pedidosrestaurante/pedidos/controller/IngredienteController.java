@@ -15,7 +15,6 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/ingredientes")
-
 public class IngredienteController {
 
     @Autowired
@@ -50,25 +49,26 @@ public class IngredienteController {
     public ResponseEntity<String> actualizarIngrediente(@PathVariable int id, @RequestBody Ingrediente cambios) {
         Optional<Ingrediente> opt = repo.findById(id);
 
-            if (opt.isEmpty()) {
+        if (opt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body("Ingrediente no encontrado ");
         }
 
         Ingrediente ing = opt.get();
 
-        
-
         if (cambios.getNombre() != null) ing.setNombre(cambios.getNombre());
         if (cambios.getDescripcion() != null) ing.setDescripcion(cambios.getDescripcion());
         if (cambios.getAlergenos() != null) ing.setAlergenos(cambios.getAlergenos());
-        ing.setStock(cambios.getStock());
+        
+        ing.setStock(cambios.getStock()); 
         ing.setEsVegano(cambios.isEsVegano());
+        if (cambios.getImagen() != null) ing.setImagen(cambios.getImagen());
 
         repo.save(ing);
         return ResponseEntity.ok("Ingrediente actualizado correctamente ");
     }
 
+    // --- MÉTODO CORREGIDO: ELIMINAR INGREDIENTE (SIMPLE) ---
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarIngrediente(@PathVariable int id) {
         if (!repo.existsById(id)) {
@@ -76,8 +76,16 @@ public class IngredienteController {
                                  .body("Ingrediente no encontrado ");
         }
 
-        
-        repo.deleteById(id);
-        return ResponseEntity.ok("Ingrediente eliminado correctamente ");
+        try {
+            // 🚨 ¡LA BASE DE DATOS LIMPIA LAS REFERENCIAS!
+            repo.deleteById(id);
+            
+            return ResponseEntity.ok("Ingrediente eliminado correctamente ");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Error interno al eliminar el ingrediente: " + e.getMessage());
+        }
     }
 }

@@ -1,10 +1,11 @@
 package com.pedidosrestaurante.pedidos.models;
 
 import java.util.List;
+import java.util.ArrayList; 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType; // <-- ¡IMPORTANTE!
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,20 +23,17 @@ public class Plato {
     @Column(name = "id_plato")
     private int idPlato;
 
-    // 🛑 MODIFICACIÓN CLAVE AQUÍ:
     @OneToMany(
         mappedBy = "plato", 
-        // 1. Añadimos CASCADE.ALL: Cuando borras un Plato, todas las filas de PlatoIngrediente asociadas se borran.
+        // Permite guardar/actualizar/eliminar PlatoIngrediente cuando se opera sobre Plato
         cascade = CascadeType.ALL,
-        // 2. Añadimos orphanRemoval: Permite que Hibernate gestione automáticamente la eliminación de la asociación.
         orphanRemoval = true 
     )
     @JsonIgnoreProperties("plato") 
-    private List<PlatoIngrediente> ingredientes;
+    private List<PlatoIngrediente> ingredientes = new ArrayList<>(); 
 
     @Column(name = "nombre")
     private String nombre;
-// ... (resto de atributos, constructores, getters y setters sin cambios)
 
     @Column(name = "descripcion")
     private String descripcion;
@@ -45,10 +43,17 @@ public class Plato {
 
     @Column(name = "imagen")
     private String imagen;
+    
+    // --- Métodos de Conveniencia y Constructores ---
 
-    // [ El resto de Constructores, Getters y Setters no necesitan cambio ]
+    public void addIngrediente(PlatoIngrediente platoIngrediente) {
+        // Establece la relación bidireccional
+        platoIngrediente.setPlato(this);
+        this.ingredientes.add(platoIngrediente);
+    }
+
     public Plato() {
-    };
+    }
 
     public Plato(String nombre, String descripcion, double precio, String imagen) {
         this.nombre = nombre;
@@ -56,6 +61,8 @@ public class Plato {
         this.precio = precio;
         this.imagen = imagen;
     }
+
+    // --- Getters y Setters ---
 
     public String getNombre() {
         return nombre;
@@ -109,8 +116,16 @@ public class Plato {
         return ingredientes;
     }
 
+    // ELIMINAMOS LA LÓGICA DE BIDIRECCIONALIDAD EN EL SETTER DE PLATO, 
+    // USANDO EL MÉTODO addIngrediente PARA MANTENER LA REFERENCIA.
     public void setIngredientes(List<PlatoIngrediente> ingredientes) {
-        this.ingredientes = ingredientes;
-
+        // Limpiamos la lista actual antes de añadir los nuevos
+        this.ingredientes.clear(); 
+        if (ingredientes != null) {
+            for (PlatoIngrediente pi : ingredientes) {
+                // Usamos el método de conveniencia para asegurar la bidireccionalidad
+                this.addIngrediente(pi); 
+            }
+        }
     }
 }

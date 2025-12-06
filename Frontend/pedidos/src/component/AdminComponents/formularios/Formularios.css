@@ -1,64 +1,128 @@
+/* ========== CONTENEDOR PRINCIPAL ========== */
 
 .div_father {
-    max-width: 900px;
-    margin: 0 auto;
-    padding-top: 40px;
+    margin-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-/* Título */
-.div_father h2 {
-    font-size: 28px;
-    margin-bottom: 25px;
-    text-align: center;
+
+/* ========== FORMULARIO ========== */
+
+.div_form {
+    margin: 20px 0;
+    padding: 25px;
+    width: 55%;
+    background: #f4f0e6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .div_form form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    /* separación entre inputs */
+    gap: 20px;
 }
 
-.div_form label {
-    font-size: 18px;
+
+/* ========== LABELS & INPUTS ========== */
+
+label {
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: -10px;
 }
 
-.div_form input,
-.div_form select {
+input,
+select {
     width: 100%;
-    padding: 12px 14px;
-    font-size: 16px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    height: auto;
     border-radius: 6px;
-    box-sizing: border-box;
+    border: 1px solid #bcae91;
+    background: #fff;
+    font-size: 1rem;
+    transition: 0.2s ease;
 }
 
-.div_form select {
-    background-color: #fff;
+/* Hover / focus */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #b58946;
+    box-shadow: 0 0 6px rgba(181, 137, 70, 0.4);
 }
 
-/* Botón grande y estilizado */
-.btn-submit,
-.div_form button[type="submit"] {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    font-size: 18px;
+
+/* ========== SECCIONES INTERNAS ========== */
+
+.section-title {
+    margin-top: 25px;
+    font-size: 1.4rem;
     font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(to right, #bb9457, #d6a86a);
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
+    color: #4a3c23;
+    border-bottom: 2px solid #c0a875;
+    padding-bottom: 5px;
 }
 
-.btn-submit:hover,
-.div_form button[type="submit"]:hover {
-    background: linear-gradient(to right, #b68a43, #e1b26d);
-    transform: scale(1.02);
+.ingrediente-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.ingrediente-row select,
+.ingrediente-row input {
+    width: 45%;
+}
+
+
+/* ========== LISTAS ========== */
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    background: #fff;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    border: 1px solid #d7c8b2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* ========== BOTONES ========== */
+
+button {
+    padding: 10px 18px;
+    background: #b58946;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-size: 1.1rem;
+}
+
+button:hover {
+    background: #9c7537;
+}
+
+button[type="submit"] {
+    width: 80%;
+    margin: 30px auto 0 auto;
+    padding: 14px;
+    font-size: 1.2rem;
+    border-radius: 25px;
 }
 
 .error {

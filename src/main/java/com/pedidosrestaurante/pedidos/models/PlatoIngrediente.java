@@ -3,28 +3,34 @@ package com.pedidosrestaurante.pedidos.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pedidosrestaurante.pedidos.id.PlatoIngredienteId;
 
+// 🚨 Importaciones para Hibernate ON DELETE CASCADE
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+// Usando 'jakarta' para Spring Boot 3+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "plato_ingrediente")
 public class PlatoIngrediente {
 
-    // 1. ELIMINAR EL ID SIMPLE (si existe) y usar la clave incrustada
     @EmbeddedId // Indica que la clave primaria es compuesta
     private PlatoIngredienteId id;
 
-    // 2. Definir la relación Plato (referenciando las columnas de la clave)
+    // Relación Plato: Mantiene la consistencia de la clave compuesta
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("platoId") // Mapea la FK 'platoId' a la clave incrustada
     @JoinColumn(name = "id_plato") // Nombre real de la columna FK en la tabla
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ingredientes"})
     private Plato plato;
 
-    // 3. Definir la relación Ingrediente
+    // 🚨 Relación Ingrediente: ¡AÑADIR ON DELETE CASCADE!
+    // Esto genera la instrucción a nivel de base de datos para borrar las referencias.
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ingredienteId") // Mapea la FK 'ingredienteId' a la clave incrustada
     @JoinColumn(name = "id_ingrediente") // Nombre real de la columna FK en la tabla
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ingredientes"})
+    @OnDelete(action = OnDeleteAction.CASCADE) // 💥 SOLUCIÓN AL ERROR DE CLAVE FORÁNEA
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "platosIngredientes"})
     private Ingrediente ingrediente;
 
     @Column(nullable = false)
@@ -45,14 +51,18 @@ public class PlatoIngrediente {
     // Cuando estableces el plato, también actualizas la clave compuesta
     public void setPlato(Plato plato) {
         this.plato = plato;
-        this.id.setPlatoId(plato.getIdPlato()); 
+        if (this.id != null && plato != null) {
+              this.id.setPlatoId(plato.getIdPlato()); 
+        }
     }
 
     public Ingrediente getIngrediente() { return ingrediente; }
     // Cuando estableces el ingrediente, también actualizas la clave compuesta
     public void setIngrediente(Ingrediente ingrediente) {
         this.ingrediente = ingrediente;
-        this.id.setIngredienteId(ingrediente.getIdIngrediente());
+        if (this.id != null && ingrediente != null) {
+            this.id.setIngredienteId(ingrediente.getIdIngrediente());
+        }
     }
 
     public int getCantidad() { return cantidad; }

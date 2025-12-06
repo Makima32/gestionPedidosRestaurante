@@ -2,7 +2,7 @@ import Header_admin from "../../../component/AdminComponents/header_admin/header
 import EditarIngrediente from "../../../component/AdminComponents/modificar/editarIngrediente/editarIngrediente";
 import ModificarIngredientePage from "../modificarIngrediente"
 
-function modificarIngredienteporIdPage() {
+function ModificarIngredientePage() {
     
     return(
         <>

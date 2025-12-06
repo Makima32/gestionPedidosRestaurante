@@ -9,9 +9,9 @@ import java.util.List;
 public interface PlatoIngredienteRepository extends JpaRepository<PlatoIngrediente, PlatoIngredienteId> {
 
     // El método de búsqueda por plato sigue siendo válido
-    List<PlatoIngrediente> findByPlato_IdPlato(Long idPlato);
+    List<PlatoIngrediente> findByPlato_IdPlato(int idPlato);
     
     // El método de eliminación por IDs también cambia el nombre y tipo de los parámetros
     // Nota: El nombre del método debe ser exactamente el mismo si usas el método de consulta de Spring Data JPA
-    void deleteByPlato_IdPlatoAndIngrediente_IdIngrediente(Long idPlato, Long idIngrediente); 
+    void deleteByPlato_IdPlatoAndIngrediente_IdIngrediente(int idPlato, int idIngrediente); 
 }
