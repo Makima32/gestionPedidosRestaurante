@@ -1,13 +1,13 @@
 package com.pedidosrestaurante.pedidos.controller;
 
+import com.pedidosrestaurante.pedidos.id.PlatoIngredienteId;
+import com.pedidosrestaurante.pedidos.models.PlatoIngrediente;
+import com.pedidosrestaurante.pedidos.repository.PlatoIngredienteRepository;
+import com.pedidosrestaurante.pedidos.service.PlatoIngredienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.pedidosrestaurante.pedidos.models.PlatoIngrediente;
-import com.pedidosrestaurante.pedidos.id.PlatoIngredienteId; // <-- Necesario
-import com.pedidosrestaurante.pedidos.repository.PlatoIngredienteRepository;
-import com.pedidosrestaurante.pedidos.service.PlatoIngredienteService; // <-- Usaremos un servicio
 
 import java.util.List;
 import java.util.Optional;
@@ -19,50 +19,66 @@ public class PlatoIngredienteController {
 
     @Autowired
     private PlatoIngredienteRepository repo;
-    
-    @Autowired // ASUME que ahora tienes un servicio para la lógica de creación/eliminación
-    private PlatoIngredienteService service; 
 
-    // 1. CREAR: Usaremos la lógica del servicio para obtener las referencias
+    @Autowired
+    private PlatoIngredienteService service;
+
+    // 1. CREAR relación plato-ingrediente
     @PostMapping("/crear")
-    public ResponseEntity<?> crear(@RequestBody PlatoIngrediente pi){
-        // Usar el servicio con la lógica de getReferenceById()
-        PlatoIngrediente nuevo = service.crear(pi); 
+    public ResponseEntity<?> crear(@RequestBody PlatoIngrediente pi) {
+        // El service se encarga de setear plato e ingrediente con getReferenceById()
+        PlatoIngrediente nuevo = service.crear(pi);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
+    // 2. LISTAR todas las relaciones
     @GetMapping("/listar")
-    public List<PlatoIngrediente> listar(){
-        return repo.findAll();
+    public ResponseEntity<List<PlatoIngrediente>> listar() {
+        List<PlatoIngrediente> lista = repo.findAll();
+        return ResponseEntity.ok(lista);
     }
 
-    // 2. OBTENER: Ahora se requiere idPlato e idIngrediente
-    // El método original por ID simple ya NO ES VÁLIDO.
+    // 3. OBTENER una relación concreta por clave compuesta
     @GetMapping("/{idPlato}/{idIngrediente}")
-    public Optional<Object> obtenerPorClave(
-            @PathVariable int idPlato, 
-            @PathVariable int idIngrediente)
-    {
+    public ResponseEntity<?> obtenerPorClave(
+            @PathVariable int idPlato,
+            @PathVariable int idIngrediente) {
         PlatoIngredienteId id = new PlatoIngredienteId(idPlato, idIngrediente);
-        
-        return repo.findById(id)
-            .map(ResponseEntity::ok);
-            
+
+        Optional<PlatoIngrediente> opt = repo.findById(id);
+
+        if (opt.isPresent()) {
+            return ResponseEntity.ok(opt.get());
+        } else {
+            return ResponseEntity.status(404)
+                    .body("Relación plato-ingrediente no encontrada");
+        }
     }
 
-    // 3. ELIMINAR: Usa el método que ya tenías, pero en el servicio
+    // 4. ELIMINAR una relación concreta plato-ingrediente
     @DeleteMapping("/eliminar/{idPlato}/{idIngrediente}")
     public ResponseEntity<?> eliminarPorIDs(
-            @PathVariable Long idPlato, 
-            @PathVariable Long idIngrediente
-    ){
-        // Usar el método que ya existía, pero con los tipos correctos (Long)
-        repo.deleteByPlato_IdPlatoAndIngrediente_IdIngrediente(idPlato, idIngrediente);
-        return ResponseEntity.ok("Eliminado correctamente");
+            @PathVariable int idPlato,
+            @PathVariable int idIngrediente) {
+        PlatoIngredienteId id = new PlatoIngredienteId(idPlato, idIngrediente);
+
+        if (!repo.existsById(id)) {
+            return ResponseEntity.status(404)
+                    .body("Relación plato-ingrediente no encontrada");
+        }
+
+        // Puedes usar deleteById(id) o el método derivado:
+        // repo.deleteByPlato_IdPlatoAndIngrediente_IdIngrediente(idPlato,
+        // idIngrediente);
+        repo.deleteById(id);
+
+        return ResponseEntity.ok("Relación plato-ingrediente eliminada correctamente");
     }
 
+    // 5. LISTAR todas las relaciones de un plato concreto
     @GetMapping("/plato/{idPlato}")
-    public List<PlatoIngrediente> listarPorPlato(@PathVariable Long idPlato){
-        return repo.findByPlato_IdPlato(idPlato);
+    public ResponseEntity<List<PlatoIngrediente>> listarPorPlato(@PathVariable int idPlato) {
+        List<PlatoIngrediente> lista = repo.findByPlato_IdPlato(idPlato);
+        return ResponseEntity.ok(lista);
     }
 }

@@ -19,11 +19,11 @@ public class Plato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_plato") // <--- CONFIRMAMOS el nombre exacto de la columna en la tabla 'platos'
+    @Column(name = "id_plato")
     private int idPlato;
 
     @OneToMany(mappedBy = "plato")
-    @JsonIgnoreProperties("plato") // <-- ROMPE EL CICLO AQUÍ
+    @JsonIgnoreProperties("plato")
     private List<PlatoIngrediente> ingredientes;
 
     @Column(name = "nombre")
@@ -38,7 +38,6 @@ public class Plato {
     @Column(name = "imagen")
     private String imagen;
 
-    // [ El resto de Constructores, Getters y Setters no necesitan cambio ]
     public Plato() {
     };
 
