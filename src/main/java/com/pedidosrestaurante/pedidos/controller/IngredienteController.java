@@ -75,6 +75,8 @@ public class IngredienteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                                  .body("Ingrediente no encontrado ");
         }
+
+        
         repo.deleteById(id);
         return ResponseEntity.ok("Ingrediente eliminado correctamente ");
     }

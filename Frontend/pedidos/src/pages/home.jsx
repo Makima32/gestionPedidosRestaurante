@@ -35,11 +35,11 @@ function Home() {
       <hr />
 
       <PlatosEstrellas
-        pizza1="Carbonara"
-        pizza2="Cuatro_Quesos"
-        pizza3="Margarita"
-        pizza4="Chorizo"
-        pizza5="Peperoni"
+        pizza1="Speck_Carbonara"
+        pizza2="Quattro_Formaggi"
+        pizza3="Clásica_di_Napoli"
+        pizza4="La_Ibérica"
+        pizza5="La_Diavola"
       />
       <hr />
 
@@ -47,6 +47,8 @@ function Home() {
       <hr />
       
       <Pedir/>
+      <hr />
+
       <ContacUs />
 
       <FooterWeb />

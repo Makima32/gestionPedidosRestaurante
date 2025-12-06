@@ -1,0 +1,97 @@
+/* Paleta: CCB185 (Masa), F2ECE1 (Fondo), AC7E2F (Corteza/Acento), 323128 (Texto) */
+
+.home-cta-animated {
+ text-align: center;
+ padding: 100px 20px; 
+ min-height: 50vh; 
+ background-color: #F2ECE1; 
+ color: #323128; 
+ font-family: 'Arial', sans-serif; 
+}
+
+.cta-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-question {
+  font-size: 2rem;
+  color: #323128;
+  margin-bottom: 5px;
+}
+
+#rotating-text-h1 {
+  font-size: 3.5rem; 
+  font-weight: 900;
+  color: #AC7E2F; 
+  min-height: 1.2em; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  /* CLAVE: Usamos Flexbox para alinear texto y cursor */
+  display: flex;
+  justify-content: center;
+  align-items: baseline; /* Alinea perfectamente el texto base y la barra */
+}
+
+.rotating-text {
+  font-weight: 900;
+}
+
+.cta-subtitle {
+  font-size: 1.3rem;
+  color: #323128;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.cursor {
+  display: inline-block;
+  background-color: #AC7E2F; 
+  width: 4px; 
+  height: 1.2em;
+  animation: blink 0.7s infinite;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+ 0%, 50%, 100% { opacity: 1; }
+ 25%, 75% { opacity: 0; }
+}
+
+.btn-cta {
+  margin-top: 50px; 
+  padding: 18px 40px; 
+  font-size: 1.5rem; 
+  background-color: #AC7E2F; 
+  color: #F2ECE1; 
+  border: none;
+  border-radius: 10px; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.btn-cta:hover {
+  background-color: #CCB185; 
+  color: #323128; 
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .home-cta-animated {
+        padding: 60px 15px;
+    }
+    .cta-question {
+        font-size: 1.5rem;
+    }
+    #rotating-text-h1 {
+        font-size: 2.5rem;
+    }
+    .cta-subtitle {
+        font-size: 1rem;
+    }
+    .btn-cta {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        margin-top: 30px;
+    }
+}

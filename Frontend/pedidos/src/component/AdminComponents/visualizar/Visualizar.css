@@ -7,7 +7,6 @@
     flex-wrap: wrap;
     height: 70vh ;
     gap: 50px;
-
 }
 
 .card{
@@ -25,7 +24,6 @@
 .card p{
 
     margin-right: 6rem;
-    font-size: 1.1rem;
     
 }
 
@@ -34,10 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 2vh;
-    height: 35%;
-    width: 125%;
-}
+    }
 
 .card_image img{
     
@@ -52,4 +47,15 @@
 
     font-size: 1.5rem;
     text-align: center;
+}
+
+.card_content_div{
+
+
+    width: 80%;
+}
+
+.card_content_div p{
+    text-align: left;
+    margin-bottom: 10px;
 }
