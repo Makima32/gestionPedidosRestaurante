@@ -11,7 +11,7 @@ function LoginPage() {
         <>
         
         <Header_home home={false}/>
-        <LoginForm/>
+        <LoginPrueba/>
         
         {/* <LoginPrueba/> */}
         </>
