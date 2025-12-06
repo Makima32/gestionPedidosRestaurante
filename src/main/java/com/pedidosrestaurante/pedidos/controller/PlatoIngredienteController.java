@@ -53,8 +53,8 @@ public class PlatoIngredienteController {
     // 3. ELIMINAR: Usa el método que ya tenías, pero en el servicio
     @DeleteMapping("/eliminar/{idPlato}/{idIngrediente}")
     public ResponseEntity<?> eliminarPorIDs(
-            @PathVariable Long idPlato, 
-            @PathVariable Long idIngrediente
+            @PathVariable int idPlato, 
+            @PathVariable int idIngrediente
     ){
         // Usar el método que ya existía, pero con los tipos correctos (Long)
         repo.deleteByPlato_IdPlatoAndIngrediente_IdIngrediente(idPlato, idIngrediente);
@@ -62,7 +62,7 @@ public class PlatoIngredienteController {
     }
 
     @GetMapping("/plato/{idPlato}")
-    public List<PlatoIngrediente> listarPorPlato(@PathVariable Long idPlato){
+    public List<PlatoIngrediente> listarPorPlato(@PathVariable int idPlato){
         return repo.findByPlato_IdPlato(idPlato);
     }
 }

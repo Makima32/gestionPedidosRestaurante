@@ -5,7 +5,7 @@ function AgregarPlato() {
     const [plato, setPlato] = useState({
         nombre: "",
         descripcion: "",
-        precio: 0,
+        precio: 0,  
         ingredientes: [], // { idIngrediente, nombre, cantidad } 
         imagen: "",
     });

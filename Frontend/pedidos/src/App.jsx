@@ -21,6 +21,7 @@ import ModificarIngredientePage from "./pages/admin/modificarIngrediente";
 import EditarIngrediente from "./component/AdminComponents/modificar/editarIngrediente/editarIngrediente";
 import AgregarPlatoPage from "./pages/admin/AgregarPlatoPage";
 import ModificarPlatoPage from "./pages/admin/modificar/ModificarPlatosPage";
+import ModificarPlato from "./pages/admin/modificarPlato";
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
         <Route path="/editar-ingrediente/:id" element={<EditarIngrediente />} />
         <Route path="/modificar/platos/" element={<ModificarPlatoPage />} />
 
-        <Route path="/modificar/plato/:id" element={<ModificarPlatoPage />} />
+        <Route path="/modificar/plato/:id" element={<ModificarPlato />} />
         </Route>
 
        
