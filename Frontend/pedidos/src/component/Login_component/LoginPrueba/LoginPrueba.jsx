@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./LoginPrueba.css"; 
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../hook/auth/authContext";
+import { useAuth } from "../../../hook/auth/authcontext";
 
 function LoginPrueba() {
   const { login } = useAuth();
