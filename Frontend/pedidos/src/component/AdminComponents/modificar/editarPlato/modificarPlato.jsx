@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../formularios/formularios.css"; 
+import "../../Formularios/formularios.css"; 
 
 function ModificarPlato() {
     const [platos, setPlatos] = useState([]);
