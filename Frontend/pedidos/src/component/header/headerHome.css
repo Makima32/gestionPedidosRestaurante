@@ -62,7 +62,7 @@
     align-items: center; 
     /* 🚨 CAMBIO CLAVE: Usa space-between para empujar el botón al final */
     justify-content: space-between; 
-    background-color: #D9D9D9;
+    background-color: #F2ECE1;
     border-radius: 3rem; 
     height: 40%; 
     /* 🚨 Aumentamos el width para dar espacio al nuevo elemento */
@@ -79,9 +79,8 @@
     align-items: center; /* 🚨 Centrado Vertical (Clave para la 'X') */
     justify-content: center; /* Centrado Horizontal */
 
-    /* Estilos estéticos y de tamaño */
-    background-color: #e74c3c;
-    color: white;
+    color: #e74c3c;
+    background-color: #F2ECE1;
     border: none;
     border-radius: 2rem;
     cursor: pointer;
@@ -93,7 +92,8 @@
 }
 
 .logout_button:hover {
-    background-color: #c0392b;
+    transform: none;
+    background-color: #F2ECE1;
 }
 /* Si decidiste usar solo la 'X' como contenido, puedes hacerlo más cuadrado */
 .logout_button_icon {

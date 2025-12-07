@@ -49,6 +49,8 @@ function LoginPrueba() {
       // Muestra el error de la API o un mensaje genérico
       setError(err.message || "Credenciales incorrectas o error de conexión.");
     }
+
+    navigate('/');
   }
 
   // Si decides implementar la lógica de Sign Up (registro), 

@@ -34,18 +34,18 @@
 
 @media (max-width: 1024px) {
     .AboutUs2_div_father{ 
-        height: auto; /* Permitir que la altura se ajuste al contenido */
-        min-height: 80vh; /* Asegurar una altura mínima */
-        font-size: 1.6rem; /* Aumento ligero del tamaño de fuente para tablets */
+        height: auto; 
+        min-height: 80vh; 
+        font-size: 1.6rem;
     }
 
     .AboutUs2_div_father h2{
-        font-size: 2.5rem; /* Título un poco más pequeño */
+        font-size: 2.5rem;
     }
 
     .AboutUs2_div_content{
-        width: 70vw; /* Más ancho para aprovechar la pantalla */
-        height: fit-content; /* Dejar que la altura se ajuste al contenido */
+        width: 70vw; 
+        height: fit-content;
     }
 }
 
@@ -54,17 +54,17 @@
 @media (max-width: 480px) {
     .AboutUs2_div_father{ 
         min-height: 70vh;
-        padding: 10px; /* Menos padding en pantallas muy pequeñas */
-        font-size: 1.2rem; /* Tamaño de fuente ideal para móviles */
+        padding: 10px; 
+        font-size: 1.2rem; 
     }
 
     .AboutUs2_div_father h2{
-        font-size: 2rem; /* Título aún más pequeño */
+        font-size: 2rem; 
         margin-bottom: 15px;
     }
     
     .AboutUs2_div_content{
-        width: 90vw; /* Casi todo el ancho de la pantalla */
+        width: 90vw; 
         height: fit-content;
     }
 }

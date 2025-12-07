@@ -15,14 +15,14 @@
     height: 70vh;
     width: 25vw;
     flex-direction: column;
-    transition: transform 0.3s ease; /* Transición suave */
+    transition: transform 0.3s ease; 
 
 
 }
 
 .card:hover{
 
-  transform: scale(1.05); /* Agrandar el elemento un 20% */
+  transform: scale(1.05); 
 }
 .card_img{
     text-align: center;
