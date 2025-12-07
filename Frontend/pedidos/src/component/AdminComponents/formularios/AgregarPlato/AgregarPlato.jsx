@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../formularios.css";
+import "../Formularios.css";
 
 function AgregarPlato() {
     const [plato, setPlato] = useState({
