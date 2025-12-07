@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../formularios.css";
+import "../Formularios.css";
 
 function AgregarIngrediente() {
   const [Ingrediente, setIngrediente] = useState({
