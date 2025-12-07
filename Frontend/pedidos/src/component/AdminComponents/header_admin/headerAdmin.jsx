@@ -1,43 +1,49 @@
 import { Link } from "react-router-dom";
+import { useState } from "react"; 
 import "./headerAdmin.css";
 
 function Header_admin() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
-  return (
-    <header className="headerAdmin">
+    return (
+        <header className="headerAdmin">
 
-        <div className="header_div_Admin">
+            <div className="header_div_Admin">
 
-       
-        <div className="header_div_img_div_admin">
+                <div className="header_div_img_div_admin">
+                    <Link to="/"><img src="/logo.png" alt="Logo" /></Link>
+                </div>
 
-      <Link to="/"><img src="logo.png" alt="Logo" /></Link>
-     
-         </div>
-        
-        <div className="header_nav_div_Admin">
+                <div 
+                    className={`hamburger_menu_admin ${isMenuOpen ? 'active' : ''}`} 
+                    onClick={toggleMenu}
+                >
+                    <div className="bar_admin"></div>
+                    <div className="bar_admin"></div>
+                    <div className="bar_admin"></div>
+                </div>
 
-            <Link to="/adminIngredientes" style={{color: "black"}} >Ingredientes</Link>
+                <div className={`header_nav_div_Admin ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
 
-            <Link to="/adminPlatos"  style={{color:"black"}}>Platos</Link>
+                    <Link to="/adminIngredientes" style={{color: "black"}} >Ingredientes</Link>
+                    <Link to="/adminPlatos" style={{color:"black"}}>Platos</Link>
+                    <Link to="/adminPedidos" style={{color:"black"}}>Pedidos</Link>
+                    <Link to="/adminClientes" style={{color:"black"}}>Clientes</Link>
+                    <Link to="/adminMesas" style={{color:"black"}} >Mesas</Link>
+                    <Link to="/adminReservas" style={{color:"black"}}>Reservas</Link>
 
-            <Link to="/adminPedidos"  style={{color:"black"}}>Pedidos </Link>
+                </div>
 
-            <Link to="/adminClientes"  style={{color:"black"}}>Clientes </Link>
+                <div className="header_account_placeholder_admin"></div>
 
-            <Link to="/adminMesas"  style={{color:"black"}} >Mesas </Link>
+            </div>
 
-            <Link to="/adminReservas"  style={{color:"black"}}>Reservas </Link>
-
-        </div>
-
-
-
-        </div>
-
-    </header>
-  );
+        </header>
+    );
 }
-
+ 
 export default Header_admin;

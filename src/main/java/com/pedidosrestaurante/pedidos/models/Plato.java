@@ -44,10 +44,8 @@ public class Plato {
     @Column(name = "imagen")
     private String imagen;
     
-    // --- Métodos de Conveniencia y Constructores ---
 
     public void addIngrediente(PlatoIngrediente platoIngrediente) {
-        // Establece la relación bidireccional
         platoIngrediente.setPlato(this);
         this.ingredientes.add(platoIngrediente);
     }
@@ -62,7 +60,6 @@ public class Plato {
         this.imagen = imagen;
     }
 
-    // --- Getters y Setters ---
 
     public String getNombre() {
         return nombre;
@@ -116,14 +113,10 @@ public class Plato {
         return ingredientes;
     }
 
-    // ELIMINAMOS LA LÓGICA DE BIDIRECCIONALIDAD EN EL SETTER DE PLATO, 
-    // USANDO EL MÉTODO addIngrediente PARA MANTENER LA REFERENCIA.
     public void setIngredientes(List<PlatoIngrediente> ingredientes) {
-        // Limpiamos la lista actual antes de añadir los nuevos
         this.ingredientes.clear(); 
         if (ingredientes != null) {
             for (PlatoIngrediente pi : ingredientes) {
-                // Usamos el método de conveniencia para asegurar la bidireccionalidad
                 this.addIngrediente(pi); 
             }
         }

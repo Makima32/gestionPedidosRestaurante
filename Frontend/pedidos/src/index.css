@@ -16,7 +16,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden; /* quita scroll horizontal */
+  overflow-x: hidden; 
   background-color: #F2ECE1;
 
 }

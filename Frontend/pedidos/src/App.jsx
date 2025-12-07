@@ -14,7 +14,6 @@ import CartaPage from "./pages/carta";
 import LoginPage from "./pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminMenuPage from "./pages/admin/adminMenu";
-import LogoutPage from "./pages/Logout";
 import PageNotFound from "./pages/PageNotFound";
 import ModificarIngredientePage from "./pages/admin/modificarIngrediente";
 import EditarIngrediente from "./component/AdminComponents/modificar/editarIngrediente/editarIngrediente";
@@ -58,7 +57,6 @@ function App() {
 
         {/* Login */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/logout" element={<LogoutPage />} />
 
 
 

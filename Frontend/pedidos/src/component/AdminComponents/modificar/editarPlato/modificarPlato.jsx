@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "../../formularios/Formularios.css"; // Asegúrate de que esta ruta a tu CSS sea correcta
 
 function ModificarPlato() {
     const [platos, setPlatos] = useState([]);
     const navigate = useNavigate();
+    const [errorBackend, setErrorBackend] = useState(false); 
 
     function fetchPlatos() {
+        setErrorBackend(false); 
+
         fetch("http://localhost:8080/platos/listar")
             .then((response) => {
-                if (!response.ok) throw new Error("Error al obtener platos");
+                if (!response.ok) throw new Error("Error en la respuesta del servidor (HTTP code)");
                 return response.json();
             })
             .then((data) => {
                 console.log("Platos recibidos:", data);
                 setPlatos(data);
             })
-            .catch((error) => console.error("Error al obtener los platos:", error));
+            .catch((error) => {
+                console.error("Error al obtener los platos:", error);
+                setErrorBackend(true);
+            });
     }
 
     useEffect(() => {
@@ -26,6 +33,24 @@ function ModificarPlato() {
     const handleEdit = (idPlato) => {
         navigate(`/modificar/plato/${idPlato}`);
     };
+    
+    if (errorBackend) {
+        return (
+            <div className="error-screen-center"> 
+                <div className="error-message-box">
+                    <span className="error-code">❌</span>
+                    <h1>¡Conexión Fallida!</h1>
+                    <p>No se pudo establecer conexión con el backend.</p>
+                    <button 
+                        className="reload-button-inline"
+                        onClick={() => window.location.reload()}
+                    >
+                        Intentar Recargar
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>

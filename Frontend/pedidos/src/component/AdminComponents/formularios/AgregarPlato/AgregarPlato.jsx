@@ -6,7 +6,7 @@ function AgregarPlato() {
         nombre: "",
         descripcion: "",
         precio: 0,  
-        ingredientes: [], // { idIngrediente, nombre, cantidad } 
+        ingredientes: [], 
         imagen: "",
     });
 
@@ -14,11 +14,9 @@ function AgregarPlato() {
     const [ingredienteSeleccionado, setIngredienteSeleccionado] = useState("");
     const [cantidadIngrediente, setCantidadIngrediente] = useState("");
 
-    // Dos estados de errores: uno para el formulario principal y otro para el input de ingredientes
     const [errores, setErrores] = useState({});
     const [erroresIngrediente, setErroresIngrediente] = useState({}); 
 
-    // Cargar ingredientes desde la API (se mantiene igual)
     useEffect(() => {
         const cargarIngredientes = async () => {
             try {
@@ -32,35 +30,29 @@ function AgregarPlato() {
         cargarIngredientes();
     }, []);
 
-    // 1. Manejador de cambios para campos principales (limpia el error)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPlato({ ...plato, [name]: value });
 
-        // Limpiar el error cuando el usuario empieza a escribir
         if (errores[name]) {
             setErrores({ ...errores, [name]: undefined });
         }
     };
     
-    // 2. Manejador para la selección de ingrediente (limpia error de ingrediente)
     const handleIngredienteSelect = (e) => {
         setIngredienteSeleccionado(e.target.value);
         setErroresIngrediente({ ...erroresIngrediente, idIngrediente: undefined });
     }
 
-    // 3. Manejador para la cantidad de ingrediente (limpia error de cantidad)
     const handleCantidadChange = (e) => {
         setCantidadIngrediente(e.target.value);
         setErroresIngrediente({ ...erroresIngrediente, cantidad: undefined });
     }
 
-    // ---------- VALIDACIÓN DEL FORMULARIO PRINCIPAL ----------
     const validarFormulario = () => {
         let erroresTemp = {};
         let esValido = true;
 
-        // 1. Validar campos obligatorios
         if (!plato.nombre.trim()) {
             erroresTemp.nombre = "El nombre del plato es obligatorio.";
             esValido = false;
@@ -71,7 +63,6 @@ function AgregarPlato() {
             esValido = false;
         }
 
-        // 2. Validar precio numérico y positivo
         const precioNum = Number(plato.precio);
         if (!plato.precio.toString().trim()) {
             erroresTemp.precio = "El precio es obligatorio.";
@@ -81,7 +72,6 @@ function AgregarPlato() {
             esValido = false;
         }
 
-        // 3. Validar que haya al menos un ingrediente añadido
         if (plato.ingredientes.length === 0) {
             erroresTemp.ingredientes = "Debes añadir al menos un ingrediente al plato.";
             esValido = false;
@@ -91,19 +81,16 @@ function AgregarPlato() {
         return esValido;
     };
 
-    // ---------- LÓGICA PARA AÑADIR INGREDIENTE A LA LISTA (CON VALIDACIÓN DE CANTIDAD) ----------
     const agregarIngredienteAlPlato = () => {
         let erroresIngTemp = {};
         let esIngredienteValido = true;
         const cantidadNum = Number(cantidadIngrediente);
 
-        // Validar selección de ingrediente
         if (!ingredienteSeleccionado) {
             erroresIngTemp.idIngrediente = "Debes seleccionar un ingrediente.";
             esIngredienteValido = false;
         }
 
-        // Validar cantidad (debe ser > 0 y numérica)
         if (!cantidadIngrediente.toString().trim()) {
             erroresIngTemp.cantidad = "La cantidad es obligatoria.";
             esIngredienteValido = false;
@@ -116,7 +103,6 @@ function AgregarPlato() {
 
         if (!esIngredienteValido) return;
 
-        // Verificar si ya existe (lógica anterior)
         const yaExiste = plato.ingredientes.some(ing => ing.idIngrediente === Number(ingredienteSeleccionado));
         if (yaExiste) {
             alert("Este ingrediente ya está añadido al plato.");
@@ -134,19 +120,16 @@ function AgregarPlato() {
                 {
                     idIngrediente: Number(ingredienteSeleccionado),
                     nombre: ingObj?.nombre, 
-                    cantidad: cantidadNum, // Usamos el valor numérico validado
+                    cantidad: cantidadNum, 
                 },
             ],
         }));
 
-        // Limpiar selección
         setIngredienteSeleccionado("");
         setCantidadIngrediente("");
-        // Limpiar error de ingredientes principal (si se añadió uno con éxito)
         setErrores((prev) => ({ ...prev, ingredientes: undefined }));
     };
     
-    // Función para eliminar un ingrediente (se mantiene igual)
     const eliminarIngredienteDePlato = (id) => {
         setPlato((prev) => ({
             ...prev,
@@ -154,11 +137,9 @@ function AgregarPlato() {
         }));
     };
 
-    // ---------- SUBMIT DEL FORM ----------
     const AñadirPlato = async (e) => {
         e.preventDefault();
 
-        // Limpia cualquier error de ingrediente temporal antes de validar el formulario final
         setErroresIngrediente({}); 
 
         if (!validarFormulario()) {
@@ -166,7 +147,6 @@ function AgregarPlato() {
             return;
         }
         
-        // Mapear la lista de ingredientes al formato de Spring Boot (lógica anterior)
         const ingredientesMapeados = plato.ingredientes.map(ing => ({
             cantidad: ing.cantidad,
             ingrediente: {
@@ -197,7 +177,6 @@ function AgregarPlato() {
             console.log("Plato enviado:", platoAEnviar);
             alert(platoAEnviar.nombre + " añadido correctamente");
             
-            // Reiniciar el formulario
             setPlato({ nombre: "", descripcion: "", precio: 0, imagen: "", ingredientes: [] });
             setErrores({});
             
@@ -213,7 +192,6 @@ function AgregarPlato() {
             <div className="div_form">
                 <form onSubmit={AñadirPlato}>
                     
-                    {/* NOMBRE */}
                     <label>Nombre Plato</label>
                     <input
                         type="text"
@@ -224,7 +202,6 @@ function AgregarPlato() {
                     />
                     {errores.nombre && <p className="error">{errores.nombre}</p>}
 
-                    {/* DESCRIPCIÓN */}
                     <label>Descripción del Plato</label>
                     <input
                         type="text"
@@ -237,7 +214,6 @@ function AgregarPlato() {
                         <p className="error">{errores.descripcion}</p>
                     )}
 
-                    {/* PRECIO */}
                     <label>Precio del Plato</label>
                     <input
                         type="number"
@@ -250,7 +226,6 @@ function AgregarPlato() {
                     />
                     {errores.precio && <p className="error">{errores.precio}</p>}
 
-                    {/* IMAGEN */}
                     <label>Imagen del Plato</label>
                     <input
                         type="text"
@@ -260,10 +235,8 @@ function AgregarPlato() {
                         onChange={handleChange}
                     />
 
-                    {/* INGREDIENTES */}
                     <label>Añadir Ingredientes</label>
                     <div className="ingrediente-row">
-                        {/* SELECT INGREDIENTE */}
                         <select
                             className="ingrediente-select"
                             value={ingredienteSeleccionado}
@@ -279,23 +252,20 @@ function AgregarPlato() {
                                 </option>
                             ))}
                         </select>
-                        {/* ERROR DE SELECT */}
                         {erroresIngrediente.idIngrediente && (
                             <p className="error">{erroresIngrediente.idIngrediente}</p>
                         )}
 
 
-                        {/* INPUT CANTIDAD */}
                         <input
                             className="ingrediente-cantidad"
                             type="number"
                             step="1"
-                            min="0" // Validacion visual en el navegador
+                            min="0" 
                             placeholder="Cantidad"
                             value={cantidadIngrediente}
                             onChange={handleCantidadChange}
                         />
-                        {/* ERROR DE CANTIDAD */}
                         {erroresIngrediente.cantidad && (
                             <p className="error">{erroresIngrediente.cantidad}</p>
                         )}
@@ -310,12 +280,10 @@ function AgregarPlato() {
                         </button>
                     </div>
 
-                    {/* ERROR DE LA LISTA COMPLETA */}
                     {errores.ingredientes && (
                         <p className="error">{errores.ingredientes}</p>
                     )}
 
-                    {/* LISTA DE INGREDIENTES AÑADIDOS */}
                     {plato.ingredientes.length > 0 && (
                         <ul className="ingrediente-list">
                             {plato.ingredientes.map((ing) => (

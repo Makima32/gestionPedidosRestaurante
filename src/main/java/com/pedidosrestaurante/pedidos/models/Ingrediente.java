@@ -21,8 +21,6 @@ public class Ingrediente {
     @Column(name="id_ingrediente")
     private int idIngrediente;
 
-    // 🚩 CAMBIO CLAVE: Eliminar la cascada aquí para evitar el error 'detached entity'.
-    // El ingrediente no debe gestionar la persistencia de la tabla de unión.
     @OneToMany(mappedBy = "ingrediente") 
     private List<PlatoIngrediente> platosIngredientes;
     
@@ -57,7 +55,6 @@ public class Ingrediente {
     }
 
 
-    // --- Getters y Setters ---
 
     public String getNombre() {
         return nombre;

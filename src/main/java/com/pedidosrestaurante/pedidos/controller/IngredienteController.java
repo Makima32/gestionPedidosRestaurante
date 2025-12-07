@@ -68,7 +68,6 @@ public class IngredienteController {
         return ResponseEntity.ok("Ingrediente actualizado correctamente ");
     }
 
-    // --- MÉTODO CORREGIDO: ELIMINAR INGREDIENTE (SIMPLE) ---
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarIngrediente(@PathVariable int id) {
         if (!repo.existsById(id)) {
@@ -77,7 +76,6 @@ public class IngredienteController {
         }
 
         try {
-            // 🚨 ¡LA BASE DE DATOS LIMPIA LAS REFERENCIAS!
             repo.deleteById(id);
             
             return ResponseEntity.ok("Ingrediente eliminado correctamente ");

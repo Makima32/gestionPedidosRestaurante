@@ -4,17 +4,13 @@ import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
-// Marca esta clase para que pueda ser incrustada como ID en la entidad
 @Embeddable 
 public class PlatoIngredienteId implements Serializable {
 
-    // Nota: El tipo de dato debe coincidir con el ID de Plato (asumo Long)
     private int platoId; 
 
-    // Nota: El tipo de dato debe coincidir con el ID de Ingrediente (asumo Long)
     private int ingredienteId; 
 
-    // --- CONSTRUCTORES ---
     public PlatoIngredienteId() {}
 
     public PlatoIngredienteId(int platoId, int ingredienteId) {
@@ -22,7 +18,6 @@ public class PlatoIngredienteId implements Serializable {
         this.ingredienteId = ingredienteId;
     }
 
-    // --- GETTERS y SETTERS ---
     public int getPlatoId() { return platoId; }
     public void setPlatoId(int platoId) { this.platoId = platoId; }
 
@@ -30,8 +25,6 @@ public class PlatoIngredienteId implements Serializable {
     public void setIngredienteId(int ingredienteId) { this.ingredienteId = ingredienteId; }
 
 
-    // --- MÉTODOS REQUERIDOS POR LA CLAVE COMPUESTA ---
-    // Hibernate REQUIERE estos métodos para comparar y manejar la clave.
 
     @Override
     public boolean equals(Object o) {

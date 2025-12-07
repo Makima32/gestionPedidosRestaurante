@@ -11,17 +11,7 @@ import PlatosEstrellas from "../component/home_component/platosEstrellas/PlatosE
 import Pedir from "../component/home_component/pedir/pedir";
 
 function Home() {
-  //NO funciona revisar el porque, scroll da 0 en todo momento
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    function handleScroll() {
-      setScrolled(window.scrollY >= window.innerHeight);
-    }
-    console.log(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <>

@@ -1,4 +1,3 @@
-/* Paleta: CCB185 (Masa), F2ECE1 (Fondo), AC7E2F (Corteza/Acento), 323128 (Texto) */
 
 .home-cta-animated {
  text-align: center;
@@ -26,10 +25,9 @@
   color: #AC7E2F; 
   min-height: 1.2em; 
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  /* CLAVE: Usamos Flexbox para alinear texto y cursor */
   display: flex;
   justify-content: center;
-  align-items: baseline; /* Alinea perfectamente el texto base y la barra */
+  align-items: baseline; 
 }
 
 .rotating-text {

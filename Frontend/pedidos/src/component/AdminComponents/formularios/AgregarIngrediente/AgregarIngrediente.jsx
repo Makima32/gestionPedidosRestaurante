@@ -18,7 +18,7 @@ function AgregarIngrediente() {
     let erroresTemp = {};
     let esValido = true;
 
-    // 1. Validar campos obligatorios
+    // Validar campos obligatorios
     if (!Ingrediente.nombre.trim()) {
       erroresTemp.nombre = "El nombre es obligatorio.";
       esValido = false;
@@ -40,7 +40,7 @@ function AgregarIngrediente() {
       esValido = false;
     }
   
-    // 2. Validar que stock sea un número entero no negativo
+    // Validar que stock sea un número entero no negativo
     const stockNum = Number(Ingrediente.stock);
     if (isNaN(stockNum) || !Number.isInteger(stockNum) || stockNum < 0) {
       erroresTemp.stock = "El stock debe ser un número entero positivo o cero.";
@@ -59,11 +59,9 @@ function AgregarIngrediente() {
       return;
     }
 
-    // Crear el objeto a enviar, asegurando que 'stock' y 'esVegano' sean tipos correctos
     const ingredienteFinal = {
       ...Ingrediente,
       stock: Number(Ingrediente.stock), // Convertir a número
-      // Convertir la string "true" o "false" a su valor booleano real
       esVegano: Ingrediente.vegano === "true", 
     };
 
@@ -95,7 +93,6 @@ function AgregarIngrediente() {
 
         <div className="div_form">
           <form onSubmit={AñadirIngrediente}>
-            {/* Campo: Nombre */}
             <label htmlFor="nombre">Nombre alimento</label>
             <input
               type="text"
@@ -107,7 +104,6 @@ function AgregarIngrediente() {
             />
             {errores.nombre && <p className="error">{errores.nombre}</p>}
 
-            {/* Campo: Descripción */}
             <label htmlFor="descripcion">Descripción del alimento</label>
             <input
               type="text"
@@ -119,7 +115,6 @@ function AgregarIngrediente() {
             />
             {errores.descripcion && <p className="error">{errores.descripcion}</p>}
 
-            {/* Campo: Alérgeno (Dropdown) */}
 
             <label htmlFor="alergeno">Alérgeno del alimento</label>
             <select
@@ -131,7 +126,7 @@ function AgregarIngrediente() {
               }
             >
               <option value="">Selecciona</option>
-              <option value="Ninguno">Ninguno</option> {/* Opción para no alérgeno */}
+              <option value="Ninguno">Ninguno</option> 
               <option value="Gluten">Gluten</option>
               <option value="Crustaceos">Crustáceos</option>
               <option value="Huevos">Huevos</option>
@@ -150,13 +145,12 @@ function AgregarIngrediente() {
             {errores.alergenos && <p className="error">{errores.alergenos}</p>}
 
 
-            {/* Campo: Stock (Cambiado a type="number") */}
             <label htmlFor="stock">Stock del alimento</label>
             <input
-              type="number" // Usa type="number" para teclado numérico y validación básica
+              type="number" 
               placeholder="Stock"
-              min="0" // Evita valores negativos a nivel de navegador
-              step="1" // Asegura que solo se puedan ingresar enteros
+              min="0" 
+              step="1"
               value={Ingrediente.stock}
               onChange={(e) =>
                 setIngrediente({ ...Ingrediente, stock: e.target.value })
@@ -164,7 +158,6 @@ function AgregarIngrediente() {
             />
             {errores.stock && <p className="error">{errores.stock}</p>}
 
-            {/* Campo: Vegano (Dropdown) */}
             <label htmlFor="vegano">¿Es vegano el alimento?</label>
             <select
               value={Ingrediente.vegano}
@@ -178,7 +171,6 @@ function AgregarIngrediente() {
             </select>
             {errores.vegano && <p className="error">{errores.vegano}</p>}
 
-            {/* Campo: Imagen */}
             <label htmlFor="imagen">Nombre de la imagen</label>
             <input
               type="text"

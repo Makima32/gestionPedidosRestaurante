@@ -1,6 +1,4 @@
-/* ================================================= */
-/* ESTILOS BASE (ESCRITORIO GRANDE)      */
-/* ================================================= */
+
 
 .cards-container{
     display: flex;
@@ -8,11 +6,10 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    height: 70vh; /* Se mantendrá para escritorio, pero ajustaremos en móvil */
+    height: 70vh; 
     gap: 50px;
 }
 
-/* Usaré .card_delete como selector principal para la tarjeta */
 .card_delete{
     display: flex;
     border-radius: 1rem;
@@ -20,18 +17,16 @@
     align-items: center;
     flex-direction: column;
     background-color: #D9D9D9;
-    /* Ajustamos el ancho para que quepan 3 o 4 en escritorio */
     width: 250px; 
-    height: 400px; /* Altura fija para escritorio */
+    height: 400px;
     padding: 15px;
 }
 
 .card p{
-    /* Ajustamos el margin para que el texto ocupe todo el ancho de la tarjeta */
     margin-right: 0; 
     padding: 0 10px;
     font-size: 1.1rem;
-    text-align: left; /* Alineamos el texto a la izquierda dentro de la tarjeta */
+    text-align: left; 
     width: 100%;
     box-sizing: border-box;
 }
@@ -42,14 +37,14 @@
     justify-content: center;
     margin-top: 2vh;
     height: 35%;
-    width: 100%; /* Ajustado para que el contenedor de imagen no sea más grande que la tarjeta */
+    width: 100%; 
 }
 
 .card_image img{
     border-radius: 0.5rem;
-    width: 80%; /* Más ancha en escritorio */
+    width: 80%; 
     height: 100%;
-    object-fit: cover; /* Asegura que la imagen se vea bien sin distorsionar */
+    object-fit: cover;
 }
 
 .div_title{
@@ -58,7 +53,6 @@
     margin-bottom: 20px;
 }
 
-/* Estilos de botones y transiciones se mantienen iguales */
 #DeleteButtom{
     background-color: transparent ; 
     border-width: 0px ;
@@ -68,7 +62,7 @@
     box-shadow: none;
 }
 .buttomDeleteDiv img{
-    width: 50px; /* Reducido el tamaño de la imagen del botón para que no sea enorme */
+    width: 50px; 
     height: 50px;
 }
 .buttomDeleteDiv button:hover {
@@ -76,16 +70,72 @@
 }
 
 
+.error-screen-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 80vh; 
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.error-message-box {
+    background-color: #ffe6e6; 
+    border: 2px solid #e74c3c; 
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.error-code {
+    font-size: 3rem;
+    color: #e74c3c; 
+    display: block;
+    margin-bottom: 10px;
+}
+
+.error-message-box h1 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.error-message-box p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.reload-button-inline {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+.reload-button-inline:hover {
+    background-color: #c0392b;
+}
+
+
+
 @media (max-width: 1024px) {
     .cards-container {
         gap: 30px;
-        /* Permitimos que el contenedor crezca más si hay muchas tarjetas */
         height: fit-content; 
         padding: 20px 0;
     }
     
     .card_delete {
-        width: 40vw; /* Dos tarjetas por fila en tabletas */
+        width: 40vw; 
         height: 350px;
     }
     
@@ -137,7 +187,7 @@
     }
 
     .buttomDeleteDiv img{
-        width: 45px; /* Botón ligeramente más grande para tocarlo fácil */
+        width: 45px; 
         height: 45px;
     }
 }

@@ -60,24 +60,19 @@
 .header_account_div {
     display: flex; 
     align-items: center; 
-    /* 🚨 CAMBIO CLAVE: Usa space-between para empujar el botón al final */
     justify-content: space-between; 
     background-color: #F2ECE1;
     border-radius: 3rem; 
     height: 40%; 
-    /* 🚨 Aumentamos el width para dar espacio al nuevo elemento */
     width: 220px; 
     padding: 0.5rem; 
     gap: 0.5rem; 
     margin-right: 3rem;
 }
-/* --- ESTILOS DEL BOTÓN DE LOGOUT --- */
-/* --- ESTILOS DEL BOTÓN DE LOGOUT --- */
 .logout_button {
-    /* Centrado de contenido con Flexbox (SOLUCIÓN) */
-    display: flex; /* 🚨 Habilitar Flexbox */
-    align-items: center; /* 🚨 Centrado Vertical (Clave para la 'X') */
-    justify-content: center; /* Centrado Horizontal */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 
     color: #e74c3c;
     background-color: #F2ECE1;
@@ -87,7 +82,7 @@
     font-size: 1rem;
     font-weight: bold;
     padding: 5px 15px; 
-    height: 35px; /* Altura fija para centrar */
+    height: 35px; 
     transition: background-color 0.2s;
 }
 
@@ -95,7 +90,6 @@
     transform: none;
     background-color: #F2ECE1;
 }
-/* Si decidiste usar solo la 'X' como contenido, puedes hacerlo más cuadrado */
 .logout_button_icon {
     width: 35px;
     height: 35px;
@@ -110,24 +104,22 @@
     width: 50px;               
     border-radius: 50%;        
 }
-/* --- ESTILOS HAMBURGUESA --- */
 .hamburger_menu {
-    display: none; /* Oculto por defecto en escritorio */
+    display: none; 
     cursor: pointer;
     padding: 10px;
-    margin-right: 3rem; /* Alineamos con el margen de la cuenta */
-    z-index: 111111; /* Siempre encima */
+    margin-right: 3rem; 
+    z-index: 111111; 
 }
 
 .bar {
     width: 30px;
     height: 3px;
-    background-color: #333; /* Color de las líneas */
+    background-color: #333; 
     margin: 6px 0;
     transition: 0.4s;
 }
 
-/* Animación de Cierre (la 'X') */
 .hamburger_menu.active .bar:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
@@ -140,23 +132,18 @@
     transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Transición para el menú desplegable */
 .header_nav_div {
     transition: transform 0.3s ease-in-out;
 }
 
-/* --- MEDIA QUERY: TABLET/MÓVIL (hasta 768px) --- */
 @media screen and (max-width: 768px) {
     
-    /* 1. MOSTRAR BOTÓN HAMBURGUESA */
     .hamburger_menu {
         display: block;
-        order: 2; /* Para que quede después del logo */
+        order: 2; 
     }
     
-    /* 2. OCULTAR NAVEGACIÓN Y HACERLA ABSOLUTA (Hamburguesa) */
     .header_nav_div {
-        /* Oculto por defecto, se mueve fuera de pantalla */
         transform: translateX(100%);
         
         position: absolute;
@@ -168,29 +155,25 @@
         box-shadow: 0 4px 6px rgba(1, 1, 1, 0.4);
         padding: 10px 0;
         
-        /* Cambiar a disposición vertical */
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         
-        /* Sobrescribe la propiedad 'display: flex' original */
         flex-wrap: wrap; 
     }
 
-    /* 3. CLASE ACTIVA: Muestra el menú al hacer clic */
     .header_nav_div.active {
         transform: translateX(0);
     }
     
-    /* 4. Estilo de los enlaces dentro del menú */
     .header_nav_div a {
         display: block;
         width: 100%;
         padding: 15px 0;
         margin: 0;
         color: black !important;
-        font-size: 1.5rem; /* Fuente más pequeña para móvil */
+        font-size: 1.5rem; 
         border-bottom: 1px solid #eee;
     }
     
@@ -199,31 +182,26 @@
       top: 0;
       position: sticky;
     }
-    /* 5. Ajustes de la barra principal */
     .header_div {
-        height: 10vh; /* Altura más compacta */
+        height: 10vh; 
         
     }
     
-    /* 6. Ocultar o simplificar la cuenta de usuario */
     .header_account_div {
-        display: none; /* Ocultamos la cuenta en móvil para ahorrar espacio */
+        display: none; 
     }
     
     .header_div_img_div {
-        margin-left: 1rem; /* Margen más pequeño para el logo */
+        margin-left: 1rem; 
     }
 }
 
-/* --- MEDIA QUERY: TABLET (769px a 1024px) --- */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     
-    /* Aseguramos que el menú hamburguesa esté oculto en tabletas */
     .hamburger_menu {
         display: none !important; 
     }
     
-    /* Ajustes generales de tablet */
     .header_nav_div a {
         font-size: 1.6rem;
         margin: 0 25px; 
