@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./modificarIngrediente.css"; // Usa la ruta correcta de tu CSS
+import "./modificarIngrediente.css"; 
 
 function ModificarPlato() {
-    const { id } = useParams(); // 👈 Captura el ID del plato
+    const { id } = useParams(); 
     const navigate = useNavigate();
 
-    // Estado principal del plato. NOTA: 'ingredientes' se conserva para el PUT.
     const [plato, setPlato] = useState({
         nombre: "",
         descripcion: "",
         precio: "",
         imagen: "",
-        ingredientes: [], // 👈 Mantenemos la lista original de ingredientes
+        ingredientes: [], 
     });
 
-    // Estados de errores
     const [errores, setErrores] = useState({});
     const [cargando, setCargando] = useState(true);
 
-    // Función centralizada para manejar cambios y limpiar errores del formulario principal
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPlato({ ...plato, [name]: value });
@@ -28,9 +25,7 @@ function ModificarPlato() {
         }
     };
     
-    // ==========================================================
-    // ========== CARGAR DATOS INICIALES (Solo Plato) ==========
-    // ==========================================================
+ 
     useEffect(() => {
         const cargarDatos = async () => {
             if (!id) {
@@ -38,19 +33,16 @@ function ModificarPlato() {
                 return;
             }
             try {
-                // 1. Cargar el plato
                 const resPlato = await fetch(`http://localhost:8080/platos/${id}`);
                 if (!resPlato.ok) throw new Error("Error al cargar el plato");
                 const dataPlato = await resPlato.json();
 
-                // Llenar el estado del plato
-                // NOTA: Se carga 'ingredientes' tal como viene de la API (formato JPA)
                 setPlato({
                     nombre: dataPlato.nombre || "",
                     descripcion: dataPlato.descripcion || "",
                     precio: dataPlato.precio != null ? String(dataPlato.precio) : "",
                     imagen: dataPlato.imagen || "",
-                    ingredientes: dataPlato.ingredientes || [], // GUARDAMOS LOS INGREDIENTES ORIGINALES
+                    ingredientes: dataPlato.ingredientes || [], 
                 });
             } catch (error) {
                 console.error(error);
@@ -63,11 +55,7 @@ function ModificarPlato() {
         cargarDatos();
     }, [id]);
     
-    // ==========================================================
-    // ========== VALIDACIÓN Y SUBMIT FINAL ==========
-    // ==========================================================
-
-    // Validación del formulario principal (SOLO CAMPOS BÁSICOS)
+   
     const validarFormulario = () => {
         let erroresTemp = {};
         let esValido = true;
@@ -90,14 +78,12 @@ function ModificarPlato() {
             esValido = false;
         }
 
-        // Ya no validamos si hay ingredientes
 
         setErrores(erroresTemp);
         return esValido;
     };
 
 
-    // ENVIAR FORMULARIO (PUT)
     const manejarSubmit = async (e) => {
         e.preventDefault();
 
@@ -106,19 +92,16 @@ function ModificarPlato() {
             return;
         }
         
-        // El objeto plato.ingredientes YA ESTÁ EN EL FORMATO CORRECTO (formato JPA)
-        // porque se cargó así en el useEffect y nunca fue modificado por el usuario.
+        
         const platoAEnviar = {
             nombre: plato.nombre,
             descripcion: plato.descripcion,
             precio: Number(plato.precio),
             imagen: plato.imagen.trim() || null,
-            // Enviamos la lista de ingredientes sin cambios
             ingredientes: plato.ingredientes, 
         };
 
         try {
-            // Llama a la API con el método PUT y el ID del plato para actualizar
             const res = await fetch(`http://localhost:8080/platos/actualizar/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
@@ -131,7 +114,6 @@ function ModificarPlato() {
             }
 
             alert("Plato actualizado correctamente");
-            // Redirige al listado de administración de platos
             navigate("/adminPlatos"); 
         } catch (error) {
             console.error("Fallo al actualizar plato:", error);
@@ -153,7 +135,6 @@ function ModificarPlato() {
             <div className="div_form">
                 <form onSubmit={manejarSubmit}>
                     
-                    {/* CAMPOS PRINCIPALES */}
                     <label htmlFor="nombre">Nombre Plato</label>
                     <input name="nombre" type="text" placeholder="Nombre" value={plato.nombre} onChange={handleChange} />
                     {errores.nombre && <p className="error">{errores.nombre}</p>}
@@ -169,7 +150,6 @@ function ModificarPlato() {
                     <label htmlFor="imagen">Imagen del Plato (opcional)</label>
                     <input name="imagen" type="text" placeholder="Imagen" value={plato.imagen} onChange={handleChange} />
 
-                    {/* <--- SECCIÓN DE INGREDIENTES ELIMINADA ---> */}
 
                     <button type="submit" className="btn-submit">
                         Guardar cambios del Plato

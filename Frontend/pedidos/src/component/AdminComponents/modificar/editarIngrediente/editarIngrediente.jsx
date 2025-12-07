@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
-import "../../formularios/Formularios.css"; // Asegúrate de que esta ruta a tu CSS sea correcta
+import "../../formularios/Formularios.css"; 
 import Header_admin from "../../header_admin/headerAdmin";
 
 function EditarIngrediente() {
@@ -16,16 +16,13 @@ function EditarIngrediente() {
     imagen: "",
   });
 
-  // Función para manejar el cambio en cualquier campo del formulario
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     
-    // Convertir el valor a booleano o número si es necesario, si no, dejarlo como string
     let newValue = value;
     if (type === 'number') {
         newValue = parseInt(value, 10);
     } else if (name === 'esVegano') {
-        // El select devuelve un string ("true" o "false"), lo convertimos a booleano
         newValue = value === 'true'; 
     }
 
@@ -35,11 +32,9 @@ function EditarIngrediente() {
     });
   };
 
-  // 1. Cargar los datos del ingrediente al montar el componente
   useEffect(() => {
     const fetchIngrediente = async () => {
       try {
-        // *** RUTA CORREGIDA ***: Usa tu endpoint @GetMapping("/{id}")
         const response = await fetch(`http://localhost:8080/ingredientes/${id}`); 
         
         if (!response.ok) {
@@ -48,13 +43,12 @@ function EditarIngrediente() {
         
         const data = await response.json();
         
-        // Pre-rellenar el estado con los datos
         setIngrediente({
           nombre: data.nombre,
           descripcion: data.descripcion,
           alergenos: data.alergenos,
           stock: data.stock,
-          esVegano: data.esVegano, // Es importante que sea un booleano
+          esVegano: data.esVegano, 
           imagen: data.imagen || "",
         });
       } catch (error) {
@@ -68,12 +62,10 @@ function EditarIngrediente() {
     }
   }, [id, navigate]); 
 
-  // 2. Función de actualización (petición PUT)
   const ActualizarIngrediente = async (e) => {
     e.preventDefault();
 
     try {
-        // *** RUTA PARA ACTUALIZAR ***: Usa tu endpoint @PutMapping("/actualizar/{id}")
         const response = await fetch(`http://localhost:8080/ingredientes/actualizar/${id}`, {
             method: "PUT", 
             headers: { "Content-Type": "application/json" },
@@ -105,7 +97,6 @@ function EditarIngrediente() {
         <div className="div_form">
           <form onSubmit={ActualizarIngrediente}>
             
-            {/* Nombre */}
             <label htmlFor="nombre">Nombre alimento</label>
             <input
               type="text"
@@ -115,7 +106,6 @@ function EditarIngrediente() {
               onChange={handleInputChange}
             />
 
-            {/* Descripción */}
             <label htmlFor="descripcion">Descripcion del alimento</label>
             <input
               type="text"
@@ -125,7 +115,6 @@ function EditarIngrediente() {
               onChange={handleInputChange}
             />
 
-            {/* Alérgeno */}
             <label htmlFor="alergenos">Alergeno del alimento</label>
             <select
               name="alergenos"
@@ -134,7 +123,6 @@ function EditarIngrediente() {
               onChange={handleInputChange}
             >
               <option value="">Selecciona</option>
-              {/* Todas tus opciones */}
               <option value="gluten">Gluten</option>
               <option value="crustaceos">Crustáceos</option>
               <option value="huevos">Huevos</option>
@@ -151,7 +139,6 @@ function EditarIngrediente() {
               <option value="altramuces">Altramuces</option>
             </select>
             
-            {/* Stock */}
             <label htmlFor="stock">Stock del alimento</label>
             <input
               type="number" 
@@ -161,11 +148,10 @@ function EditarIngrediente() {
               onChange={handleInputChange}
             />
 
-            {/* Vegano */}
             <label htmlFor="esVegano">¿Es vegano el alimento?</label>
             <select
               name="esVegano"
-              value={Ingrediente.esVegano} // Muestra true o false
+              value={Ingrediente.esVegano} 
               onChange={handleInputChange}
             >
               <option value={false}>No</option> 
@@ -173,7 +159,6 @@ function EditarIngrediente() {
             </select>
 
 
-            {/* Imagen */}
             <label htmlFor="imagen">Nombre de la imagen</label>
             <input
               type="text"

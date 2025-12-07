@@ -5,6 +5,7 @@ function NoEncontrado() {
     
     return(
     <>
+    
         <div className="NoEncontrado_div_father">
             <div className="error-content">
                 <span className="error-code">404</span>

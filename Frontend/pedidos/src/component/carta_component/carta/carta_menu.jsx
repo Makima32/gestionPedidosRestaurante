@@ -21,28 +21,23 @@ function Carta_menu() {
     fetchDatos();
   }, []);
 
-  // Función para determinar y renderizar los iconos de alérgenos/veganismo
   const renderAlergenosYVegano = (plato) => {
     const alergenosEncontrados = new Set();
     let esPlatoVegano = true;
     const carpetaBase = "/AlergenosIco";
 
-    // Si el plato no tiene ingredientes, no puede ser vegano (salvo si es un plato base)
-    // y no tiene alergenos. Asumimos que un plato con lista de ingredientes vacía no es apto.
+   
     if (!plato.ingredientes || plato.ingredientes.length === 0) {
       esPlatoVegano = false;
     }
 
-    // 1. Recorrer los ingredientes del plato
     plato.ingredientes?.forEach((relacion) => {
       const ingrediente = relacion.ingrediente;
 
-      // a) Chequear Veganismo
       if (!ingrediente.esVegano) {
-        esPlatoVegano = false; // Si un solo ingrediente NO es vegano, el plato NO lo es.
+        esPlatoVegano = false; 
       }
 
-      // b) Chequear Alérgenos (usando la string del ingrediente)
       const alergenosString = ingrediente.alergenos
         ? ingrediente.alergenos.toLowerCase()
         : "";
@@ -56,13 +51,10 @@ function Carta_menu() {
       if (alergenosString.includes("huevos")) {
         alergenosEncontrados.add("huevos");
       }
-      // Puedes añadir más alérgenos aquí (gluten, soja, pescado, etc.)
     });
 
-    // 2. Generar los elementos <img> a mostrar
     const iconos = [];
 
-    // Mostrar icono de leche/lácteos
     if (alergenosEncontrados.has("leche")) {
       iconos.push(
         <img
@@ -74,7 +66,6 @@ function Carta_menu() {
       );
     }
 
-    // Mostrar icono de huevos
     if (alergenosEncontrados.has("huevos")) {
       iconos.push(
         <img
@@ -86,7 +77,6 @@ function Carta_menu() {
       );
     }
 
-    // Mostrar icono Vegano
     if (esPlatoVegano) {
       iconos.push(
         <img
@@ -113,7 +103,6 @@ function Carta_menu() {
           )}
 
           {datos.map((plato) => {
-            // **CORRECCIÓN DE NULLS:** Si nombre o descripción son null, usa un valor por defecto para que se vea algo.
             const nombrePlato = plato.nombre || "Sin Nombre";
             const descripcionPlato =
               plato.descripcion || "Descripción no disponible.";

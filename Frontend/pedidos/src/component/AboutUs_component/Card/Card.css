@@ -130,7 +130,7 @@ margin-bottom: -2rem;
     }
 
     .card{
-        width: 90vw; /* Casi todo el ancho de la pantalla */
+        width: 90vw; 
         padding: 15px;
     }
     
@@ -139,7 +139,7 @@ margin-bottom: -2rem;
     }
 
     .card_img img{
-        width: 60%; /* Iconos ligeramente más pequeños */
+        width: 60%; 
         max-width: 100px;
     }
     

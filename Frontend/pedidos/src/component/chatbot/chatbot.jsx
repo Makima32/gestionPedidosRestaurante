@@ -12,7 +12,6 @@ function Chatbot() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Añadimos el mensaje del usuario
     setMensajes(prev => [...prev, { autor: "user", texto: input }]);
 
     setIsLoading(true);

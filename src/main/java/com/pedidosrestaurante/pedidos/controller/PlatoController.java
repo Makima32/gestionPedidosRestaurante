@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException; // Para manejar errores 400 limpios
+import org.springframework.web.server.ResponseStatusException; 
 
 import com.pedidosrestaurante.pedidos.models.Plato;
 import com.pedidosrestaurante.pedidos.models.PlatoIngrediente;
@@ -24,30 +24,24 @@ public class PlatoController {
     @Autowired
     private IngredienteRepository ingredienteRepo;
 
-    // --- MÉTODO CREAR PLATO CORREGIDO Y VALIDADO ---
     @PostMapping("/crear")
     public ResponseEntity<?> crearPlato(@RequestBody Plato plato) {
         try {
             if (plato.getIngredientes() != null) {
                 for (PlatoIngrediente pi : plato.getIngredientes()) {
                     
-                    // 🚨 VALIDACIÓN CRUCIAL 1: El objeto Ingrediente debe existir en el JSON
                     if (pi.getIngrediente() == null) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cada PlatoIngrediente debe especificar un Ingrediente.");
                     }
                     
                     int idIngrediente = pi.getIngrediente().getIdIngrediente();
                     
-                    // 🚨 VALIDACIÓN CRUCIAL 2: El Ingrediente debe existir en la base de datos
                     if (!ingredienteRepo.existsById(idIngrediente)) {
-                        // Opcionalmente, puedes usar existsById para verificar antes de getReferenceById
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El ID de ingrediente " + idIngrediente + " no existe en la base de datos.");
                     }
                     
-                    // 1. CREAR REFERENCIA: Reemplaza el objeto parcial con un proxy gestionado.
                     pi.setIngrediente(ingredienteRepo.getReferenceById(idIngrediente));
                     
-                    // 2. Establecer la bidireccionalidad
                     pi.setPlato(plato);
                 }
             }
@@ -56,17 +50,14 @@ public class PlatoController {
             return new ResponseEntity<>("Plato creado correctamente", HttpStatus.CREATED);
             
         } catch (ResponseStatusException e) {
-            // Captura los errores 400 que generamos
             return new ResponseEntity<>(e.getReason(), e.getStatusCode());
         } catch (Exception e) {
-            // Captura cualquier otro error (incluyendo fallos de Jackson si el JSON es muy malo)
             e.printStackTrace();
             return new ResponseEntity<>("Error al crear el plato: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
 
-    // --- MÉTODO ACTUALIZAR PLATO CORREGIDO Y VALIDADO ---
     @PutMapping("/actualizar/{id}")
     public ResponseEntity<?> actualizarPlato(@PathVariable int id, @RequestBody Plato cambios) {
         Optional<Plato> opt = platoRepo.findById(id);
@@ -89,17 +80,14 @@ public class PlatoController {
             
             for (PlatoIngrediente pi : cambios.getIngredientes()) {
                 if (pi.getIngrediente() == null || pi.getIngrediente().getIdIngrediente() == 0) {
-                     // Si el ingrediente está mal, lanzamos una excepción para detener la operación.
                      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ingrediente con ID no válido en el payload de actualización.");
                 }
                 
                 int idIngrediente = pi.getIngrediente().getIdIngrediente();
                 
-                // Asegura que la referencia sea gestionada
                 pi.setIngrediente(ingredienteRepo.getReferenceById(idIngrediente));
             }
             
-            // Pasar la lista preprocesada al Setter (el setter debe manejar la limpieza/bidireccionalidad)
             plato.setIngredientes(cambios.getIngredientes());
         }
 
@@ -112,7 +100,6 @@ public class PlatoController {
         }
     }
     
-    // --- OTROS MÉTODOS (sin cambios) ---
 
     @GetMapping("/listar")
     public ResponseEntity<?> listarPlatos() {
