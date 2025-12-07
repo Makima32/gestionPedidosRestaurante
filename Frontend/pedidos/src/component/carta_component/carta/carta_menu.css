@@ -1,78 +1,198 @@
+/* ========================================= */
+/* --- ESTILOS DE ESCRITORIO (BASE) --- */
+/* ========================================= */
 .Menu_content_div_father {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
 }
 
 .Menu_content_div_father p {
-  font-size: 1.1rem;
+    font-size: 1.1rem;
 }
 
 h2 {
-  font-size: 1.3rem;
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .Menu_content_div {
-  margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  width: 85vw;
-  height: fit-content;
-  border-radius: 2rem;
+    margin-top: 3rem; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem; 
+    width: 85vw;
+    max-width: 1200px; 
+    height: fit-content;
 }
 
-.menu_card_content {
-  width: 100%;
-  margin-left: 10px;
-  margin-right: 10px;
-
-  margin-bottom: 10px;
-}
+/* Diseño de la tarjeta en ESCRITORIO (3-4 columnas) */
 .menu_card {
-  margin-top: 20px;
-  display: flex;
-  background-color: #e6e1d8;
-  box-shadow: 2px 2px 5px rgb(175, 175, 175);
-
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 20vw;
-  min-height: 25vw;
-  gap: 10px;
-
-  border-radius: 1rem;
-  box-shadow: 2px 2px 5px rgb(175, 175, 175);
-  transition: transform 0.3s ease;
+    margin-top: 20px;
+    display: flex;
+    background-color: #e6e1d8;
+    box-shadow: 2px 2px 5px rgb(175, 175, 175);
+    
+    flex-direction: column; 
+    flex-wrap: nowrap; 
+    
+    width: 22%; 
+    min-width: 250px; 
+    max-width: 300px; 
+    
+    /* Altura mínima para asegurar espacio */
+    min-height: 400px; 
+    
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
 }
 
 .menu_card_img {
-  display: flex;
-  height: 50%;
-  width: 100%;
-  margin-top: 10px;
-
-  align-items: center;
+    display: flex;
+    height: 180px; /* Altura de la imagen en escritorio */
+    width: 100%;
+    overflow: hidden; 
 }
 
 .menu_card_img img {
-  margin: 0;
-  margin: auto 0;
-  margin: 0 auto;
-  height: auto;
-  width: auto;
-  max-height: 100%; 
-  max-width: 100%; 
-
-  object-fit: contain;
-
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 }
 
+/* CLAVE: Contenedor flexible para alinear el contenido */
+.menu_card_content {
+    width: 100%;
+    padding: 15px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+/* CLAVE: El párrafo de descripción se trunca a 3 líneas */
+.menu_card_content p:nth-child(2) { 
+    flex-grow: 1; /* Mantiene el empuje hacia abajo */
+    margin-bottom: 10px; 
+
+    /* Truncamiento CSS */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu_card_alergias {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; /* Empuja a la parte inferior */
+}
 
 .menu_card_alergias img {
-  height: 50px;
+    height: 30px; 
+    width: 30px;
+}
+
+/* ========================================= */
+/* --- MEDIA QUERY: TABLET (1024px o menos) --- */
+/* ========================================= */
+@media screen and (max-width: 1024px) {
+    .Menu_content_div {
+        width: 90vw;
+        gap: 2rem;
+    }
+    
+    /* 2 COLUMNAS EN TABLET */
+    .menu_card {
+        width: 45%; 
+        min-width: 300px;
+    }
+    
+    .menu_card_img {
+        height: 200px;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    .Menu_content_div_father p {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================= */
+/* --- MEDIA QUERY: MÓVIL (600px o menos) --- */
+/* ========================================= */
+@media screen and (max-width: 600px) {
+    .Menu_content_div {
+        margin-top: 1.5rem;
+        gap: 1.5rem;
+        width: 95vw;
+    }
+
+    /* 1 COLUMNA EN MÓVIL (HORIZONTAL) */
+    .menu_card {
+        width: 95%; 
+        min-width: 95%; 
+        max-width: 95%;
+        flex-direction: row; 
+        height: auto;
+        min-height: 150px; 
+    }
+    
+    /* Diseño Horizontal de la tarjeta */
+    .menu_card_img {
+        width: 35%; 
+        height: 120px; 
+        flex-shrink: 0; 
+    }
+    
+    .menu_card_img img {
+        border-radius: 1rem 0 0 1rem; 
+        object-fit: cover;
+    }
+    
+    .menu_card_content {
+        width: 65%; 
+        padding: 10px;
+        flex-grow: 1; 
+        justify-content: space-between; 
+    }
+    
+    /* La descripción en móvil se trunca a 2 líneas */
+    .menu_card_content p:nth-child(2) { 
+        flex-grow: 0; 
+        margin-bottom: 5px; 
+        
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* 🚨 2 líneas en móvil */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .menu_card_alergias {
+        margin-top: 5px; 
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    .Menu_content_div_father p {
+        font-size: 0.9rem;
+    }
+    
+    .menu_card_alergias img {
+        height: 25px;
+        width: 25px;
+    }
 }

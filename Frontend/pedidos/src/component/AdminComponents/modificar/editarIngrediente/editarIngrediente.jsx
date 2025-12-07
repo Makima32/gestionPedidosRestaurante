@@ -60,7 +60,6 @@ function EditarIngrediente() {
       } catch (error) {
         console.error("Error al cargar el ingrediente:", error);
         alert("Error al cargar los datos del ingrediente.");
-        navigate('/modificar-ingrediente/Ingredientes'); // Redirige si hay error
       }
     };
 
@@ -87,7 +86,7 @@ function EditarIngrediente() {
         }
 
         alert(Ingrediente.nombre + " actualizado correctamente.");
-        navigate('/modificar-ingrediente/Ingredientes'); 
+        navigate('/adminIngredientes'); 
     } catch (error) {
         console.error("Error al actualizar el ingrediente:", error);
         alert(`Error al actualizar el ingrediente: ${error.message}`);
