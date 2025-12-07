@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
-import "../../formularios/formularios.css"; // Asegúrate de que esta ruta a tu CSS sea correcta
+import "../../formularios/Formularios.css"; // Asegúrate de que esta ruta a tu CSS sea correcta
 import Header_admin from "../../header_admin/headerAdmin";
 
 function EditarIngrediente() {
