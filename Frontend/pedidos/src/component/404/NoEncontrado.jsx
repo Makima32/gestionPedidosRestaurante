@@ -17,7 +17,7 @@ function NoEncontrado() {
                 <p className="sub-message">
                     Lo sentimos, la URL que estás buscando no existe. ¿Es correcta la dirección?
                 </p>
-
+            
                 <a href="/" className="home-button">
                     Ir a la Página de Inicio
                 </a>

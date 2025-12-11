@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "platos")
@@ -33,12 +35,16 @@ public class Plato {
     private List<PlatoIngrediente> ingredientes = new ArrayList<>(); 
 
     @Column(name = "nombre")
+    @NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
 
     @Column(name = "descripcion")
+    @NotBlank(message = "La descripción no puede estar vacía")
     private String descripcion;
 
     @Column(name = "precio")
+    @NotBlank(message = "El precio no puede estar vacío")
+    @Min(value = 0, message = "El precio no puede ser negativo")
     private double precio;
 
     @Column(name = "imagen")

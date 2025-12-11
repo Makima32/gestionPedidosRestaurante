@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -19,23 +21,30 @@ public class Ingrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_ingrediente")
+
     private int idIngrediente;
 
     @OneToMany(mappedBy = "ingrediente") 
     private List<PlatoIngrediente> platosIngredientes;
     
+    @NotBlank(message = "El nombre no puede estar vacío")
     @Column(name="nombre")
     private String nombre;
 
+    @NotBlank(message = "La descripción no puede estar vacía")
     @Column(name="descripcion")
     private String descripcion;
 
+    @NotBlank(message = "Los alérgenos no pueden estar vacíos")
     @Column(name="alergenos")
     private String alergenos;
 
+    @NotBlank(message = "El stock no puede estar vacío")
     @Column(name="stock")
+    @Min(value = 0, message = "El stock no puede ser negativo")
     private int stock;
 
+    @NotBlank(message = "El campo Esvegano no puede estar vacío")
     @Column(name="es_vegano")
     private boolean esVegano;
 
