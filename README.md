@@ -43,3 +43,7 @@ Para arrancar el proyecto localmente, sigue estos pasos:
 3.  Inicia la aplicación: `npm start`
 4.  La aplicación debería abrirse en `http://localhost:5173`.
 
+
+## La web subida esta en
+https://gestion-pedidos-restaurante-5zds.vercel.app
+
