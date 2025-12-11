@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Headerhome.css";
-import { useAuth } from "../../hook/auth/authContext";
+
+import "./headerHome.css";
+import { useAuth } from "../../hook/auth/authcontext";
 
 function Header_home({ home }) {
  const [isHome] = useState(home ?? false);

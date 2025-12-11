@@ -1,4 +1,4 @@
-import "./Ubicacion.css";
+import "./ubicacion.css";
 
 
 function Ubicacion() {
