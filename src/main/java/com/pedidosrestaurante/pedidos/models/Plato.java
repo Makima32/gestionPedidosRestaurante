@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "platos")
@@ -43,7 +44,7 @@ public class Plato {
     private String descripcion;
 
     @Column(name = "precio")
-    @NotBlank(message = "El precio no puede estar vacío")
+    @NotNull(message = "El precio no puede ser nulo")
     @Min(value = 0, message = "El precio no puede ser negativo")
     private double precio;
 
@@ -114,12 +115,12 @@ public class Plato {
         this.idPlato = idPlato;
 
     }
-
+    @JsonIgnoreProperties("plato")
     public List<PlatoIngrediente> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(List<PlatoIngrediente> ingredientes) {
+    public void actualizarIngredientes(List<PlatoIngrediente> ingredientes) {
         this.ingredientes.clear(); 
         if (ingredientes != null) {
             for (PlatoIngrediente pi : ingredientes) {
@@ -127,4 +128,10 @@ public class Plato {
             }
         }
     }
+
+    public void setIngredientes(List<PlatoIngrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+        
 }

@@ -1,4 +1,3 @@
-// Archivo: PlatoIngredienteService.java
 package com.pedidosrestaurante.pedidos.service;
 
 import com.pedidosrestaurante.pedidos.models.Ingrediente;

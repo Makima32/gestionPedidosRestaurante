@@ -17,27 +17,37 @@ function Chatbot() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/ia", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mensaje: input })
+
+      // encodeURIComponent asegura que espacios y caracteres especiales sean seguros para la URL
+      const encodedPrompt = encodeURIComponent(input);
+
+      const url = `http://localhost:8080/gemini/chat?UserPrompt=${encodedPrompt}`;
+
+      const res = await fetch(url, {
+        method: "GET", 
       });
 
-      const data = await res.json();
+      //EL BACKEND DEVUELVE UN STRING.
+      const data = await res.text(); 
 
-      if (typeof data.respuesta === "string") {
-        setMensajes(prev => [...prev, { autor: "ia", texto: data.respuesta }]);
+      if (res.ok) {
+        setMensajes(prev => [...prev, { autor: "ia", texto: data }]);
+      } else {
+        console.error("Error del Servidor/Gemini:", data);
+        setMensajes(prev => [...prev, { autor: "ia", texto: `Error del asistente: ${data.substring(0, 100)}...` }]);
       }
     } catch (error) {
-      setMensajes(prev => [...prev, { autor: "ia", texto: "Error al obtener respuesta" }]);
+      console.error("Error de conexión:", error);
+      setMensajes(prev => [...prev, { autor: "ia", texto: "Error al conectar con el servidor." }]);
     } finally {
       setIsLoading(false);
       setInput("");
     }
   }
 
+
   useEffect(() => {
-    setMensajes(prev => prev.filter(m => m.texto !== "Error al obtener respuesta"));
+    setMensajes(prev => prev.filter(m => !m.texto.includes("Error")));
   }, [input]);
 
   return (
@@ -62,12 +72,12 @@ function Chatbot() {
         </div>
 
         <form onSubmit={enviarMensaje} className="chat_input">
-          <input 
+          <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Escribe aquí..."
           />
-          <button type="submit">Enviar</button>
+          <button type="submit"><img src="/sendButton.png" alt="" /></button>
         </form>
       </div>
     </>

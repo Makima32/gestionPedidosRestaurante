@@ -20,6 +20,7 @@ import EditarIngrediente from "./component/AdminComponents/modificar/editarIngre
 import AgregarPlatoPage from "./pages/admin/AgregarPlatoPage";
 import ModificarPlatoPage from "./pages/admin/modificar/ModificarPlatosPage";
 import ModificarPlato from "./pages/admin/modificarPlato";
+import Layout from "./component/layout/layout";
 
 function App() {
   return (
@@ -49,6 +50,8 @@ function App() {
 
        
         {/* Rutas pagina Usuario */}
+
+        <Route path="/" element={<Layout />}>
         <Route path="/aboutUs" element={<AboutUsPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/carta" element={<CartaPage />} />
@@ -62,6 +65,7 @@ function App() {
 
         <Route path="/*" element={<PageNotFound />} />
 
+    </Route>
       </Routes>
     </Router>
   );

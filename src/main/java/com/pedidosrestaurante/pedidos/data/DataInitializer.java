@@ -135,7 +135,7 @@ public class DataInitializer {
             addRelation.accept(speckCarbonara, nataCarbonara);
             addRelation.accept(speckCarbonara, bacon);
             addRelation.accept(speckCarbonara, cebolla);
-            addRelation.accept(speckCarbonara, huevo); // Añadimos huevo para un toque carbonara más auténtico
+            addRelation.accept(speckCarbonara, huevo); 
 
             // 5. La Ibérica (Chorizo)
             addRelation.accept(iberica, tomateBase);

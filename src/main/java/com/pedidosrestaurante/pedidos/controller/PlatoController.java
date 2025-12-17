@@ -21,6 +21,8 @@ public class PlatoController {
     @Autowired
     private PlatoRepository platoRepo;
     
+    
+    
     @Autowired
     private IngredienteRepository ingredienteRepo;
 
@@ -88,8 +90,7 @@ public class PlatoController {
                 pi.setIngrediente(ingredienteRepo.getReferenceById(idIngrediente));
             }
             
-            plato.setIngredientes(cambios.getIngredientes());
-        }
+        plato.actualizarIngredientes(cambios.getIngredientes());        }
 
         try {
             platoRepo.save(plato);

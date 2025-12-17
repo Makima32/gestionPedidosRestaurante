@@ -194,6 +194,18 @@
     .header_div_img_div {
         margin-left: 1rem; 
     }
+
+       .header_div_img_div {
+        margin-left: 1rem; 
+        width: auto; 
+    }
+
+    .header_div_img_div img {
+        margin-top: 2rem;
+        width: 50px; 
+        min-width: 80px; 
+    }
+
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
@@ -209,5 +221,16 @@
     
     .header_div_img_div {
         margin-left: 2rem;
+    }
+
+    .header_div_img_div {
+        margin-left: 1rem; 
+        width: auto; 
+    }
+
+    .header_div_img_div img {
+        width: 80px; 
+        min-width: 80px;
+        
     }
 }

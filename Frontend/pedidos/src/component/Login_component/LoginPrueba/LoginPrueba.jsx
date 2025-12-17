@@ -78,7 +78,7 @@ function LoginPrueba() {
               <option value="Mujer">Mujer</option>
             </select>
 
-            <button type="submit">Sign Up</button>
+            <button type="submit">Registrarse</button>
           </form>
         </div>
 
@@ -114,7 +114,7 @@ function LoginPrueba() {
 
             <div className="overlay-panel overlay-right">
               <h1>!Hola, amigo!</h1>
-              <button className="ghost" ref={btnSignUp}>Iniciar sesion</button>
+              <button className="ghost" ref={btnSignUp}>Registrarse </button>
             </div>
           </div>
         </div>

@@ -1,13 +1,12 @@
 package com.pedidosrestaurante.pedidos.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pedidosrestaurante.pedidos.id.PlatoIngredienteId;
 
-// 🚨 Importaciones para Hibernate ON DELETE CASCADE
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-// Usando 'jakarta' para Spring Boot 3+
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +20,7 @@ public class PlatoIngrediente {
     @MapsId("platoId") 
     @JoinColumn(name = "id_plato") 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ingredientes"})
+    @JsonIgnore
     private Plato plato;
 
     @ManyToOne(fetch = FetchType.LAZY)

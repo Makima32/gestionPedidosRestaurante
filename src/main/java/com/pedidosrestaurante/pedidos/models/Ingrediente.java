@@ -11,6 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -39,12 +40,11 @@ public class Ingrediente {
     @Column(name="alergenos")
     private String alergenos;
 
-    @NotBlank(message = "El stock no puede estar vacío")
+    @NotNull(message = "El stock no puede ser nulo")
     @Column(name="stock")
     @Min(value = 0, message = "El stock no puede ser negativo")
     private int stock;
 
-    @NotBlank(message = "El campo Esvegano no puede estar vacío")
     @Column(name="es_vegano")
     private boolean esVegano;
 
@@ -115,7 +115,7 @@ public class Ingrediente {
 
     @Override
     public String toString() {
-        return "ingredientes [idCliente=" + idIngrediente + ", nombre=" + nombre + ", descripcion=" + descripcion
+        return "ingredientes [idIngrediente=" + idIngrediente + ", nombre=" + nombre + ", descripcion=" + descripcion
                 + ", alergenos=" + alergenos + ", stock=" + stock + ", esVegano=" + esVegano + "]" + imagen +"]";
     }
 

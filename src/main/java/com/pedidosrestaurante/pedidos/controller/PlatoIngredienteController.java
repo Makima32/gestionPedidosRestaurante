@@ -3,6 +3,7 @@ package com.pedidosrestaurante.pedidos.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import com.pedidosrestaurante.pedidos.models.PlatoIngrediente;
 import com.pedidosrestaurante.pedidos.id.PlatoIngredienteId; 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
+@Transactional
 @RequestMapping("/platosIngredientes")
 public class PlatoIngredienteController {
 
@@ -54,8 +56,8 @@ public class PlatoIngredienteController {
         repo.deleteByPlato_IdPlatoAndIngrediente_IdIngrediente(idPlato, idIngrediente);
         return ResponseEntity.ok("Eliminado correctamente");
     }
-
-    @GetMapping("/plato/{idPlato}")
+    
+    @GetMapping("/plato/{idPlato}") 
     public List<PlatoIngrediente> listarPorPlato(@PathVariable int idPlato){
         return repo.findByPlato_IdPlato(idPlato);
     }

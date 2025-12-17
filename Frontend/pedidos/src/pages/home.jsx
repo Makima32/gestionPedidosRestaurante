@@ -16,7 +16,6 @@ function Home() {
   return (
     <>
       <Chatbot />
-      <Header_home home={true} />
       <StartBanner />
 
       <About_Us />
@@ -41,7 +40,6 @@ function Home() {
 
       <ContacUs />
 
-      <FooterWeb />
     </>
   );
 }

@@ -21,7 +21,9 @@ function FooterWeb() {
           <h1>Enlaces rápidos</h1>
           <a href="/">Inicio</a>
           <a href="/carta">Carta</a>
-          <a href="/contacto">Contacto</a>
+          <a href="/AboutUs">Sobre nosotros</a>
+          <a href="/pedidos">Pedidos</a>
+
         </div>
 
         <div className="footer_info">

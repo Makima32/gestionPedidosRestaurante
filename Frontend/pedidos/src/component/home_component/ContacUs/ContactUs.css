@@ -8,23 +8,22 @@
   gap: 50px;
 }
 
-.ContactUs_content {
-  width: 40vw;
+.ContactUs_content, .horario_content {
+  
+    width: 40vw;
   height: 50vh;
   background-color: #e0dacf;
   border-radius: 0.5rem;
   box-shadow: 2px 2px 5px rgb(175, 175, 175);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;   
+  justify-content: center;  
+  align-items: center;     
+  text-align: center;      
+  padding: 20px;          
 }
 
-.horario_content {
-  width: 40vw;
-  height: 50vh;
-  background-color: #e0dacf;
-  border-radius: 0.5rem;
-  box-shadow: 2px 2px 5px rgb(175, 175, 175);
-  transition: transform 0.3s ease;
-}
 
 .ContactUs_content:hover {
   transform: scale(1.05);
