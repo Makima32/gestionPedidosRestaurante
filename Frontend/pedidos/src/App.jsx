@@ -21,6 +21,7 @@ import AgregarPlatoPage from "./pages/admin/AgregarPlatoPage";
 import ModificarPlatoPage from "./pages/admin/modificar/ModificarPlatosPage";
 import ModificarPlato from "./pages/admin/modificarPlato";
 import Layout from "./component/layout/layout";
+import PedidosPage from "./pages/pedidosPage";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path="/aboutUs" element={<AboutUsPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/carta" element={<CartaPage />} />
+        <Route path="/pedidos" element={<PedidosPage />} />
         
 
 

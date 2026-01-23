@@ -9,7 +9,6 @@ function LoginPage() {
 
         <>
         
-        <Header_home home={false}/>
         <LoginPrueba/>
         
         </>

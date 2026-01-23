@@ -1,32 +1,21 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie"
-// 1) Creamos el contexto
+
 const AuthContext = createContext(null);
 
-// 2) Hook de conveniencia
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error("useAuth debe usarse dentro de <AuthProvider>");
   return ctx;
 }
 
-// 3 Keys de almacenamientos 
 const COOKIE_KEY = "auth:user";
 
-
-/**
- * AuthProvider
- * - Mantiene el estado de la sesión { user: {...} | null }
- * - Expone login() y logout()
- * - Persiste en localStorage para recordar sesión al recargar
- */
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);         // null = no autenticado
-  const [loading, setLoading] = useState(true);   // para el "arranque"
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Cargar sesión guardada al montar
   useEffect(() => {
-
     const raw = localStorage.getItem("auth:user");
     if (raw) {
       try { setUser(JSON.parse(raw)); } catch {}
@@ -34,26 +23,33 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  // Guardar cuando cambie
   useEffect(() => {
     if (user) localStorage.setItem("auth:user", JSON.stringify(user));
     else localStorage.removeItem("auth:user");
   }, [user]);
 
-  // Simulación de login (valida si hay algo escrito)
   async function login(username, password) {
-    // En real: llamar a API, recibir token/perfil…
-    if (!username || !password) {
-      throw new Error("Credenciales inválidas");
+    try {
+      const response = await fetch(`http://localhost:8080/usuarios/buscar/${username}`);
+      if (!response.ok) throw new Error("Usuario no encontrado");
+      const dbUser = await response.json();
+      if (dbUser.password !== password) throw new Error("Contraseña incorrecta");
+
+      const userToSave = { 
+        id: dbUser.id, 
+        name: dbUser.nombre, 
+        rol: dbUser.rol 
+      };
+
+      setUser(userToSave);
+      return userToSave;
+    } catch (error) {
+      console.error("Error en login:", error);
+      throw error;
     }
-    // Usuario “fake”:
-    const fakeUser = { id: 1, name: username, role: "user" };
-    setUser(fakeUser);
-    return fakeUser;
   }
 
   function logout() {
-    // null==> usuario no logeado
     setUser(null);
   }
 
@@ -61,32 +57,12 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-
-
-
-/*
-EXAMPLE
-
-Cookie.set("usuario","Jhon",{
-  expires: 7, // Número de días /Fecha
-  path: "/", //Qué rutas pueden acceder a la cookie (/, /admin, etc)
-  domain: "example.com"  //Restringe la cookie a un dominio o subdominio
-  secure: true, //Obliga envió solo por https
-  sameSite: "lax" //Previene el envió por cross-site (LAX, STRICT, NONE), Necesario tener el secure: true
-  })
-
-  Cross-Site o XSS es un ataque para introducir un código malicioso desde otros sitios y que es capaz de ejecutarse
-  desde el cliente
-
-*/
 export function AuthProvierCookie({children}){
   
-  const [user, setUser] = useState(null);         // null = no autenticado
-  const [loading, setLoading] = useState(true);   // para el "arranque"
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Cargar sesión guardada al montar
   useEffect(() => {
-
     const raw = Cookies.get(COOKIE_KEY)
     if (raw) {
       try { setUser(JSON.parse(raw)); } catch {}
@@ -94,30 +70,50 @@ export function AuthProvierCookie({children}){
     setLoading(false);
   }, []);
 
-  // Guardar cuando cambie
   useEffect(() => {
-    if (user) Cookies.set(COOKIE_KEY, JSON.stringify(user),{expires: 1}); // 1-> 1día
+    if (user) Cookies.set(COOKIE_KEY, JSON.stringify(user),{expires: 1});
     else Cookies.remove(COOKIE_KEY);
   }, [user]);
 
-  // Simulación de login (valida si hay algo escrito)
-  async function login(username, password) {
-    // En real: llamar a API, recibir token/perfil…
-    if (!username || !password) {
-      throw new Error("Credenciales inválidas");
+  async function register(nombre, correo, password) {
+    try {
+      const response = await fetch("http://localhost:8080/usuarios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, correo, password, rol: "user" }),
+      });
+      if (!response.ok) throw new Error("Error al registrar");
+      return await response.text();
+    } catch (error) {
+      throw error;
     }
-    // Usuario “fake”:
-    const fakeUser = { id: 1, name: username, role: "user" };
-    setUser(fakeUser);
-    return fakeUser;
+  }
+
+  async function login(username, password) {
+    try {
+      const response = await fetch(`http://localhost:8080/usuarios/buscar/${username}`);
+      if (!response.ok) throw new Error("Usuario no encontrado");
+      const dbUser = await response.json();
+      if (dbUser.password !== password) throw new Error("Contraseña incorrecta");
+
+      const userToSave = { 
+        id: dbUser.id, 
+        name: dbUser.nombre, 
+        rol: dbUser.rol 
+      };
+
+      setUser(userToSave);
+      return userToSave;
+    } catch (error) {
+      throw error;
+    }
   }
 
   function logout() {
-    // null==> usuario no logeado
     setUser(null);
   }
 
-  const value = { user, loading, login, logout };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  const value = { user, loading, login, logout, register };
 
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

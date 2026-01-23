@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./headerHome.css";
-import { useAuth } from "../../hook/auth/authcontext";
+import { useAuth } from "../../hook/auth/authContext";
 
 function Header_home({ home }) {
   const { user, logout } = useAuth(); 
@@ -37,8 +37,7 @@ function Header_home({ home }) {
           <Link to="/AboutUs" style={linkStyle}>Sobre nosotros</Link>
           <Link to="/carta" style={linkStyle}>Nuestra carta</Link>
           
-          {/* Renderizado condicional según el rol o si existe usuario */}
-          {user && user.name === "admin" && (
+          {user && user.rol === "admin" && (
             <Link to="/adminMenu" style={linkStyle}>Administracion</Link>
           )}
           {!user && (

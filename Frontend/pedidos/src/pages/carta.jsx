@@ -9,7 +9,6 @@ function CartaPage() {
 
         <>
 
-        <Header_home/>
         <BannerMenu/>
         <Carta_menu/>
         

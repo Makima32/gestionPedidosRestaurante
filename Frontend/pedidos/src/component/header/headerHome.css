@@ -105,6 +105,7 @@
     border-radius: 50%;        
 }
 .hamburger_menu {
+
     display: none; 
     cursor: pointer;
     padding: 10px;
@@ -141,6 +142,11 @@
     .hamburger_menu {
         display: block;
         order: 2; 
+        border-radius: 0.5rem;
+        border: 0.5px solid #ccc; 
+        box-shadow: 10px 5px 5px black; /* Sombra desplazada a la derecha y abajo */
+        box-shadow: inset 1px 1px 3px #ccc; 
+
     }
     
     .header_nav_div {

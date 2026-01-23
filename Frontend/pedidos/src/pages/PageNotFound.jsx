@@ -4,9 +4,7 @@ import Header_home from "../component/header/headerHome";
 function PageNotFound() {
  return<>
  
- 
- <Header_home home={false}/>
- <NoEncontrado/>
+  <NoEncontrado/>
  </>   
 }
 
