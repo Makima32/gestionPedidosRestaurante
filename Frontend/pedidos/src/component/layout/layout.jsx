@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Header_home from "../header/headerHome";
-import FooterWeb from "../Footer/Footer";
+import Header_home from "./header/headerHome";
+import FooterWeb from "./Footer/Footer";
 
 function Layout() {
   

@@ -14,7 +14,7 @@ function About_Us() {
   <div className="about_us_div_father">
     <div className="about_us_div_img">
 
-        <img src="/aboutUs_home.png" alt="img_aboutUs" />
+        <img src="/home/aboutUs_home.webp" alt="img_aboutUs" />
 
     </div>
     <div className="about_us_div_information">

@@ -16,28 +16,28 @@ function PlatosEstrellas({pizza1, pizza2, pizza3, pizza4, pizza5}) {
             
           
 
-            <div className="card_platoEstrella_div" id="card_platoEstrella_div1" style={{backgroundImage:`url(/pizzas/${pizza1}.png)`}}>
+            <div className="card_platoEstrella_div" id="card_platoEstrella_div1" style={{backgroundImage:`url(/pizzas/${pizza1}.webp)`}}>
                 
                 <p><span>{pizza1}</span></p>
 
             </div>
             
-            <div className="card_platoEstrella_div" id="card_platoEstrella_div2" style={{backgroundImage:`url(/pizzas/${pizza2}.png)`}}>
+            <div className="card_platoEstrella_div" id="card_platoEstrella_div2" style={{backgroundImage:`url(/pizzas/${pizza2}.webp)`}}>
                 
                 <p><span>{pizza2}</span></p>
 
             </div>
-            <div className="card_platoEstrella_div" id="card_platoEstrella_div3" style={{backgroundImage:`url(/pizzas/${pizza3}.png)`}}>
+            <div className="card_platoEstrella_div" id="card_platoEstrella_div3" style={{backgroundImage:`url(/pizzas/${pizza3}.webp)`}}>
                 
                 <p><span>{pizza3}</span></p>
 
             </div>
-            <div className="card_platoEstrella_div " id="card_platoEstrella_div4 " style={{backgroundImage:`url(/pizzas/${pizza4}.png)`}}>
+            <div className="card_platoEstrella_div " id="card_platoEstrella_div4 " style={{backgroundImage:`url(/pizzas/${pizza4}.webp)`}}>
                 
                 <p><span>{pizza4}</span></p>
 
             </div>
-            <div className="card_platoEstrella_div" id="card_platoEstrella_div5" style={{backgroundImage:`url(/pizzas/${pizza5}.png)`}}>
+            <div className="card_platoEstrella_div" id="card_platoEstrella_div5" style={{backgroundImage:`url(/pizzas/${pizza5}.webp)`}}>
                 
                 <p><span>{pizza5}</span></p>
 

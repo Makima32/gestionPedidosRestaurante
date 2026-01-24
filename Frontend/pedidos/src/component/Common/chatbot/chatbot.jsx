@@ -53,7 +53,7 @@ function Chatbot() {
   return (
     <>
       <div className="chatbot_button" onClick={() => setIsOpen(!isOpen)}>
-        <img src="/chatbotIcon.png" alt="Bot" />
+        <img src="/chatbotIcon.webp" alt="Bot" />
       </div>
 
       <div className={`chat_window ${isOpen ? "open" : ""}`}>

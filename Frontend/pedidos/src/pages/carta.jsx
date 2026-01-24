@@ -1,6 +1,6 @@
 import BannerMenu from "../component/carta_component/banner_menu/Banner_menu";
 import Carta_menu from "../component/carta_component/carta/carta_menu";
-import Header_home from "../component/header/headerHome";
+import Header_home from "../component/layout/header/headerHome";
 
 function CartaPage() {
     

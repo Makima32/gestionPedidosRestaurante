@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./headerHome.css";
-import { useAuth } from "../../hook/auth/authContext";
+import { useAuth } from "../../../hook/auth/authContext";
 
 function Header_home({ home }) {
   const { user, logout } = useAuth(); 
@@ -22,7 +22,7 @@ function Header_home({ home }) {
     <header className="header">
       <div className="header_div">
         <div className="header_div_img_div">
-          <Link to="/"><img src="logo.png" alt="Logo" /></Link>
+          <Link to="/"><img src="logo.webp" alt="Logo" /></Link>
         </div>
 
         <div className={`hamburger_menu ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>

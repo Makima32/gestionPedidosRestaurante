@@ -13,7 +13,7 @@ function Carta() {
   <div className="carta_div_father">
     <div className="carta_div_img">
 
-        <img src="/carta_img_home.png" alt="img_carta" />
+        <img src="/home/carta_img_home.webp" alt="img_carta" />
 
     </div>
     <div className="carta_div_information">

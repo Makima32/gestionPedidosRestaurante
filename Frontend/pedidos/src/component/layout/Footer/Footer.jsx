@@ -7,13 +7,13 @@ function FooterWeb() {
         <div className="footer_socials">
           <h1>Síguenos</h1>
           <a href="https://instagram.com">
-            <img src="/instagram.png" alt="Instagram" />
+            <img src="/socialMedia/instagram.svg" alt="Instagram" />
           </a>
           <a href="https://facebook.com">
-            <img src="/facebook.png" alt="Facebook" />
+            <img src="/socialMedia/facebook.svg" alt="Facebook" />
           </a>
           <a href="https://X.com">
-            <img src="/x.png" alt="X" />
+            <img src="/socialMedia/x.svg" alt="X" />
           </a>
         </div>
 
