@@ -2,11 +2,14 @@
   font-family: "Cormorant Garamond";
   src: url("/fonts/CormorantGaramond-Regular.ttf") format("truetype");
   font-weight: 400;
+  font-display: swap; 
+
 }
 
 @font-face {
   font-family: "Cormorant Garamond Bold";
   src: url("/fonts/CormorantGaramond-Bold.ttf") format("truetype");
+  font-display: swap; 
 }
 
 
@@ -15,7 +18,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
   overflow-x: hidden; 
   background-color: #F2ECE1;
 

@@ -15,7 +15,6 @@ function Home() {
 
   return (
     <>
-      <Chatbot />
       <StartBanner />
 
       <About_Us />

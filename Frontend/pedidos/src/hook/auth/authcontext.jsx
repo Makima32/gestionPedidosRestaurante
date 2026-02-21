@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie"
+import { SERVER } from "../../utils/assets";
 
 const AuthContext = createContext(null);
 
@@ -30,7 +31,7 @@ export function AuthProvider({ children }) {
 
   async function login(username, password) {
     try {
-      const response = await fetch(`http://localhost:8080/usuarios/buscar/${username}`);
+      const response = await fetch(`${SERVER}/usuarios/buscar/${username}`);
       if (!response.ok) throw new Error("Usuario no encontrado");
       const dbUser = await response.json();
       if (dbUser.password !== password) throw new Error("Contraseña incorrecta");
@@ -77,7 +78,7 @@ export function AuthProvierCookie({children}){
 
   async function register(nombre, correo, password) {
     try {
-      const response = await fetch("http://localhost:8080/usuarios", {
+      const response = await fetch(`${SERVER}/usuarios`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, correo, password, rol: "user" }),
@@ -91,7 +92,7 @@ export function AuthProvierCookie({children}){
 
   async function login(username, password) {
     try {
-      const response = await fetch(`http://localhost:8080/usuarios/buscar/${username}`);
+      const response = await fetch(`${SERVER}/usuarios/${username}`);
       if (!response.ok) throw new Error("Usuario no encontrado");
       const dbUser = await response.json();
       if (dbUser.password !== password) throw new Error("Contraseña incorrecta");

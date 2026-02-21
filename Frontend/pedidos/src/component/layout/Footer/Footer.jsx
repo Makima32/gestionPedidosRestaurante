@@ -1,3 +1,4 @@
+import { IMAGENES } from "../../../utils/assets";
 import "./Footer.css";
 
 function FooterWeb() {
@@ -7,13 +8,13 @@ function FooterWeb() {
         <div className="footer_socials">
           <h1>Síguenos</h1>
           <a href="https://instagram.com">
-            <img src="/socialMedia/instagram.svg" alt="Instagram" />
+            <img src={IMAGENES.SocialmediaIco.instagram} alt="Instagram" />
           </a>
           <a href="https://facebook.com">
-            <img src="/socialMedia/facebook.svg" alt="Facebook" />
+            <img src={IMAGENES.SocialmediaIco.facebook} alt="Facebook" />
           </a>
           <a href="https://X.com">
-            <img src="/socialMedia/x.svg" alt="X" />
+            <img src={IMAGENES.SocialmediaIco.x}alt="X" />
           </a>
         </div>
 

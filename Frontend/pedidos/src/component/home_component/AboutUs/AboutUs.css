@@ -11,13 +11,23 @@
   height: 80vh;
   width: 50vw;
   display: flex;
-  align-items: center;
+  align-items: center;    
+  justify-content: center; 
+}
+
+.about_us_div_img picture {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .about_us_div_img img {
-  height: 65%;
+  height: 55vh; 
+  width: auto;  
   border-radius: 1rem;
+  object-fit: cover;
+  display: block; 
 }
 
 .about_us_div_information {

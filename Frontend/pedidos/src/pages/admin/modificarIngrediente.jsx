@@ -1,5 +1,5 @@
-import Header_admin from "../../component/AdminComponents/header_admin/headerAdmin";
-import ModificarIngrediente from "../../component/AdminComponents/modificar/modificarIngrediente";
+import Header_admin from "../../component/AdminComponents/common/headerAdmin";
+import ListaIngredientesModificar from "../../component/AdminComponents/Ingredientes/ListaIngredientesModificar";
 
 function ModificarIngredientePage() {
     
@@ -9,7 +9,7 @@ function ModificarIngredientePage() {
         
         <Header_admin/>
 
-        <ModificarIngrediente/>
+        <ListaIngredientesModificar/>
         </>
     )
 }

@@ -32,7 +32,7 @@ public class UsuarioController {
                 .body("Usuario creado correctamente ");
     }
 
-    @GetMapping("/buscar/{nombre}")
+    @GetMapping("/{nombre}")
     public ResponseEntity<?> obtenerUsuario(@PathVariable String nombre) {
         Optional<Usuario> userOptional = repository.findByNombre(nombre);
         if (userOptional.isPresent()) {
@@ -44,7 +44,7 @@ public class UsuarioController {
         }
     }
 
-@PutMapping("/modificar/{id}")
+@PutMapping("/{id}")
 public ResponseEntity<?> modificarUsuario(@PathVariable Integer id, @RequestBody Usuario cambios) {
     Optional<Usuario> userOptional = repository.findById(id);
 

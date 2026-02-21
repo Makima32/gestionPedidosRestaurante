@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./chatbot.css";
 import { BlinkBlur } from "react-loading-indicators";
+import { IMAGENES, SERVER } from "../../../utils/assets";
 
 function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +22,7 @@ function Chatbot() {
       // encodeURIComponent asegura que espacios y caracteres especiales sean seguros para la URL
       const encodedPrompt = encodeURIComponent(input);
 
-      const url = `http://localhost:8080/gemini/chat?UserPrompt=${encodedPrompt}`;
+      const url = `${SERVER}/gemini/chat?UserPrompt=${encodedPrompt}`;
 
       const res = await fetch(url, {
         method: "GET", 
@@ -53,7 +54,7 @@ function Chatbot() {
   return (
     <>
       <div className="chatbot_button" onClick={() => setIsOpen(!isOpen)}>
-        <img src="/chatbotIcon.webp" alt="Bot" />
+        <img src={IMAGENES.ChatbotIcon} alt="Bot" />
       </div>
 
       <div className={`chat_window ${isOpen ? "open" : ""}`}>
@@ -77,7 +78,7 @@ function Chatbot() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Escribe aquí..."
           />
-          <button type="submit"><img src="/sendButton.png" alt="" /></button>
+          <button type="submit"><img src={IMAGENES.SendButtom} alt="enviar" /></button>
         </form>
       </div>
     </>

@@ -1,5 +1,5 @@
 import AdminMenu from "../../component/AdminComponents/adminMenu/adminMenu";
-import Header_admin from "../../component/AdminComponents/header_admin/headerAdmin";
+import Header_admin from "../../component/AdminComponents/common/headerAdmin";
 
 function AdminMenuPage() {
     

@@ -3,6 +3,7 @@ import "./pedidos.css";
 // Importamos la lógica externa
 import { actualizarCarrito, calcularTotalItems } from "./carrito.js";
 import Carrito from "./Carrito.jsx";
+import { IMAGENES, SERVER } from "../../utils/assets.js";
 
 function Pedidos() {
   const [platos, setPlatos] = useState([]);
@@ -13,7 +14,7 @@ function Pedidos() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:8080/platos/listar")
+    fetch(`${SERVER}/platos`)
       .then((res) => res.json())
       .then((data) => setPlatos(data))
       .catch((err) => console.error("Error cargando platos:", err));
@@ -39,7 +40,7 @@ function Pedidos() {
       
       {!isCarritoVisible && ( // El boton solo se muestra si el carrito NO esta visible
         <button className="carrito_icon_button" onClick={toggleCarrito}>
-          <span className="carrito_icon"><img src="/carrito.png" alt="carrito"/></span>
+          <span className="carrito_icon"><img src={IMAGENES.carritoIco} alt="carrito"/></span>
           <span className="carrito_counter">{calcularTotalItems(carrito)}</span>
         </button>
       )}

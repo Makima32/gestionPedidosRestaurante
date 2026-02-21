@@ -20,14 +20,14 @@ public class IngredienteController {
     @Autowired
     private IngredienteRepository repo;
 
-    @PostMapping("/crear")
+    @PostMapping()
     public ResponseEntity<String> crearIngrediente(@RequestBody Ingrediente ingrediente) {
         repo.save(ingrediente);
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body("Ingrediente creado correctamente ");
     }
 
-    @GetMapping("/listar")
+    @GetMapping()
     public ResponseEntity<List<Ingrediente>> listarIngredientes() {
         List<Ingrediente> ingredientes = repo.findAll();
         return ResponseEntity.ok(ingredientes);
@@ -45,7 +45,7 @@ public class IngredienteController {
         }
     }
 
-    @PutMapping("/actualizar/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> actualizarIngrediente(@PathVariable int id, @RequestBody Ingrediente cambios) {
         Optional<Ingrediente> opt = repo.findById(id);
 
@@ -68,7 +68,7 @@ public class IngredienteController {
         return ResponseEntity.ok("Ingrediente actualizado correctamente ");
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarIngrediente(@PathVariable int id) {
         if (!repo.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

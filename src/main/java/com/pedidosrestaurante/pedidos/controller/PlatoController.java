@@ -26,7 +26,7 @@ public class PlatoController {
     @Autowired
     private IngredienteRepository ingredienteRepo;
 
-    @PostMapping("/crear")
+    @PostMapping()
     public ResponseEntity<?> crearPlato(@RequestBody Plato plato) {
         try {
             if (plato.getIngredientes() != null) {
@@ -60,7 +60,7 @@ public class PlatoController {
     }
 
 
-    @PutMapping("/actualizar/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> actualizarPlato(@PathVariable int id, @RequestBody Plato cambios) {
         Optional<Plato> opt = platoRepo.findById(id);
 
@@ -102,7 +102,7 @@ public class PlatoController {
     }
     
 
-    @GetMapping("/listar")
+    @GetMapping("")
     public ResponseEntity<?> listarPlatos() {
         return ResponseEntity.ok(platoRepo.findAll());
     }
@@ -118,7 +118,7 @@ public class PlatoController {
         return ResponseEntity.ok(opt.get());
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarPlato(@PathVariable int id) {
         Optional<Plato> opt = platoRepo.findById(id);
 

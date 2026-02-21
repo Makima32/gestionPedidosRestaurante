@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./carta_menu.css";
+import { SERVER } from "../../../utils/assets";
 
 function Carta_menu() {
   const [datos, setDatos] = useState([]);
 
   function fetchDatos() {
-    fetch("http://localhost:8080/platos/listar")
+    fetch(`${SERVER}/platos`)
       .then((response) => {
         if (!response.ok) throw new Error("Error al obtener datos");
         return response.json();
@@ -24,7 +25,7 @@ function Carta_menu() {
   const renderAlergenosYVegano = (plato) => {
     const alergenosEncontrados = new Set();
     let esPlatoVegano = true;
-    const carpetaBase = "/AlergenosIco";
+    const carpetaBase = "/icons/AlergenosIco";
 
    
     if (!plato.ingredientes || plato.ingredientes.length === 0) {
@@ -89,6 +90,7 @@ function Carta_menu() {
       );
     }
 
+    //ALERGENOS ESTA INCOMpLETO
     return iconos;
   };
 

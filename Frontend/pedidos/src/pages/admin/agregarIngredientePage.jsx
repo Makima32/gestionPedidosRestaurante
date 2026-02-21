@@ -1,5 +1,5 @@
-import AgregarIngrediente from "../../component/AdminComponents/formularios/AgregarIngrediente/AgregarIngrediente";
-import Header_admin from "../../component/AdminComponents/header_admin/headerAdmin";
+import AgregarIngrediente from "../../component/AdminComponents/Ingredientes/AgregarIngrediente";
+import Header_admin from "../../component/AdminComponents/common/headerAdmin";
 
 function AgregarIngredientePage() {
     

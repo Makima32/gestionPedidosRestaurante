@@ -2,6 +2,8 @@ import React from 'react';
 import './Carrito.css';
 import { eliminarPlatoDelCarrito, cambiarCantidad } from './carrito.js'; 
 
+import { Link } from 'react-router-dom';
+
 const Carrito = ({ carrito, setCarrito, isVisible, onClose }) => {
   if (!isVisible) {
     return null;
@@ -58,9 +60,12 @@ const Carrito = ({ carrito, setCarrito, isVisible, onClose }) => {
             </div>
             <div className="carrito-total">
               <h3>Total: {calcularTotalGeneral()}€</h3>
+
+              <Link to="/finalizarPedido">
               <button className="finalizar-compra-btn" onClick={onClose}>
                 Finalizar Compra
               </button>
+              </Link>
             </div>
           </>
         )}

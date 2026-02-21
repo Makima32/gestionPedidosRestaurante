@@ -67,11 +67,11 @@
 
 .carrito-item {
   display: flex;
-  align-items: stretch; /* Cambiado a stretch para que los hijos ocupen toda la altura */
+  align-items: stretch; 
   margin-bottom: 15px;
   border-bottom: 1px solid #f0f0f0;
   padding-bottom: 15px;
-  gap: 15px; /* Anade un espacio entre la imagen y los detalles */
+  gap: 15px; 
 }
 
 .carrito-item img {
@@ -79,21 +79,21 @@
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
-  flex-shrink: 0; /* Evita que la imagen se encoja */
+  flex-shrink: 0; 
 }
 
 .item-details {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Alinea nombre arriba, controles abajo */
+  justify-content: space-between; 
 }
 
 .item-nombre {
     font-weight: bold;
     margin-bottom: 10px;
     font-family: 'CormorantGaramond-Regular', serif;
-    word-break: break-word; /* Evita que el texto largo se desborde */
+    word-break: break-word; 
 }
 
 .item-quantity {
@@ -112,7 +112,6 @@
   transition: background-color 0.2s;
   color: black;
 
-  /* Usar Flexbox para un centrado perfecto */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,16 +131,16 @@
 .item-price {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Alinea precio arriba, boton abajo */
-    align-items: flex-end; /* Alinea el contenido a la derecha */
-    flex-shrink: 0; /* Evita que esta columna se encoja */
+    justify-content: space-between; 
+    align-items: flex-end; 
+    flex-shrink: 0; 
 }
 
 .item-price p {
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 1.1rem;
-    white-space: nowrap; /* Evita que el precio se divida en varias lineas */
+    white-space: nowrap; 
 }
 
 .item-remove-btn {

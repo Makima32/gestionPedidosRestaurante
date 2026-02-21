@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header_admin from "../../component/AdminComponents/header_admin/headerAdmin";
-import Eliminar from "../../component/AdminComponents/eliminar/eliminar";
+import Header_admin from "../../component/AdminComponents/common/headerAdmin";
+import Eliminar from "../../component/AdminComponents/common/Eliminar";
 
 function EliminarPage() {
  

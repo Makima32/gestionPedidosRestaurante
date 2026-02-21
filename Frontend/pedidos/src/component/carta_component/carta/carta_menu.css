@@ -54,6 +54,9 @@ h2 {
     height: 180px; 
     width: 100%;
     overflow: hidden; 
+    margin: auto 0px;
+    align-items: center;
+    align-content: center;
 }
 
 .menu_card_img img {
@@ -141,7 +144,7 @@ h2 {
     
     .menu_card_img {
         width: 35%; 
-        height: 120px; 
+        height: 85%; 
         flex-shrink: 0; 
     }
     

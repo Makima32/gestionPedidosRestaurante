@@ -24,14 +24,17 @@
 
 
 .carrito_icon_button {
-  position: fixed; /* Posicion fija relativa a la ventana del navegador */
-  top: 50px;       /* 20px desde la parte superior */
-  right: 50px;      /* 20px desde la derecha */
-  z-index: 9999;    /* Valor muy alto para asegurar que este por encima de todo */
+
+  margin-top: 8.5vh;
+  position: fixed;  
+  top: 50px;       
+  right: 50px;      
+  z-index: 9999;    
   background: none;
   border: none;
   cursor: pointer;
   padding: 10px;
+  background-color: #F2ECE1;
 }
 
 .carrito_icon {

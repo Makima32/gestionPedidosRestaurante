@@ -25,13 +25,13 @@ public class PlatoIngredienteController {
     @Autowired
     private PlatoIngredienteService service;
 
-    @PostMapping("/crear")
+    @PostMapping()
     public ResponseEntity<?> crear(@RequestBody PlatoIngrediente pi){
         PlatoIngrediente nuevo = service.crear(pi); 
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
-    @GetMapping("/listar")
+    @GetMapping()
     public List<PlatoIngrediente> listar(){
         return repo.findAll();
     }
@@ -48,7 +48,7 @@ public class PlatoIngredienteController {
             
     }
 
-    @DeleteMapping("/eliminar/{idPlato}/{idIngrediente}")
+    @DeleteMapping("/{idPlato}/{idIngrediente}")
     public ResponseEntity<?> eliminarPorIDs(
             @PathVariable int idPlato, 
             @PathVariable int idIngrediente
@@ -57,7 +57,7 @@ public class PlatoIngredienteController {
         return ResponseEntity.ok("Eliminado correctamente");
     }
     
-    @GetMapping("/plato/{idPlato}") 
+    @GetMapping("/{idPlato}") 
     public List<PlatoIngrediente> listarPorPlato(@PathVariable int idPlato){
         return repo.findByPlato_IdPlato(idPlato);
     }

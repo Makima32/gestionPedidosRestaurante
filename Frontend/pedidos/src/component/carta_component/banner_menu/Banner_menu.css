@@ -3,8 +3,6 @@
     display: flex;
     align-items: center;
     margin-top: 20vh;
-    background-color: red;
-    background-image: url("/bannerMenu.png");
     height: 40vh;
     background-size: cover;
     background-repeat: no-repeat;
