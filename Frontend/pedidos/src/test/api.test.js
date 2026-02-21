@@ -1,7 +1,12 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
 import { obtenerPlatos } from '../service/api.js';
 
 describe('API - Peticiones al Servidor (Mocks)', () => {
+
+  beforeEach(() => {
+    // Reinicia los contadores de llamadas
+    vi.clearAllMocks();
+  });
 
   // Limpiamos el mocks 
   afterEach(() => {
