@@ -12,10 +12,10 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
 
   it('Debería obtener los platos correctamente cuando el servidor responde OK', async () => {
     const mockPlatos = [
-      { idPlato: 1, nombre: 'Margarita', precio: 10 }, 
+      { idPlato: 1, nombre: 'Margarita', precio: 10 },
       { idPlato: 2, nombre: 'Barbacoa', precio: 12 }
     ];
-    
+
     vi.spyOn(global, 'fetch').mockResolvedValue({
       ok: true,
       json: async () => mockPlatos,
@@ -38,4 +38,10 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
 
 
   //Santiago
+  it('Debería fallar si no hay red o el backend está apagado', async () => {
+    vi.spyOn(global, 'fetch').mockRejectedValue(new Error("Failed to fetch"));
+
+    await expect(obtenerPlatos()).rejects.toThrow("Failed to fetch");
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
 });
