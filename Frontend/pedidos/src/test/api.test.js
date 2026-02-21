@@ -18,6 +18,7 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
 
     vi.spyOn(global, 'fetch').mockResolvedValue({
       ok: true,
+      status: 200,
       json: async () => mockPlatos,
     });
 
@@ -30,6 +31,7 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
   it('Debería lanzar un error si el servidor responde con error HTTP (ok: false)', async () => {
     vi.spyOn(global, 'fetch').mockResolvedValue({
       ok: false,
+      status: 500,
     });
 
     await expect(obtenerPlatos()).rejects.toThrow("Error al obtener datos");
