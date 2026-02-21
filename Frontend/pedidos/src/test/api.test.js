@@ -1,0 +1,42 @@
+import { describe, it, expect, vi, afterEach } from 'vitest';
+// Ajusta la ruta a tu archivo api.js
+import { obtenerPlatos } from '../services/api.js'; 
+
+describe('API - Peticiones al Servidor (Mocks)', () => {
+
+  // Limpiamos el mocks 
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  // Omar
+
+  it('Debería obtener los platos correctamente cuando el servidor responde OK', async () => {
+    const mockPlatos = [
+      { idPlato: 1, nombre: 'Margarita', precio: 10 }, 
+      { idPlato: 2, nombre: 'Barbacoa', precio: 12 }
+    ];
+    
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => mockPlatos,
+    });
+
+    const resultado = await obtenerPlatos();
+
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(resultado).toEqual(mockPlatos);
+  });
+
+  it('Debería lanzar un error si el servidor responde con error HTTP (ok: false)', async () => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+    });
+
+    await expect(obtenerPlatos()).rejects.toThrow("Error al obtener datos");
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+  });
+
+
+  //Santiago
+});
