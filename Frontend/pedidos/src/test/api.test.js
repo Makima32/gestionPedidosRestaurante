@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-// Ajusta la ruta a tu archivo api.js
-import { obtenerPlatos } from '../services/api.js'; 
+import { obtenerPlatos } from '../service/api.js';
 
 describe('API - Peticiones al Servidor (Mocks)', () => {
 
