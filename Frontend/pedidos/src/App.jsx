@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import AdminIngredientePage from "./pages/admin/adminIngrediente";
 import AdminPedidosPage from "./pages/admin/AdminPedidos";
@@ -25,45 +25,37 @@ import PedidosPage from "./pages/pedidosPage";
 import ScrollToTop from "./utils/ScrollTop";
 import FinalizarPedidoPage from "./pages/FinalizarPedidoPage";
 
-// IMPORTAMOS EL CONTEXTO
 import { ConnectivityProvider, useConnectivity } from "./hook/Conectividad/ConnectivityContext";
+import ErrorConexion from "./component/Common/ErrorConexion/ErrorConexion";
+import Header_home from "./component/layout/header/headerHome";
+import FooterWeb from "./component/layout/Footer/Footer";
+import { useEffect } from "react";
 
-// 1. Creamos el componente que decide qué mostrar
 function AppContent() {
-  const { isOnline, setIsOnline } = useConnectivity();
+  const { isOnline, setIsOnline, retry } = useConnectivity();
+  const location = useLocation(); 
 
-  // SI NO HAY CONEXIÓN: Mostramos el mensaje de error
+
+  //Funcion para que en la pantalla de error permita redigir al usuario a la pagina clicada
+  useEffect(() => {
+    if (!isOnline) {
+      retry(); 
+    }
+  }, [location.pathname]);
   if (!isOnline) {
     return (
-      <div style={{ 
-        height: '100vh', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        fontFamily: 'Arial, sans-serif'
-      }}>
-        <img src="/icons/pizza_quemada.webp" alt="Error" style={{ width: '150px' }} />
-        <h1 style={{ color: '#AC7E2F' }}>¡Vaya! Parece que el horno está apagado</h1>
-        <p>No pudimos conectar con el servidor. Revisa tu conexión.</p>
-        <button 
-          onClick={() => setIsOnline(true)}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#AC7E2F',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
-        >
-          Intentar de nuevo
-        </button>
-      </div>
+   <>
+        <Header_home /> 
+        <main style={{ minHeight: '70vh' }}>
+          <ErrorConexion onRetry={retry} />
+        </main>
+        <FooterWeb />
+   </>
     );
+    
   }
 
-  // SI HAY CONEXIÓN: Mostramos todas tus rutas normales
+  // Si conecta con el backend se muestra rutas normales
   return (
     <Routes>
       {/* Rutas CRUD */}
@@ -88,13 +80,14 @@ function AppContent() {
       {/* Rutas pagina Usuario */}
       <Route path="/" element={<Layout />}>
         <Route path="/aboutUs" element={<AboutUsPage />} />
-        <Route index element={<Home />} /> {/* Usamos index para la ruta raíz */}
+        <Route index element={<Home />} /> 
         <Route path="/carta" element={<CartaPage />} />
         <Route path="/pedidos" element={<PedidosPage />} />
         <Route path="/finalizarPedido" element={<FinalizarPedidoPage />} />
       </Route>
 
       {/* Login */}
+        
       <Route path="/login" element={<LoginPage />} />
 
       {/* 404 */}
@@ -103,7 +96,6 @@ function AppContent() {
   );
 }
 
-// 2. El componente App principal solo envuelve todo con los Providers
 function App() {
   return (
     <ConnectivityProvider>

@@ -12,6 +12,7 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "js-cookie": "^3.0.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-loading-indicators": "^1.0.1",

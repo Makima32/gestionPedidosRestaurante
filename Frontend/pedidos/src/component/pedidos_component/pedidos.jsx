@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import "./pedidos.css";
-// Importamos la lógica externa
 import { actualizarCarrito, calcularTotalItems } from "./carrito.js";
 import Carrito from "./Carrito.jsx";
-import { IMAGENES, SERVER } from "../../utils/assets.js";
+import { IMAGENES } from "../../utils/assets.js"; 
+import { BlinkBlur } from "react-loading-indicators";
+
+import { useApi } from "../../hook/useApi/useApi.jsx"; 
+import { obtenerPlatos } from "../../service/api.js"; 
 
 function Pedidos() {
-  const [platos, setPlatos] = useState([]);
+  const { datos: platos, loading, ejecutarFetch } = useApi();
+  
   const [isCarritoVisible, setIsCarritoVisible] = useState(false);
   const [carrito, setCarrito] = useState(() => {
     const saved = localStorage.getItem("carrito");
@@ -14,11 +18,8 @@ function Pedidos() {
   });
 
   useEffect(() => {
-    fetch(`${SERVER}/platos`)
-      .then((res) => res.json())
-      .then((data) => setPlatos(data))
-      .catch((err) => console.error("Error cargando platos:", err));
-  }, []);
+    ejecutarFetch(obtenerPlatos);
+  }, []); 
 
   useEffect(() => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -32,13 +33,29 @@ function Pedidos() {
     setIsCarritoVisible(!isCarritoVisible);
   };
 
+  if (loading) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column',
+        justifyContent: 'center', 
+        alignItems: 'center',
+        gap: '20px' 
+      }}>
+        <BlinkBlur color="#AC7E2F" size="large" text="Cargando menú..." textColor="#AC7E2F" />
+      </div>
+    );
+  }
+
+  // 5. si conecta al backend 
   return (
     <div className="div_father_pedidos">
       <header className="pedidos_header">
         <h1 id="titulo">Hacer pedido</h1>
       </header>
       
-      {!isCarritoVisible && ( // El boton solo se muestra si el carrito NO esta visible
+      {!isCarritoVisible && (
         <button className="carrito_icon_button" onClick={toggleCarrito}>
           <span className="carrito_icon"><img src={IMAGENES.carritoIco} alt="carrito"/></span>
           <span className="carrito_counter">{calcularTotalItems(carrito)}</span>
@@ -75,9 +92,6 @@ function Pedidos() {
       />
     </div>
   );
-
 }
 
 export default Pedidos;
-
-//

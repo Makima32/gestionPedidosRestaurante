@@ -5,17 +5,17 @@ const ConnectivityContext = createContext();
 export const ConnectivityProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(true);
 
-  // Función global para reportar que el servidor ha muerto
-  const reportError = () => setIsOnline(false);
+  const setConnectionError = () => {
+    console.log("Cambiando estado a offline...");
+    setIsOnline(false);
+  };
   
-  // Función para resetear el estado y volver a intentar
   const retry = () => {
     setIsOnline(true);
-    window.location.reload(); 
   };
 
   return (
-    <ConnectivityContext.Provider value={{ isOnline, reportError, retry }}>
+    <ConnectivityContext.Provider value={{ isOnline, setConnectionError, retry }}>
       {children}
     </ConnectivityContext.Provider>
   );
