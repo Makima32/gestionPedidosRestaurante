@@ -73,7 +73,7 @@ function Pedidos() {
       <div className="div_content_pedidos">
         {platos.map((plato) => {
           const rutaImagen = plato.imagen
-            ? `/CrudImg/Platos/${plato.imagen}`
+            ? `/CrudImg/Platos/${plato.imagen}.png`
             : "/logo.png";
 
           return (

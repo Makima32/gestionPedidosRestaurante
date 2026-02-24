@@ -59,7 +59,6 @@ function Visualizar() {
 
   return (
     <>
-      <Header_admin />
       <div>
         <div className="div_title">
           <h1>{config.titulo}</h1>

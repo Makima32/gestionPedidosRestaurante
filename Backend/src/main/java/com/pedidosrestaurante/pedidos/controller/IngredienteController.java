@@ -25,15 +25,12 @@ public class IngredienteController {
     @Autowired
     private IngredienteRepository repo;
 
-    // RUTA FÍSICA PARA INGREDIENTES
     private final String RUTA_IMAGENES = "C:/Users/jefra/DAM/Segundo_año/pedidos/Frontend/pedidos/public/CrudImg/Ingredientes/";
 
-    // Función auxiliar para guardar la imagen (Solo PNG)
     private void guardarImagen(Ingrediente ing, MultipartFile archivoImagen) throws Exception {
         if (archivoImagen != null && !archivoImagen.isEmpty()) {
             String nombreOriginal = archivoImagen.getOriginalFilename();
             
-            // Validación estricta de PNG
             if (nombreOriginal == null || !nombreOriginal.toLowerCase().endsWith(".png")) {
                 throw new Exception("Solo se permiten archivos .png");
             }
