@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BlinkBlur } from "react-loading-indicators";
-import Header_admin from "../common/headerAdmin";
 
 import { useApi } from "../../../hook/useApi/useApi.jsx";
 import { obtenerEntidades } from "../../../service/api.js";
@@ -45,7 +44,6 @@ function ModificarPlato() {
 
   return (
     <>
-      <Header_admin />
       <div>
         <div className="div_title">
           <h1>Editar Platos</h1>

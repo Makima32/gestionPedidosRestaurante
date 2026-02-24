@@ -62,7 +62,6 @@ function Eliminar() {
 
   return (
     <>
-      <Header_admin />
       <div className="eliminar-page-container">
         <div className="div_title">
           <h1>Eliminar {tipo}</h1>

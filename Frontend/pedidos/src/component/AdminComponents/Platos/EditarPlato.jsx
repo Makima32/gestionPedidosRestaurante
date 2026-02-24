@@ -137,7 +137,6 @@ function ModificarPlato() {
   if (cargando) {
     return (
       <>
-        <Header_admin />
         <div
           style={{
             minHeight: "80vh",
@@ -161,7 +160,6 @@ function ModificarPlato() {
 
   return (
     <>
-      <Header_admin />
       <div className="div_father">
         <h2>Modificar Plato</h2>
         <div className="div_form">
