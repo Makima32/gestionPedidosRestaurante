@@ -1,106 +1,112 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SERVER } from "../../../utils/assets";
+import { BlinkBlur } from "react-loading-indicators";
+import Header_admin from "../common/headerAdmin";
 
-import "../common/Formularios.css"; 
+import { useApi } from "../../../hook/useApi/useApi.jsx";
+import { obtenerEntidades } from "../../../service/api.js";
+
+import "../common/Formularios.css";
 
 function ModificarPlato() {
-    const [platos, setPlatos] = useState([]);
-    const navigate = useNavigate();
-    const [errorBackend, setErrorBackend] = useState(false); 
+  const navigate = useNavigate();
 
-    function fetchPlatos() {
-        setErrorBackend(false); 
+  const { datos: platos, loading, ejecutarFetch } = useApi();
 
-        fetch(`${SERVER}/platos`)
-            .then((response) => {
-                if (!response.ok) throw new Error("Error en la respuesta del servidor (HTTP code)");
-                return response.json();
-            })
-            .then((data) => {
-                console.log("Platos recibidos:", data);
-                setPlatos(data);
-            })
-            .catch((error) => {
-                console.error("Error al obtener los platos:", error);
-                setErrorBackend(true);
-            });
-    }
+  useEffect(() => {
+    ejecutarFetch(() => obtenerEntidades("platos"));
+  }, []);
 
-    useEffect(() => {
-        fetchPlatos();
-    }, []);
+  const handleEdit = (idPlato) => {
+    navigate(`/modificar/plato/${idPlato}`);
+  };
 
-    const handleEdit = (idPlato) => {
-        navigate(`/modificar/plato/${idPlato}`);
-    };
-    
-    if (errorBackend) {
-        return (
-            <div className="error-screen-center"> 
-                <div className="error-message-box">
-                    <span className="error-code">❌</span>
-                    <h1>¡Conexión Fallida!</h1>
-                    <p>No se pudo establecer conexión con el backend.</p>
-                    <button 
-                        className="reload-button-inline"
-                        onClick={() => window.location.reload()}
-                    >
-                        Intentar Recargar
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
+  if (loading) {
     return (
-        <div>
-            <div className="div_title">
-                <h1>Platos</h1>
-            </div>
-
-            <div className="cards-container">
-                {platos.map((plato) => {
-                    const imagen = plato.imagen ? plato.imagen : "default";
-
-                    return (
-                        <div className="card" key={plato.idPlato}>
-                            <div className="card_image">
-                                <img
-                                    src={`/CrudImg/Platos/${imagen}.png`}
-                                    alt={`Imagen del plato ${plato.nombre}`}
-                                />
-                            </div>
-
-                            <div className="div_content">
-                                <h2>{plato.nombre}</h2>
-                                <p><strong>Descripción:</strong> {plato.descripcion}</p>
-                                <p><strong>Precio:</strong> {plato.precio} €</p>
-
-                                <p><strong>Ingredientes:</strong></p>
-                                <p>
-                                    {plato.ingredientes?.length
-                                        ? plato.ingredientes
-                                            .map(rel => `${rel.cantidad}x ${rel.ingrediente.nombre}`)
-                                            .join(", ")
-                                        : "Sin ingredientes"}
-                                </p>
-                            </div>
-
-                            <div className="buttonEditDiv">
-                                <button
-                                    id="editbutton"
-                                    onClick={() => handleEdit(plato.idPlato)}
-                                >
-                                    <img src="/editbutton.png" alt="Modificar" />
-                                </button>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+      <>
+        <div
+          style={{
+            minHeight: "80vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <BlinkBlur
+            color="#AC7E2F"
+            size="large"
+            text="Cargando inventario..."
+            textColor="#AC7E2F"
+          />
         </div>
+      </>
     );
+  }
+
+  return (
+    <>
+      <Header_admin />
+      <div>
+        <div className="div_title">
+          <h1>Editar Platos</h1>
+        </div>
+
+        <div className="cards-container">
+          {platos &&
+            platos.map((plato) => {
+              const imagen = plato.imagen ? plato.imagen : "default";
+
+              return (
+                <div className="card" key={plato.idPlato}>
+                  <div className="card_image">
+                    <img
+                      src={`/CrudImg/Platos/${imagen}.png`}
+                      alt={`Imagen del plato ${plato.nombre}`}
+                      onError={(e) => {
+                        e.target.src = "/CrudImg/Platos/default.png";
+                      }}
+                    />
+                  </div>
+
+                  <div className="div_content">
+                    <h2>{plato.nombre}</h2>
+                    <p>
+                      <strong>Descripción:</strong> {plato.descripcion}
+                    </p>
+                    <p>
+                      <strong>Precio:</strong> {plato.precio} €
+                    </p>
+
+                    <p>
+                      <strong>Ingredientes:</strong>
+                    </p>
+                    <p style={{ fontSize: "0.9rem", color: "#555" }}>
+                      {plato.ingredientes?.length
+                        ? plato.ingredientes
+                            .map(
+                              (rel) =>
+                                `${rel.cantidad}x ${rel.ingrediente.nombre}`,
+                            )
+                            .join(", ")
+                        : "Sin ingredientes asignados"}
+                    </p>
+                  </div>
+
+                  <div className="buttonEditDiv">
+                    <button
+                      id="editbutton"
+                      onClick={() => handleEdit(plato.idPlato)}
+                    >
+                      <img src="/editbutton.png" alt="Modificar" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default ModificarPlato;

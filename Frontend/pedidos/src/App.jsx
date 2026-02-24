@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+// PAGINAS
 import Home from "./pages/home";
 import AdminIngredientePage from "./pages/admin/adminIngrediente";
 import AdminPedidosPage from "./pages/admin/AdminPedidos";
@@ -20,45 +23,57 @@ import EditarIngrediente from "./component/AdminComponents/Ingredientes/EditarIn
 import AgregarPlatoPage from "./pages/admin/AgregarPlatoPage";
 import ModificarPlatoPage from "./pages/admin/modificar/ModificarPlatosPage";
 import ModificarPlato from "./pages/admin/modificarPlato";
-import Layout from "./component/layout/layout";
 import PedidosPage from "./pages/pedidosPage";
-import ScrollToTop from "./utils/ScrollTop";
 import FinalizarPedidoPage from "./pages/FinalizarPedidoPage";
 
-import { ConnectivityProvider, useConnectivity } from "./hook/Conectividad/ConnectivityContext";
+// COMPONENTES DE LAYOUT Y COMUNES
+import Layout from "./component/layout/layout";
+import ScrollToTop from "./utils/ScrollTop";
 import ErrorConexion from "./component/Common/ErrorConexion/ErrorConexion";
 import Header_home from "./component/layout/header/headerHome";
+import Header_admin from "./component/AdminComponents/common/headerAdmin"; 
 import FooterWeb from "./component/layout/Footer/Footer";
-import { useEffect } from "react";
+
+// CONTEXTO
+import { ConnectivityProvider, useConnectivity } from "./hook/Conectividad/ConnectivityContext";
 
 function AppContent() {
-  const { isOnline, setIsOnline, retry } = useConnectivity();
-  const location = useLocation(); 
+  const { isOnline, retry } = useConnectivity();
+  const location = useLocation();
 
+  const isAdminPath = 
+    location.pathname.startsWith('/admin') || 
+    location.pathname.startsWith('/visualizar') || 
+    location.pathname.startsWith('/eliminar') || 
+    location.pathname.startsWith('/anadir') || 
+    location.pathname.startsWith('/modificar') ||
+    location.pathname.startsWith('/editar-ingrediente');
 
-  //Funcion para que en la pantalla de error permita redigir al usuario a la pagina clicada
+  
   useEffect(() => {
     if (!isOnline) {
-      retry(); 
+      retry();
     }
   }, [location.pathname]);
+
   if (!isOnline) {
     return (
-   <>
-        <Header_home /> 
-        <main style={{ minHeight: '70vh' }}>
+      <>
+        {isAdminPath ? <Header_admin /> : <Header_home />}
+        
+        <main style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <ErrorConexion onRetry={retry} />
         </main>
-        <FooterWeb />
-   </>
+
+        {!isAdminPath && <FooterWeb />}
+      </>
     );
-    
   }
 
-  // Si conecta con el backend se muestra rutas normales
+  // Si hay conexión, renderizamos las rutas normales
   return (
     <Routes>
-      {/* Rutas CRUD */}
+      {/* Grupo de rutas de Administración */}
       <Route element={<ProtectedRoute />}>
         <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
         <Route path="/adminPlatos" element={<AdminPlatoPage />} />
@@ -77,24 +92,23 @@ function AppContent() {
         <Route path="/modificar/plato/:id" element={<ModificarPlato />} />
       </Route>
 
-      {/* Rutas pagina Usuario */}
       <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
         <Route path="/aboutUs" element={<AboutUsPage />} />
-        <Route index element={<Home />} /> 
         <Route path="/carta" element={<CartaPage />} />
         <Route path="/pedidos" element={<PedidosPage />} />
         <Route path="/finalizarPedido" element={<FinalizarPedidoPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<PageNotFound />} /> 
       </Route>
 
-      {/* Login */}
-        
-      <Route path="/login" element={<LoginPage />} />
-
-      {/* 404 */}
-      <Route path="*" element={<PageNotFound />} />
+    
+      
     </Routes>
   );
 }
+
+
 
 function App() {
   return (

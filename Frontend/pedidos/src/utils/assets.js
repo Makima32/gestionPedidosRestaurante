@@ -67,24 +67,24 @@ export const IMAGENES = {
 
   EditButton: "/icons/Editbutton.webp",
 
-  //Alergenos icos
 
+ // Alergenos icos
   AlergenosIco: {
-    Altramuces: "/AlergenosIco/Altramuces.ico",
-    Apio: "/AlergenosIco/Apio.ico",
-    Cacahuete: "/AlergenosIco/Cacahuete.ico",
-    Crustaceos: "/AlergenosIco/Crustaceos.ico",
-    FrutosCascara: "/AlergenosIco/FrutosCascara.ico",
-    Gluten: "/AlergenosIco/Gluten.ico",
-    Huevos: "/AlergenosIco/Huevos.ico",
-    Lacteos: "/AlergenosIco/Lacteos.ico",
-    Molusco: "/AlergenosIco/Molusco.ico",
-    Mostaza: "/AlergenosIco/Mostaza.ico",
-    Pescado: "/AlergenosIco/Pescado.ico",
-    Sesamo: "/AlergenosIco/Sesamo.ico",
-    Soja: "/AlergenosIco/Soja.ico",
-    Sulfitos: "/AlergenosIco/Sulfitos.ico",
-    Vegano: "/AlergenosIco/Vegano.ico",
+    Altramuces: "/icons/AlergenosIco/Altramuces.ico",
+    Apio: "/icons/AlergenosIco/Apio.ico",
+    Cacahuete: "/icons/AlergenosIco/Cacahuete.ico",
+    Crustaceos: "/icons/AlergenosIco/Crustaceos.ico",
+    FrutosCascara: "/icons/AlergenosIco/FrutosCascara.ico",
+    Gluten: "/icons/AlergenosIco/Gluten.ico",
+    Huevos: "/icons/AlergenosIco/Huevos.ico",
+    Lacteos: "/icons/AlergenosIco/Lacteos.ico",
+    Molusco: "/icons/AlergenosIco/Molusco.ico",
+    Mostaza: "/icons/AlergenosIco/Mostaza.ico",
+    Pescado: "/icons/AlergenosIco/Pescado.ico",
+    Sesamo: "/icons/AlergenosIco/Sesamo.ico",
+    Soja: "/icons/AlergenosIco/Soja.ico",
+    Sulfitos: "/icons/AlergenosIco/Sulfitos.ico",
+    Vegano: "/icons/AlergenosIco/Vegano.ico",
   },
 
 

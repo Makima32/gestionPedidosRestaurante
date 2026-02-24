@@ -4,13 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException; 
 
+import com.fasterxml.jackson.databind.ObjectMapper; // <-- LA HERRAMIENTA MÁGICA
 import com.pedidosrestaurante.pedidos.models.Plato;
 import com.pedidosrestaurante.pedidos.models.PlatoIngrediente;
 import com.pedidosrestaurante.pedidos.repository.PlatoRepository;
 import com.pedidosrestaurante.pedidos.repository.IngredienteRepository; 
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -21,17 +27,46 @@ public class PlatoController {
     @Autowired
     private PlatoRepository platoRepo;
     
-    
-    
     @Autowired
     private IngredienteRepository ingredienteRepo;
 
-    @PostMapping()
-    public ResponseEntity<?> crearPlato(@RequestBody Plato plato) {
+    private final String RUTA_IMAGENES = "C:/Users/jefra/DAM/Segundo_año/pedidos/Frontend/pedidos/public/CrudImg/Platos/";
+
+    private void guardarImagen(Plato plato, MultipartFile archivoImagen) throws Exception {
+        if (archivoImagen != null && !archivoImagen.isEmpty()) {
+            String nombreOriginal = archivoImagen.getOriginalFilename();
+            String nombreSinExtension = nombreOriginal;
+            
+            if(nombreOriginal != null && nombreOriginal.contains(".")) {
+                nombreSinExtension = nombreOriginal.substring(0, nombreOriginal.lastIndexOf('.'));
+            }
+            
+            plato.setImagen(nombreSinExtension);
+
+            Path directorioImagenes = Paths.get(RUTA_IMAGENES);
+            if (!Files.exists(directorioImagenes)) {
+                Files.createDirectories(directorioImagenes);
+            }
+            Path rutaArchivo = directorioImagenes.resolve(nombreOriginal);
+            Files.copy(archivoImagen.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
+
+    @PostMapping(consumes = {"multipart/form-data"})
+    public ResponseEntity<?> crearPlato(
+            @RequestPart("plato") String platoJson, 
+            @RequestPart(value = "imagen", required = false) MultipartFile archivoImagen) {
+        
         try {
+            // TRANSFORMAMOS EL STRING AL OBJETO PLATO
+            ObjectMapper objectMapper = new ObjectMapper();
+            Plato plato = objectMapper.readValue(platoJson, Plato.class);
+
+            // 1. Guardar la imagen en el directorio
+            guardarImagen(plato, archivoImagen);
+
             if (plato.getIngredientes() != null) {
                 for (PlatoIngrediente pi : plato.getIngredientes()) {
-                    
                     if (pi.getIngrediente() == null) {
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cada PlatoIngrediente debe especificar un Ingrediente.");
                     }
@@ -43,7 +78,6 @@ public class PlatoController {
                     }
                     
                     pi.setIngrediente(ingredienteRepo.getReferenceById(idIngrediente));
-                    
                     pi.setPlato(plato);
                 }
             }
@@ -60,8 +94,13 @@ public class PlatoController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarPlato(@PathVariable int id, @RequestBody Plato cambios) {
+    // HACEMOS LO MISMO PARA EL PUT
+    @PutMapping(value = "/{id}", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> actualizarPlato(
+            @PathVariable int id, 
+            @RequestPart("cambios") String cambiosJson, // <-- AHORA RECIBIMOS UN STRING
+            @RequestPart(value = "imagen", required = false) MultipartFile archivoImagen) {
+        
         Optional<Plato> opt = platoRepo.findById(id);
 
         if (opt.isEmpty()) {
@@ -69,39 +108,48 @@ public class PlatoController {
         }
 
         Plato plato = opt.get();
-        if (cambios.getNombre() != null)
-            plato.setNombre(cambios.getNombre());
-        if (cambios.getDescripcion() != null)
-            plato.setDescripcion(cambios.getDescripcion());
-        if (cambios.getPrecio() != 0) 
-            plato.setPrecio(cambios.getPrecio());
-        if (cambios.getImagen() != null)
-            plato.setImagen(cambios.getImagen());
-            
-        if (cambios.getIngredientes() != null) {
-            
-            for (PlatoIngrediente pi : cambios.getIngredientes()) {
-                if (pi.getIngrediente() == null || pi.getIngrediente().getIdIngrediente() == 0) {
-                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ingrediente con ID no válido en el payload de actualización.");
-                }
-                
-                int idIngrediente = pi.getIngrediente().getIdIngrediente();
-                
-                pi.setIngrediente(ingredienteRepo.getReferenceById(idIngrediente));
-            }
-            
-        plato.actualizarIngredientes(cambios.getIngredientes());        }
-
+        
         try {
+            // TRANSFORMAMOS EL STRING AL OBJETO PLATO
+            ObjectMapper objectMapper = new ObjectMapper();
+            Plato cambios = objectMapper.readValue(cambiosJson, Plato.class);
+
+            // 1. Actualizar imagen si viene una nueva
+            guardarImagen(plato, archivoImagen);
+            
+            // 2. Actualizar el resto de campos (Intacto)
+            if (cambios.getNombre() != null)
+                plato.setNombre(cambios.getNombre());
+            if (cambios.getDescripcion() != null)
+                plato.setDescripcion(cambios.getDescripcion());
+            if (cambios.getPrecio() != 0) 
+                plato.setPrecio(cambios.getPrecio());
+                
+            if (archivoImagen == null && cambios.getImagen() != null) {
+                plato.setImagen(cambios.getImagen());
+            }
+                
+            if (cambios.getIngredientes() != null) {
+                for (PlatoIngrediente pi : cambios.getIngredientes()) {
+                    if (pi.getIngrediente() == null || pi.getIngrediente().getIdIngrediente() == 0) {
+                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ingrediente con ID no válido en el payload de actualización.");
+                    }
+                    int idIngrediente = pi.getIngrediente().getIdIngrediente();
+                    pi.setIngrediente(ingredienteRepo.getReferenceById(idIngrediente));
+                }
+                plato.actualizarIngredientes(cambios.getIngredientes());        
+            }
+
             platoRepo.save(plato);
             return ResponseEntity.ok("Plato actualizado correctamente");
+            
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Error al actualizar el plato: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
-
+    // ... LOS GET Y DELETE SE QUEDAN IGUAL ...
     @GetMapping("")
     public ResponseEntity<?> listarPlatos() {
         return ResponseEntity.ok(platoRepo.findAll());
@@ -110,22 +158,14 @@ public class PlatoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerPlato(@PathVariable int id) {
         Optional<Plato> opt = platoRepo.findById(id);
-
-        if (opt.isEmpty()) {
-            return ResponseEntity.status(404).body("Plato no encontrado");
-        }
-
+        if (opt.isEmpty()) return ResponseEntity.status(404).body("Plato no encontrado");
         return ResponseEntity.ok(opt.get());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarPlato(@PathVariable int id) {
         Optional<Plato> opt = platoRepo.findById(id);
-
-        if (opt.isEmpty()) {
-            return ResponseEntity.status(404).body("Plato no encontrado");
-        }
-
+        if (opt.isEmpty()) return ResponseEntity.status(404).body("Plato no encontrado");
         platoRepo.deleteById(id);
         return ResponseEntity.ok("Plato eliminado correctamente");
     }

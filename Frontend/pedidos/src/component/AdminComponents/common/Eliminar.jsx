@@ -1,163 +1,107 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./eliminar.css"; 
+import { useEffect } from "react";
+import "./eliminar.css";
 import { IMAGENES, SERVER } from "../../../utils/assets";
+import { BlinkBlur } from "react-loading-indicators";
+import Header_admin from "../common/headerAdmin";
+
+import { useApi } from "../../../hook/useApi/useApi.jsx";
+import { obtenerEntidades, eliminarEntidad } from "../../../service/api.js";
 
 function Eliminar() {
-    const { tipo } = useParams();
-    const [datos, setDatos] = useState([]);
-    const [errorBackend, setErrorBackend] = useState(false);
+  const { tipo } = useParams();
+  
+  const { datos, loading, ejecutarFetch } = useApi();
 
-    const recursoSingular = tipo === "ingredientes" ? "ingrediente" : tipo === "platos" ? "plato" : "recurso";
+  const configDiccionario = {
+    ingredientes: {
+      idKey: "idIngrediente",
+      folder: "Ingredientes",
+      singular: "ingrediente",
+    },
+    platos: {
+      idKey: "idPlato",
+      folder: "Platos",
+      singular: "plato",
+    },
+  };
 
-    function fetchDatos() {
-        setErrorBackend(false); 
-        fetch(`${SERVER}/${tipo}`) 
-            .then((response) => {
-                if (!response.ok) throw new Error("Error en la respuesta del servidor (HTTP code)");
-                return response.json(); 
-            })
-            .then((data) => {
-                console.log("Datos recibidos:", data);
-                setDatos(data); 
-            })
-            .catch((error) => {
-                console.error("Error al obtener los datos:", error);
-                setErrorBackend(true); 
-            });
+  const config = configDiccionario[tipo];
+
+  useEffect(() => {
+    if (config) {
+      ejecutarFetch(() => obtenerEntidades(tipo));
     }
+  }, [tipo]);
 
-    useEffect(() => {
-        fetchDatos();
-    }, [tipo]); 
+  const borrarDato = async (id) => {
+    const confirmar = window.confirm(`¿Estás seguro de que quieres eliminar este ${config.singular}?`);
     
-    function borrarDato(id) {
-        
-        fetch(`${SERVER}/${tipo}/${id}`, {
-            method: "DELETE",
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(errorMessage => {
-                    throw new Error(errorMessage || `Error al eliminar ${recursoSingular} (Status: ${response.status})`);
-                });
-            }
-            
-            return response.text(); 
-        })
-        .then(successMessage => {
-            alert(successMessage.trim()); 
-            fetchDatos(); 
-        })
-        .catch(error => {
-            console.error("Error al borrar:", error);
-            alert(`Fallo en la operación: ${error.message}`); 
-        });
+    if (confirmar) {
+      try {
+        const mensaje = await eliminarEntidad(tipo, id);
+        alert(mensaje);
+        ejecutarFetch(() => obtenerEntidades(tipo));
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+      }
     }
+  };
 
-    if (errorBackend) {
-        return (
-            <div className="error-screen-center"> 
-                <div className="error-message-box">
-                    <span className="error-code">❌</span>
-                    <h1>¡Conexión Fallida!</h1>
-                    <p>No se pudo establecer conexión con el backend.</p>
-                    <button 
-                        className="reload-button-inline"
-                        onClick={() => window.location.reload()}
-                    >
-                        Intentar Recargar
-                    </button>
+  if (loading) {
+    return (
+      <>
+        <div style={{ minHeight: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <BlinkBlur color="#AC7E2F" size="large" text={`Buscando ${tipo}...`} textColor="#AC7E2F" />
+        </div>
+      </>
+    );
+  }
+
+  if (!config) return <p>Recurso no válido.</p>;
+
+  return (
+    <>
+      <Header_admin />
+      <div className="eliminar-page-container">
+        <div className="div_title">
+          <h1>Eliminar {tipo}</h1>
+        </div>
+
+        <div className="cards-container">
+          {datos && datos.map((dato) => {
+            const id = dato[config.idKey];
+            const imagen = dato.imagen ? dato.imagen : "default";
+
+            return (
+              <div className="card_delete" key={id}>
+                <div className="card_image">
+                  <img
+                    src={`/CrudImg/${config.folder}/${imagen}.png`}
+                    alt={dato.nombre}
+                  />
                 </div>
-            </div>
-        );
-    }
 
-    if (tipo === "ingredientes") {
-        const idKey = "idIngrediente";
-        const folder = "Ingredientes";
-
-        return (
-            <>
-                <div>
-                    <div className="div_title">
-                        <h1>{tipo}</h1>
-                    </div>
-                    <div className="cards-container">
-                        
-                        {datos.map((dato) => {
-                            const imagen = dato.imagen ? dato.imagen : "default";
-                            const id = dato[idKey];
-                            const nombre = dato.nombre;
-
-                            return (
-                                <div className="card_delete" key={id}>
-                                    <div className="card_image">
-                                        <img src={`/CrudImg/${folder}/${imagen}.png`} alt="imagenIngrediente" />
-                                    </div>
-
-                                    <div>
-                                        <h2>{nombre}</h2>
-                                    </div>
-
-                                    <div className="buttomDeleteDiv">
-                                        <button id="DeleteButtom" type="button" onClick={() => borrarDato(id)}>
-                                            <img src={IMAGENES.DeleteButton} alt="" />
-                                        </button>
-                                    </div>
-                                </div>
-                            );
-                        })}
-
-                    </div>
+                <div className="card_info_delete">
+                  <h2>{dato.nombre}</h2>
                 </div>
-            </>
-        );
-    } 
-    
-    else if (tipo === "platos") {
-        const idKey = "idPlato";
-        const folder = "Platos";
-        
-        return ( 
-            <>
-                <div>
-                    <div className="div_title">
-                        <h1>{tipo}</h1>
-                    </div>
-                    <div className="cards-container">
-                        
-                        {datos.map((dato) => {
-                            const imagen = dato.imagen ? dato.imagen : "default";
-                            const id = dato[idKey];
-                            const nombre = dato.nombre;
 
-                            return (
-                                <div className="card_delete" key={id}>
-                                    <div className="card_image">
-                                        <img src={`/CrudImg/${folder}/${imagen}.png`} alt="imagenPlato" /> 
-                                    </div>
-
-                                    <div>
-                                        <h2>{nombre}</h2>
-                                    </div>
-
-                                    <div className="buttomDeleteDiv">
-                                        <button id="DeleteButtom" type="button" onClick={() => borrarDato(id)}>
-                                            <img src="/deletebuttom.png" alt="" />
-                                        </button>
-                                    </div>
-                                </div>
-                            );
-                        })}
-
-                    </div>
+                <div className="buttomDeleteDiv">
+                  <button
+                    id="DeleteButtom"
+                    type="button"
+                    onClick={() => borrarDato(id)}
+                  >
+                    <img src={IMAGENES.DeleteButton} alt="Borrar" />
+                  </button>
                 </div>
-            </>
-        );
-    }
-    
-    return <div>Cargando datos o tipo de recurso no válido.</div>;
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Eliminar;
