@@ -3,7 +3,7 @@ import "./LoginPrueba.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hook/auth/authContext";
 
-function LoginPrueba() {
+export default function LoginPrueba() {
   const { login, register } = useAuth();
 
   const [username, setUsername] = useState("");
@@ -39,8 +39,7 @@ function LoginPrueba() {
     setError("");
     try {
       await register(regNombre, regEmail, regPass);
-      
-      alert("¡Usuario creado!");
+      alert("¡Usuario creado con éxito! Ahora inicia sesión.");
       
       setRegNombre("");
       setRegEmail("");
@@ -58,15 +57,8 @@ function LoginPrueba() {
 
     if (!container || !signUpButton || !signInButton) return;
 
-    const handleSignUpClick = () => {
-      container.classList.add("right-panel-active");
-      setError(""); 
-    };
-
-    const handleSignInClick = () => {
-      container.classList.remove("right-panel-active");
-      setError(""); 
-    };
+    const handleSignUpClick = () => { container.classList.add("right-panel-active"); setError(""); };
+    const handleSignInClick = () => { container.classList.remove("right-panel-active"); setError(""); };
 
     signUpButton.addEventListener("click", handleSignUpClick);
     signInButton.addEventListener("click", handleSignInClick);
@@ -84,59 +76,24 @@ function LoginPrueba() {
         <div className="form-container sign-up-container">
           <form onSubmit={handleRegisterSubmit}> 
             <h1>Crear una cuenta</h1>
-
-            <input 
-              type="text" 
-              placeholder="Nombre" 
-              value={regNombre}
-              onChange={(e) => setRegNombre(e.target.value)}
-              required
-            />
-            <input 
-              type="email" 
-              placeholder="Email" 
-              value={regEmail}
-              onChange={(e) => setRegEmail(e.target.value)}
-              required
-            />
-            <input 
-              type="password" 
-              placeholder="Password" 
-              value={regPass}
-              onChange={(e) => setRegPass(e.target.value)}
-              required
-            />
-
+            <input type="text" placeholder="Nombre" value={regNombre} onChange={(e) => setRegNombre(e.target.value)} required />
+            <input type="email" placeholder="Email" value={regEmail} onChange={(e) => setRegEmail(e.target.value)} required />
+            <input type="password" placeholder="Password" value={regPass} onChange={(e) => setRegPass(e.target.value)} required />
             <select value={genero} onChange={(e) => setGenero(e.target.value)}>
               <option value="Hombre">Hombre</option>
               <option value="Mujer">Mujer</option>
             </select>
-
             <button type="submit">Registrarse</button>
           </form>
         </div>
 
         <div className="form-container sign-in-container">
           <form onSubmit={handleLoginSubmit}>
-            <h1>Iniciar sesion</h1>
-            <input 
-              type="text" 
-              placeholder="Nombre de Usuario" 
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              required
-            />
-            <input 
-              type="password" 
-              placeholder="Contraseña" 
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-            />
-
+            <h1>Iniciar sesión</h1>
+            <input type="text" placeholder="Nombre de Usuario" onChange={(e) => setUsername(e.target.value)} value={username} required />
+            <input type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} value={password} required />
             {error && <p style={{ color: "crimson", textAlign: "center", marginTop: "10px" }}>{error}</p>}
-            
-            <button type="submit">Iniciar sesion</button>
+            <button type="submit">Iniciar sesión</button>
           </form>
         </div>
 
@@ -144,11 +101,11 @@ function LoginPrueba() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>¡Bienvenido!</h1>
-              <button className="ghost" ref={btnSignIn}>Iniciar sesion </button>
+              <button className="ghost" ref={btnSignIn}>Iniciar sesión</button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>!Hola, amigo!</h1>
-              <button className="ghost" ref={btnSignUp}>Registrarse </button>
+              <h1>¡Hola, amigo!</h1>
+              <button className="ghost" ref={btnSignUp}>Registrarse</button>
             </div>
           </div>
         </div>
@@ -157,5 +114,3 @@ function LoginPrueba() {
     </div>
   );
 }
-
-export default LoginPrueba;

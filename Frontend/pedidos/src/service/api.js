@@ -1,17 +1,45 @@
 import { SERVER } from "../utils/assets.js";
+import Cookies from "js-cookie"; 
+
+// ==========================================
+// FUNCIÓN DE AYUDA PARA EL TOKEN JWT 
+// ==========================================
+const getAuthHeaders = () => {
+  // Leemos la cookie donde guardamos el objeto del usuario
+  const rawCookie = Cookies.get("auth:user");
+  
+  if (rawCookie) {
+    try {
+      const userData = JSON.parse(rawCookie);
+      
+      if (userData && userData.token) {
+        return { "Authorization": `Bearer ${userData.token}` };
+      } 
+    } catch (e) {
+      console.error("Error al leer la cookie de autenticación:", e);
+    }
+  }
+  
+  // Si no hay usuario o hay error, enviamos cabeceras vacías
+  return {};
+};
 
 // ==========================================
 // FUNCIONES GENÉRICAS (GET y DELETE)
 // ==========================================
 
 export const obtenerEntidades = async (tipo) => {
-  const response = await fetch(`${SERVER}/${tipo}`);
+  const response = await fetch(`${SERVER}/${tipo}`, {
+    headers: getAuthHeaders(), 
+  });
   if (!response.ok) throw new Error(`Error al obtener datos de ${tipo}`);
   return response.json();
 };
 
 export const obtenerEntidadPorId = async (tipo, id) => {
-  const response = await fetch(`${SERVER}/${tipo}/${id}`);
+  const response = await fetch(`${SERVER}/${tipo}/${id}`, {
+    headers: getAuthHeaders(), 
+  });
   if (!response.ok) throw new Error(`Error al cargar el ${tipo}`);
   return response.json();
 };
@@ -19,6 +47,7 @@ export const obtenerEntidadPorId = async (tipo, id) => {
 export const eliminarEntidad = async (tipo, id) => {
   const response = await fetch(`${SERVER}/${tipo}/${id}`, {
     method: "DELETE",
+    headers: getAuthHeaders(), 
   });
   if (!response.ok) {
     const errorText = await response.text();
@@ -34,6 +63,7 @@ export const eliminarEntidad = async (tipo, id) => {
 export const crearPlatoAPI = async (formData) => {
   const response = await fetch(`${SERVER}/platos`, {
     method: "POST",
+    headers: getAuthHeaders(), // Ahora sí lleva el token desde la Cookie
     body: formData,
   });
   if (!response.ok) {
@@ -48,6 +78,7 @@ export const crearPlatoAPI = async (formData) => {
 export const actualizarPlatoAPI = async (id, formData) => {
   const response = await fetch(`${SERVER}/platos/${id}`, {
     method: "PUT",
+    headers: getAuthHeaders(), 
     body: formData,
   });
   if (!response.ok) {
@@ -64,19 +95,23 @@ export const actualizarPlatoAPI = async (id, formData) => {
 //  FUNCIONES ESPECÍFICAS para ingredientes
 // ==========================================
 
-
 export const crearIngredienteAPI = async (formData) => {
   const response = await fetch(`${SERVER}/ingredientes`, {
     method: "POST",
+    headers: getAuthHeaders(), 
     body: formData,
   });
-  if (!response.ok) throw new Error("Error al crear ingrediente");
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Error al crear ingrediente");
+  }
   return response.text();
 };
 
 export const actualizarIngredienteAPI = async (id, formData) => {
   const response = await fetch(`${SERVER}/ingredientes/${id}`, {
     method: "PUT",
+    headers: getAuthHeaders(), 
     body: formData,
   });
   if (!response.ok) throw new Error("Error al actualizar ingrediente");

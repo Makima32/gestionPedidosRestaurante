@@ -1,20 +1,19 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
-import { obtenerPlatos } from '../service/api.js';
+// 1. IMPORTANTE: Importamos la nueva función genérica
+import { obtenerEntidades } from '../service/api.js';
 
 describe('API - Peticiones al Servidor (Mocks)', () => {
 
   beforeEach(() => {
-    // Reinicia los contadores de llamadas
     vi.clearAllMocks();
   });
 
-  // Limpiamos el mocks 
+  // Limpiamos los mocks 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
   // Omar
-
   it('Debería obtener los platos correctamente cuando el servidor responde OK', async () => {
     const mockPlatos = [
       { idPlato: 1, nombre: 'Margarita', precio: 10 },
@@ -27,7 +26,7 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
       json: async () => mockPlatos,
     });
 
-    const resultado = await obtenerPlatos();
+    const resultado = await obtenerEntidades("platos");
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(resultado).toEqual(mockPlatos);
@@ -39,16 +38,15 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
       status: 500,
     });
 
-    await expect(obtenerPlatos()).rejects.toThrow("Error al obtener datos");
+    await expect(obtenerEntidades("platos")).rejects.toThrow("Error al obtener datos");
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
-
-  //Santiago
+  // Santiago
   it('Debería fallar si no hay red o el backend está apagado', async () => {
     vi.spyOn(global, 'fetch').mockRejectedValue(new Error("Failed to fetch"));
 
-    await expect(obtenerPlatos()).rejects.toThrow("Failed to fetch");
+    await expect(obtenerEntidades("platos")).rejects.toThrow("Failed to fetch");
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 });

@@ -10,7 +10,7 @@ import { obtenerEntidades, eliminarEntidad } from "../../../service/api.js";
 
 function Eliminar() {
   const { tipo } = useParams();
-  
+
   const { datos, loading, ejecutarFetch } = useApi();
 
   const configDiccionario = {
@@ -35,8 +35,10 @@ function Eliminar() {
   }, [tipo]);
 
   const borrarDato = async (id) => {
-    const confirmar = window.confirm(`¿Estás seguro de que quieres eliminar este ${config.singular}?`);
-    
+    const confirmar = window.confirm(
+      `¿Estás seguro de que quieres eliminar este ${config.singular}?`,
+    );
+
     if (confirmar) {
       try {
         const mensaje = await eliminarEntidad(tipo, id);
@@ -51,8 +53,20 @@ function Eliminar() {
   if (loading) {
     return (
       <>
-        <div style={{ minHeight: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <BlinkBlur color="#AC7E2F" size="large" text={`Buscando ${tipo}...`} textColor="#AC7E2F" />
+        <div
+          style={{
+            minHeight: "80vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <BlinkBlur
+            color="#AC7E2F"
+            size="large"
+            text={`Buscando ${tipo}...`}
+            textColor="#AC7E2F"
+          />
         </div>
       </>
     );
@@ -68,35 +82,36 @@ function Eliminar() {
         </div>
 
         <div className="cards-container">
-          {datos && datos.map((dato) => {
-            const id = dato[config.idKey];
-            const imagen = dato.imagen ? dato.imagen : "default";
+          {datos &&
+            datos.map((dato) => {
+              const id = dato[config.idKey];
+              const imagen = dato.imagen ? dato.imagen : "default";
 
-            return (
-              <div className="card_delete" key={id}>
-                <div className="card_image">
-                  <img
-                    src={`/CrudImg/${config.folder}/${imagen}.png`}
-                    alt={dato.nombre}
-                  />
-                </div>
+              return (
+                <div className="card_delete" key={id}>
+                  <div className="card_image">
+                    <img
+                      src={`/CrudImg/${config.folder}/${imagen}.png`}
+                      alt={dato.nombre}
+                    />
+                  </div>
 
-                <div className="card_info_delete">
-                  <h2>{dato.nombre}</h2>
-                </div>
+                  <div className="card_info_delete">
+                    <h2>{dato.nombre}</h2>
+                  </div>
 
-                <div className="buttomDeleteDiv">
-                  <button
-                    id="DeleteButtom"
-                    type="button"
-                    onClick={() => borrarDato(id)}
-                  >
-                    <img src={IMAGENES.DeleteButton} alt="Borrar" />
-                  </button>
+                  <div className="buttomDeleteDiv">
+                    <button
+                      id="DeleteButtom"
+                      type="button"
+                      onClick={() => borrarDato(id)}
+                    >
+                      <img src={IMAGENES.DeleteButton} alt="Borrar" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </>
