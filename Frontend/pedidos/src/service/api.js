@@ -29,7 +29,8 @@ const getAuthHeaders = () => {
 // ==========================================
 
 export const obtenerEntidades = async (tipo) => {
-  const response = await fetch(`${SERVER}/${tipo}`, {
+  const endpoint = tipo === "clientes" ? "usuarios" : tipo;
+  const response = await fetch(`${SERVER}/${endpoint}`, {
     headers: getAuthHeaders(), 
   });
   if (!response.ok) throw new Error(`Error al obtener datos de ${tipo}`);
@@ -37,7 +38,8 @@ export const obtenerEntidades = async (tipo) => {
 };
 
 export const obtenerEntidadPorId = async (tipo, id) => {
-  const response = await fetch(`${SERVER}/${tipo}/${id}`, {
+  const endpoint = tipo === "clientes" ? "usuarios" : tipo;
+  const response = await fetch(`${SERVER}/${endpoint}/${id}`, {
     headers: getAuthHeaders(), 
   });
   if (!response.ok) throw new Error(`Error al cargar el ${tipo}`);
@@ -45,7 +47,8 @@ export const obtenerEntidadPorId = async (tipo, id) => {
 };
 
 export const eliminarEntidad = async (tipo, id) => {
-  const response = await fetch(`${SERVER}/${tipo}/${id}`, {
+  const endpoint = tipo === "clientes" ? "usuarios" : tipo;
+  const response = await fetch(`${SERVER}/${endpoint}/${id}`, {
     method: "DELETE",
     headers: getAuthHeaders(), 
   });
@@ -115,5 +118,35 @@ export const actualizarIngredienteAPI = async (id, formData) => {
     body: formData,
   });
   if (!response.ok) throw new Error("Error al actualizar ingrediente");
+  return response.text();
+};
+
+// ==========================================
+//  FUNCIONES ESPECÍFICAS para usuarios
+// ==========================================
+
+export const crearUsuarioAPI = async (formData) => {
+  const response = await fetch(`${SERVER}/usuarios`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: formData,
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Error al crear usuario");
+  }
+  return response.text();
+};
+
+export const actualizarUsuarioAPI = async (id, formData) => {
+  const response = await fetch(`${SERVER}/usuarios/${id}`, {
+    method: "PUT",
+    headers: getAuthHeaders(),
+    body: formData,
+  });
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Error al actualizar usuario");
+  }
   return response.text();
 };

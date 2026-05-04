@@ -23,6 +23,16 @@ function Visualizar() {
       folder: "Platos",
       titulo: "Platos en Menú",
     },
+    usuarios: {
+      idKey: "idUsuario",
+      folder: "Usuarios",
+      titulo: "Usuarios Registrados",
+    },
+    clientes: {
+      idKey: "idUsuario",
+      folder: "Usuarios",
+      titulo: "Listado de Clientes",
+    },
   };
 
   const config = configDiccionario[tipo];
@@ -82,6 +92,17 @@ function Visualizar() {
                     <p>
                       <strong>Descripción:</strong> {dato.descripcion}
                     </p>
+
+                    {tipo === "usuarios" || tipo === "clientes" && (
+                      <>
+                        <p>
+                          <strong>Correo:</strong> {dato.correo}
+                        </p>
+                        <p>
+                          <strong>Rol:</strong> {dato.rol}
+                        </p>
+                      </>
+                    )}
 
                     {tipo === "ingredientes" && (
                       <>

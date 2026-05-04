@@ -23,13 +23,11 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    // Obtener la clave para firmar
     private SecretKey getSigningKey() {
         byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // Generar el Token tras loguearse
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -39,7 +37,6 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Validar si el token es correcto
     public Boolean validateToken(String token, String username) {
         final String usernameFromToken = extractUsername(token);
         return (usernameFromToken.equals(username) && !isTokenExpired(token));

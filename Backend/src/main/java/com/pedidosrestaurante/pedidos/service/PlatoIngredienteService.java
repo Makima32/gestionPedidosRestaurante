@@ -7,7 +7,7 @@ import com.pedidosrestaurante.pedidos.repository.IngredienteRepository;
 import com.pedidosrestaurante.pedidos.repository.PlatoIngredienteRepository;
 import com.pedidosrestaurante.pedidos.repository.PlatoRepository;
 
-import jakarta.transaction.Transactional; // Importación para el manejo de transacciones
+import jakarta.transaction.Transactional; 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

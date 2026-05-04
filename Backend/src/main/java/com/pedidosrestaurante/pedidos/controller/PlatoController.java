@@ -94,7 +94,6 @@ public class PlatoController {
     }
 
 
-    // HACEMOS LO MISMO PARA EL PUT
     @PutMapping(value = "/{id}", consumes = {"multipart/form-data"})
     public ResponseEntity<?> actualizarPlato(
             @PathVariable int id, 
@@ -110,14 +109,11 @@ public class PlatoController {
         Plato plato = opt.get();
         
         try {
-            // TRANSFORMAMOS EL STRING AL OBJETO PLATO
             ObjectMapper objectMapper = new ObjectMapper();
             Plato cambios = objectMapper.readValue(cambiosJson, Plato.class);
 
-            // 1. Actualizar imagen si viene una nueva
             guardarImagen(plato, archivoImagen);
             
-            // 2. Actualizar el resto de campos (Intacto)
             if (cambios.getNombre() != null)
                 plato.setNombre(cambios.getNombre());
             if (cambios.getDescripcion() != null)
@@ -149,7 +145,6 @@ public class PlatoController {
         }
     }
     
-    // ... LOS GET Y DELETE SE QUEDAN IGUAL ...
     @GetMapping("")
     public ResponseEntity<?> listarPlatos() {
         return ResponseEntity.ok(platoRepo.findAll());

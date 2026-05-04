@@ -12,7 +12,9 @@ import VisualizarPage from "./pages/admin/visualizar";
 import EliminarPage from "./pages/admin/Eliminar";
 import AboutUsPage from "./pages/AboutUs";
 import AdminPlatoPage from "./pages/admin/adminPlatos";
+import AdminUsuariosPage from "./pages/admin/adminUsuarios";
 import AgregarIngredientePage from "./pages/admin/agregarIngredientePage";
+import AgregarUsuarioPage from "./pages/admin/agregarUsuarioPage";
 import CartaPage from "./pages/carta";
 import LoginPage from "./pages/Login";
 import ProtectedRoute from "./ProtectedRoute";
@@ -20,6 +22,7 @@ import AdminMenuPage from "./pages/admin/adminMenu";
 import PageNotFound from "./pages/PageNotFound";
 import ModificarIngredientePage from "./pages/admin/modificarIngrediente";
 import EditarIngrediente from "./component/AdminComponents/Ingredientes/EditarIngrediente";
+import EditarUsuario from "./component/AdminComponents/Usuarios/EditarUsuario";
 import AgregarPlatoPage from "./pages/admin/AgregarPlatoPage";
 import ModificarPlatoPage from "./pages/admin/modificar/ModificarPlatosPage";
 import ModificarPlato from "./pages/admin/modificarPlato";
@@ -47,7 +50,8 @@ function AppContent() {
     location.pathname.startsWith('/eliminar') || 
     location.pathname.startsWith('/anadir') || 
     location.pathname.startsWith('/modificar') ||
-    location.pathname.startsWith('/editar-ingrediente');
+    location.pathname.startsWith('/editar-ingrediente') ||
+    location.pathname.startsWith('/editar-usuario');
 
   
   useEffect(() => {
@@ -79,15 +83,18 @@ function AppContent() {
         <Route path="/adminPlatos" element={<AdminPlatoPage />} />
         <Route path="/adminPedidos" element={<AdminPedidosPage />} />
         <Route path="/adminClientes" element={<AdminclientesPage />} />
+        <Route path="/adminUsuarios" element={<AdminUsuariosPage />} />
         <Route path="/adminMesas" element={<AdminMesasPage />} />
         <Route path="/adminReservas" element={<AdminReservasPage />} />
         <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
         <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
+        <Route path="/anadir/usuarios" element={<AgregarUsuarioPage />} />
         <Route path="/adminMenu" element={<AdminMenuPage />} />
         <Route path="/anadir/platos" element={<AgregarPlatoPage />} />
         <Route path="/modificar/:tipo" element={<ModificarIngredientePage />} />
         <Route path="/editar-ingrediente/:id" element={<EditarIngrediente />} />
+        <Route path="/editar-usuario/:id" element={<EditarUsuario />} />
         <Route path="/modificar/platos/" element={<ModificarPlatoPage />} />
         <Route path="/modificar/plato/:id" element={<ModificarPlato />} />
       </Route>

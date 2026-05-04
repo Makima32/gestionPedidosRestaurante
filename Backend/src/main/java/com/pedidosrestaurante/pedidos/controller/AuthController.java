@@ -47,15 +47,13 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.get("username"));
         final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-        // Buscamos al usuario en la base de datos para obtener su rol real
         Optional<Usuario> usuarioOpt = usuarioRepository.findByNombre(userDetails.getUsername());
 
         Map<String, String> response = new HashMap<>();
         response.put("jwt", jwt);
         response.put("username", userDetails.getUsername());
 
-        // Si el usuario existe, mandamos su rol a React (si no, mandamos "user" por
-        // defecto)
+    
         if (usuarioOpt.isPresent()) {
             response.put("rol", usuarioOpt.get().getRol());
         } else {
@@ -68,15 +66,12 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Usuario nuevoUsuario) {
 
-        // Comprobar si el usuario ya existe
         if (usuarioRepository.findByNombre(nuevoUsuario.getNombre()).isPresent()) {
             return ResponseEntity.badRequest().body(Map.of("error", "El nombre de usuario ya está en uso"));
         }
 
-        // Encriptar la contraseña
         nuevoUsuario.setPassword(passwordEncoder.encode(nuevoUsuario.getPassword()));
 
-        // 3. Asignar rol por defecto 
         if (nuevoUsuario.getRol() == null || nuevoUsuario.getRol().isEmpty()) {
             nuevoUsuario.setRol("user");
         }

@@ -21,14 +21,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        // Buscamos tu Usuario en la base de datos
         Usuario usuario = usuarioRepository.findByNombre(username)
                 .orElseThrow(() -> new UsernameNotFoundException("El usuario " + username + " no existe en la base de datos"));
 
-        // Extraemos su rol y le añadimos el prefijo "ROLE_" 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toUpperCase());
 
-        // Convertimos tu "Usuario" al "User" oficial que entiende Spring Security
         return new User(
                 usuario.getNombre(), 
                 usuario.getPassword(), 

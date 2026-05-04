@@ -28,8 +28,7 @@ public class Plato {
 
     @OneToMany(
         mappedBy = "plato", 
-        // Permite guardar/actualizar/eliminar PlatoIngrediente cuando se opera sobre Plato
-        cascade = CascadeType.ALL,
+            cascade = CascadeType.ALL,
         orphanRemoval = true 
     )
     @JsonIgnoreProperties("plato") 

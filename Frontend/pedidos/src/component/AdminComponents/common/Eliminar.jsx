@@ -24,6 +24,16 @@ function Eliminar() {
       folder: "Platos",
       singular: "plato",
     },
+    usuarios: {
+      idKey: "idUsuario",
+      folder: "Usuarios",
+      singular: "usuario",
+    },
+    clientes: {
+      idKey: "idUsuario",
+      folder: "Usuarios",
+      singular: "cliente",
+    },
   };
 
   const config = configDiccionario[tipo];

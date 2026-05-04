@@ -35,7 +35,6 @@ public class IngredienteController {
                 throw new Exception("Solo se permiten archivos .png");
             }
             
-            // Guardamos el nombre sin extensión en la base de datos
             String nombreSinExtension = nombreOriginal.substring(0, nombreOriginal.lastIndexOf('.'));
             ing.setImagen(nombreSinExtension);
 
@@ -78,8 +77,7 @@ public class IngredienteController {
             Ingrediente cambios = mapper.readValue(cambiosJson, Ingrediente.class);
             Ingrediente ing = opt.get();
 
-            guardarImagen(ing, archivoImagen); // Si hay imagen nueva, la guarda
-
+            guardarImagen(ing, archivoImagen);
             if (cambios.getNombre() != null) ing.setNombre(cambios.getNombre());
             if (cambios.getDescripcion() != null) ing.setDescripcion(cambios.getDescripcion());
             if (cambios.getAlergenos() != null) ing.setAlergenos(cambios.getAlergenos());
@@ -87,7 +85,6 @@ public class IngredienteController {
             ing.setStock(cambios.getStock()); 
             ing.setEsVegano(cambios.isEsVegano());
             
-            // Si no se subió archivo pero se mandó un nombre de imagen por texto
             if (archivoImagen == null && cambios.getImagen() != null) ing.setImagen(cambios.getImagen());
 
             repo.save(ing);

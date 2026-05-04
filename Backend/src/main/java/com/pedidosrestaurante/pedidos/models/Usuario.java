@@ -33,6 +33,10 @@ public class Usuario {
     @NotBlank(message = "El correo no puede estar vacío")
     @Column(name="correo")
     private String correo;
+
+    @Column(name="imagen")
+    private String imagen;
+
     public Usuario(){}
 
    
@@ -40,11 +44,13 @@ public class Usuario {
     public Usuario(@NotBlank(message = "El nombre no puede estar vacío") String nombre,
             @NotBlank(message = "La contraseña no puede estar vacía") String password,
             @NotBlank(message = "El rol no puede estar vacío") String rol,
-            @NotBlank(message = "El correo no puede estar vacío") String correo) {
+            @NotBlank(message = "El correo no puede estar vacío") String correo,
+            String imagen) {
         this.nombre = nombre;
         this.password = password;
         this.rol = rol;
         this.correo = correo;
+        this.imagen = imagen;
     }
 
 
@@ -83,6 +89,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
 
