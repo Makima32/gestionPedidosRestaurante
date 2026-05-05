@@ -14,7 +14,8 @@ function EditarUsuario() {
     nombre: "",
     correo: "",
     rol: "user",
-    password: "", // Normalmente no se mostraría o se trataría aparte
+    direccion: "", 
+    password: "", 
     imagenVieja: "", 
   });
 
@@ -32,7 +33,8 @@ function EditarUsuario() {
           nombre: data.nombre,
           correo: data.correo,
           rol: data.rol,
-          password: "", // No queremos mostrar la password actual por seguridad
+          direccion: data.direccion || "", 
+          password: "", 
           imagenVieja: data.imagen || "",
         });
       } catch (error) {
@@ -58,7 +60,7 @@ function EditarUsuario() {
     const file = e.target.files[0];
     if (file) {
       if (file.type !== "image/png") {
-        alert("⛔ Solo se permiten imágenes en formato .PNG");
+        alert(" Solo se permiten imágenes en formato .PNG");
         e.target.value = "";
         setArchivoImagen(null);
         return;
@@ -75,10 +77,10 @@ function EditarUsuario() {
       nombre: usuario.nombre,
       correo: usuario.correo,
       rol: usuario.rol,
+      direccion: usuario.direccion, 
       imagen: archivoImagen ? null : usuario.imagenVieja
     };
     
-    // Solo enviamos la password si se ha escrito algo nuevo
     if (usuario.password) {
       usuarioFinal.password = usuario.password;
     }
@@ -146,6 +148,15 @@ function EditarUsuario() {
               <option value="user">Usuario (user)</option>
               <option value="admin">Administrador (admin)</option>
             </select>
+
+            <label htmlFor="direccion">Dirección</label>
+            <input
+              type="text"
+              name="direccion"
+              value={usuario.direccion}
+              onChange={handleInputChange}
+              placeholder="Calle, número, piso..."
+            />
             
             <label htmlFor="password">Contraseña (dejar en blanco para no cambiar)</label>
             <input

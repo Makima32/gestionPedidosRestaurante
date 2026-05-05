@@ -32,22 +32,28 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
                 .csrf(csrf -> csrf.disable())
-
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/platos", "/platos/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/ingredientes", "/ingredientes/**").permitAll()
-
-                        .requestMatchers("/gemini/chat").permitAll()
                         .requestMatchers("/auth/**").permitAll()
-                    
-                        .anyRequest().authenticated())
+                        .requestMatchers("/gemini/chat").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/platos").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/platos/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/platos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/platos/listar").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/ingredientes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/ingredientes/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/ingredientes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/ingredientes/listar").permitAll()
+.requestMatchers("/usuarios", "/usuarios/**").authenticated()
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -56,15 +62,24 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "http://10.0.2.2:8080"
+        ));
+
+        configuration.setAllowedMethods(Arrays.asList(
+                "GET", "POST", "PUT", "DELETE", "OPTIONS"
+        ));
 
         configuration.setAllowedHeaders(Arrays.asList("*"));
-
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 

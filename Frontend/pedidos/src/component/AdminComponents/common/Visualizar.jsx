@@ -89,17 +89,24 @@ function Visualizar() {
 
                   <div className="card_content_div">
                     <h2>{dato.nombre}</h2>
-                    <p>
-                      <strong>Descripción:</strong> {dato.descripcion}
-                    </p>
+                    
+                    {/* SOLO muestra descripción si NO es usuario o cliente */}
+                    {tipo !== "usuarios" && tipo !== "clientes" && (
+                      <p>
+                        <strong>Descripción:</strong> {dato.descripcion}
+                      </p>
+                    )}
 
-                    {tipo === "usuarios" || tipo === "clientes" && (
+                    {(tipo === "usuarios" || tipo === "clientes") && (
                       <>
                         <p>
                           <strong>Correo:</strong> {dato.correo}
                         </p>
                         <p>
                           <strong>Rol:</strong> {dato.rol}
+                        </p>
+                        <p>
+                          <strong>Dirección:</strong> {dato.direccion || "No especificada"}
                         </p>
                       </>
                     )}

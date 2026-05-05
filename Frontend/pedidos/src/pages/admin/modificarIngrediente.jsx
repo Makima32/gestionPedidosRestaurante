@@ -9,7 +9,7 @@ function ModificarIngredientePage() {
     return (
         <>
             <Header_admin/>
-            {tipo === "usuarios" ? (
+            {tipo === "usuarios" || tipo === "clientes" ? (
                 <ListaUsuarios modo="modificar" />
             ) : (
                 <ListaIngredientesModificar />

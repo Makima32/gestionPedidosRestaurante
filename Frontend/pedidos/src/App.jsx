@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-// PAGINAS
 import Home from "./pages/home";
 import AdminIngredientePage from "./pages/admin/adminIngrediente";
 import AdminPedidosPage from "./pages/admin/AdminPedidos";
@@ -29,7 +28,6 @@ import ModificarPlato from "./pages/admin/modificarPlato";
 import PedidosPage from "./pages/pedidosPage";
 import FinalizarPedidoPage from "./pages/FinalizarPedidoPage";
 
-// COMPONENTES DE LAYOUT Y COMUNES
 import Layout from "./component/layout/layout";
 import ScrollToTop from "./utils/ScrollTop";
 import ErrorConexion from "./component/Common/ErrorConexion/ErrorConexion";
@@ -37,8 +35,8 @@ import Header_home from "./component/layout/header/headerHome";
 import Header_admin from "./component/AdminComponents/common/headerAdmin"; 
 import FooterWeb from "./component/layout/Footer/Footer";
 
-// CONTEXTO
 import { ConnectivityProvider, useConnectivity } from "./hook/Conectividad/ConnectivityContext";
+import ProfileInfoPage from "./pages/ProfileInfoPage";
 
 function AppContent() {
   const { isOnline, retry } = useConnectivity();
@@ -74,10 +72,9 @@ function AppContent() {
     );
   }
 
-  // Si hay conexión, renderizamos las rutas normales
   return (
     <Routes>
-      {/* Grupo de rutas de Administración */}
+      {/*Administración */}
       <Route element={<ProtectedRoute />}>
         <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
         <Route path="/adminPlatos" element={<AdminPlatoPage />} />
@@ -90,6 +87,7 @@ function AppContent() {
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
         <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
         <Route path="/anadir/usuarios" element={<AgregarUsuarioPage />} />
+        <Route path="/anadir/clientes" element={<AgregarUsuarioPage />} />
         <Route path="/adminMenu" element={<AdminMenuPage />} />
         <Route path="/anadir/platos" element={<AgregarPlatoPage />} />
         <Route path="/modificar/:tipo" element={<ModificarIngredientePage />} />
@@ -105,6 +103,8 @@ function AppContent() {
         <Route path="/carta" element={<CartaPage />} />
         <Route path="/pedidos" element={<PedidosPage />} />
         <Route path="/finalizarPedido" element={<FinalizarPedidoPage />} />
+        <Route path="/perfil" element={<ProfileInfoPage />} />
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<PageNotFound />} /> 
       </Route>

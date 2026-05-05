@@ -12,14 +12,12 @@ export const useApi = () => {
     try {
       const resultado = await funcionApi(); 
       
-      //Si todo va bien, guarda los datos y quita el loading
       setDatos(resultado);
       setLoading(false);
 
     } catch (error) {
       console.error("Error capturado por useApi:", error);
       
-      // Si falla esperamos 3 s y mandamos pantalla de error
       setTimeout(() => {
         setLoading(false);
         setConnectionError(); 
@@ -27,6 +25,5 @@ export const useApi = () => {
     }
   };
 
-  // Devolvemos las 3 herramientas para que las use el componente
   return { datos, loading, ejecutarFetch };
 };

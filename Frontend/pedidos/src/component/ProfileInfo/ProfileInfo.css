@@ -1,0 +1,249 @@
+.profile_page {
+    margin-top: 15vh;
+  padding: 2rem 5%;
+      min-height: 85vh;
+}
+
+.profile_header_nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile_header_nav h2 {
+  color: #333;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.btn_volver {
+  background: none;
+  border: none;
+  color: #AC7E2F;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+  padding: 0;
+}
+
+.btn_volver:hover {
+  transform: translateX(-5px);
+}
+
+/* El Dashboard principal */
+.profile_dashboard {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start; /* Para que las tarjetas no se estiren al mismo alto si no quieren */
+}
+
+/* --- TARJETA IZQUIERDA (LECTURA) --- */
+.profile_view_card {
+  flex: 1; /* Ocupa un tercio del espacio aprox */
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  text-align: center;
+  position: sticky;
+  top: 2rem; /* Se queda pegada al hacer scroll */
+}
+
+.profile_view_image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #F2ECE1;
+  margin-bottom: 1rem;
+}
+
+.profile_view_header h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.profile_badge {
+  background-color: #AC7E2F;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.profile_view_data {
+  margin-top: 2rem;
+  text-align: left;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
+
+.data_item {
+  margin-bottom: 1.2rem;
+}
+
+.data_item strong {
+  display: block;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.data_item p {
+  margin: 0;
+  color: #222;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* --- TARJETA DERECHA (EDICIÓN) --- */
+.profile_edit_card {
+  flex: 2; /* Ocupa el doble que la izquierda */
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+}
+
+.profile_edit_card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.edit_subtitle {
+  color: #888;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.profile_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form_row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.input_group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input_group.full_width {
+  flex: none;
+  width: 100%;
+}
+
+.input_group label {
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.input_group input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background-color: #fafafa;
+}
+
+.input_group input:focus {
+  outline: none;
+  border-color: #AC7E2F;
+  background-color: white;
+}
+
+.file_input {
+  padding: 8px !important;
+  background-color: white !important;
+}
+
+.form_divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 1rem 0;
+}
+
+.profile_edit_card h4 {
+  margin: 0;
+  color: #AC7E2F;
+  font-size: 1.2rem;
+}
+
+.btn_update {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+  align-self: flex-end; /* Botón a la derecha */
+  min-width: 200px;
+}
+
+.btn_update:hover:not(:disabled) {
+  background-color: #AC7E2F;
+}
+
+.btn_update:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.profile_mensaje {
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.profile_mensaje.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border-left: 4px solid #d32f2f;
+}
+
+.profile_mensaje.exito {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+}
+
+/* RESPONSIVE PARA MÓVILES */
+@media (max-width: 768px) {
+  .profile_dashboard {
+    flex-direction: column;
+  }
+  
+  .profile_view_card, .profile_edit_card {
+    width: 100%;
+    position: static;
+  }
+
+  .form_row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .btn_update {
+    width: 100%;
+  }
+}

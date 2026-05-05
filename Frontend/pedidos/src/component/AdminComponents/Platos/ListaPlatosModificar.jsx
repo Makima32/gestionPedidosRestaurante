@@ -6,6 +6,7 @@ import { useApi } from "../../../hook/useApi/useApi.jsx";
 import { obtenerEntidades } from "../../../service/api.js";
 
 import "../common/Formularios.css";
+import { IMAGENES } from "../../../utils/assets.js";
 
 function ModificarPlato() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ function ModificarPlato() {
     <>
       <div>
         <div className="div_title">
-          <h1>Editar Platos</h1>
+          <h1>Platos</h1>
         </div>
 
         <div className="cards-container">
@@ -95,7 +96,7 @@ function ModificarPlato() {
                       id="editbutton"
                       onClick={() => handleEdit(plato.idPlato)}
                     >
-                      <img src="/editbutton.png" alt="Modificar" />
+                  <img src={IMAGENES.EditButton} alt="Modificar" />
                     </button>
                   </div>
                 </div>

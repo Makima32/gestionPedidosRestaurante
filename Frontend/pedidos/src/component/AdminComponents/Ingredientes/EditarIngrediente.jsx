@@ -70,7 +70,7 @@ function EditarIngrediente() {
     const file = e.target.files[0];
     if (file) {
       if (file.type !== "image/png") {
-        alert("⛔ Solo se permiten imágenes en formato .PNG");
+        alert(" Solo se permiten imágenes en formato .PNG");
         e.target.value = "";
         setArchivoImagen(null);
         return;

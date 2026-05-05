@@ -35,7 +35,7 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping("/login")
+ @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody Map<String, String> authRequest) {
         try {
             authenticationManager.authenticate(
@@ -49,20 +49,23 @@ public class AuthController {
 
         Optional<Usuario> usuarioOpt = usuarioRepository.findByNombre(userDetails.getUsername());
 
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("jwt", jwt);
         response.put("username", userDetails.getUsername());
 
-    
         if (usuarioOpt.isPresent()) {
-            response.put("rol", usuarioOpt.get().getRol());
+            Usuario user = usuarioOpt.get();
+            response.put("idUsuario", user.getIdUsuario());
+            response.put("rol", user.getRol());
+            response.put("direccion", user.getDireccion());
+            response.put("correo", user.getCorreo()); 
+            response.put("imagen", user.getImagen()); 
         } else {
             response.put("rol", "user");
         }
 
         return ResponseEntity.ok(response);
     }
-
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Usuario nuevoUsuario) {
 

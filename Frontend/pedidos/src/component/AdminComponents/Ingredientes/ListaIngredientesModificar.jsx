@@ -31,23 +31,6 @@ function ModificarIngrediente() {
     navigate(`/editar-ingrediente/${idIngrediente}`);
   };
 
-  if (errorBackend) {
-    return (
-      <div className="error-screen-center">
-        <div className="error-message-box">
-          <span className="error-code">❌</span>
-          <h1>¡Conexión Fallida!</h1>
-          <p>No se pudo establecer conexión con el backend.</p>
-          <button
-            className="reload-button-inline"
-            onClick={() => window.location.reload()}
-          >
-            Intentar Recargar
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   if (loading) {
     return (

@@ -9,51 +9,54 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_usuario")
+    @Column(name = "id_usuario")
     private int idUsuario;
 
     @NotBlank(message = "El nombre no puede estar vacío")
-    @Column(name="nombre", unique = true)
+    @Column(name = "nombre", unique = true)
     private String nombre;
 
     @NotBlank(message = "La contraseña no puede estar vacía")
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
-    
 
-    @Column(name="rol", columnDefinition = "VARCHAR(255) DEFAULT 'user'")
+    @Column(name = "rol", columnDefinition = "VARCHAR(255) DEFAULT 'user'")
     private String rol = "user";
 
-
     @NotBlank(message = "El correo no puede estar vacío")
-    @Column(name="correo")
+    @Column(name = "correo")
     private String correo;
 
-    @Column(name="imagen")
+    @Column(name = "imagen")
     private String imagen;
 
-    public Usuario(){}
+    @Column(name = "direccion")
+    private String direccion;
 
-   
-    
-    public Usuario(@NotBlank(message = "El nombre no puede estar vacío") String nombre,
-            @NotBlank(message = "La contraseña no puede estar vacía") String password,
-            @NotBlank(message = "El rol no puede estar vacío") String rol,
-            @NotBlank(message = "El correo no puede estar vacío") String correo,
-            String imagen) {
+    public Usuario() {
+    }
+
+    public Usuario(String nombre, String password, String rol, String correo, String imagen, String direccion) {
         this.nombre = nombre;
         this.password = password;
         this.rol = rol;
         this.correo = correo;
         this.imagen = imagen;
+        this.direccion = direccion;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public String getNombre() {
         return nombre;
@@ -79,13 +82,9 @@ public class Usuario {
         this.rol = rol;
     }
 
-
-
     public String getCorreo() {
         return correo;
     }
-
-
 
     public void setCorreo(String correo) {
         this.correo = correo;
@@ -99,7 +98,11 @@ public class Usuario {
         this.imagen = imagen;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
 
-    
-    
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 }

@@ -29,15 +29,24 @@ function ListaUsuarios({ modo }) {
     cargarDatos();
   }, []);
 
-  const handleEdit = (idUsuario) => {
-    navigate(`/editar-usuario/${idUsuario}`);
+  const handleEdit = (idTarget) => {
+    if (!idTarget) {
+      alert("Error: No se ha detectado el ID del usuario.");
+      return;
+    }
+    navigate(`/editar-usuario/${idTarget}`);
   };
 
-  const handleDelete = async (idUsuario, nombre) => {
+  const handleDelete = async (idTarget, nombre) => {
+    if (!idTarget) {
+      alert("Error: No se ha detectado el ID del usuario.");
+      return;
+    }
+
     if (window.confirm(`¿Estás seguro de que deseas eliminar al usuario "${nombre}"?`)) {
       setEliminando(true);
       try {
-        await eliminarEntidad("usuarios", idUsuario);
+        await eliminarEntidad("usuarios", idTarget);
         alert("Usuario eliminado correctamente.");
         cargarDatos();
       } catch (error) {
@@ -48,32 +57,10 @@ function ListaUsuarios({ modo }) {
     }
   };
 
-  if (errorBackend) {
-    return (
-      <div className="error-screen-center">
-        <div className="error-message-box">
-          <span className="error-code">❌</span>
-          <h1>¡Conexión Fallida!</h1>
-          <p>No se pudo establecer conexión con el backend.</p>
-          <button
-            className="reload-button-inline"
-            onClick={() => window.location.reload()}
-          >
-            Intentar Recargar
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   if (loading || eliminando) {
     return (
-      <div style={{ 
-        minHeight: '80vh', 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center' 
-      }}>
+      <div style={{ minHeight: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <BlinkBlur color="#AC7E2F" size="large" text={eliminando ? "Eliminando..." : "Cargando usuarios..."} textColor="#AC7E2F" />
       </div>
     );
@@ -82,17 +69,19 @@ function ListaUsuarios({ modo }) {
   return (
     <div>
       <div className="div_title">
-        <h1>Gestión de Usuarios - {modo}</h1>
+        <h1>Usuarios</h1>
       </div>
       <div className="cards-container">
         {usuarios && usuarios.length > 0 ? (
           usuarios.map((user) => {
+            const idReal = user.id || user.idUsuario || user.id_usuario;
+
             const imagenRuta = user.imagen 
               ? `/CrudImg/Usuarios/${user.imagen}.png` 
               : "/CrudImg/Usuarios/default.png";
 
             return (
-              <div className="card" key={user.idUsuario}>
+              <div className="card" key={idReal}>
                 <div className="card_image">
                   <img
                     src={imagenRuta}
@@ -103,19 +92,15 @@ function ListaUsuarios({ modo }) {
 
                 <div className="div_content">
                   <h2>{user.nombre}</h2>
-                  <p>
-                    <strong>Correo:</strong> {user.correo}
-                  </p>
-                  <p>
-                    <strong>Rol:</strong> {user.rol}
-                  </p>
+                  <p><strong>Correo:</strong> {user.correo}</p>
+                  <p><strong>Rol:</strong> {user.rol}</p>
                 </div>
 
                 <div className="buttonEditDiv">
                   {modo === "modificar" && (
                     <button
                       id="editbutton"
-                      onClick={() => handleEdit(user.idUsuario)}
+                      onClick={() => handleEdit(idReal)} 
                     >
                       <img src={IMAGENES.EditButton} alt="Modificar" />
                     </button>
@@ -123,7 +108,7 @@ function ListaUsuarios({ modo }) {
                   {modo === "eliminar" && (
                     <button
                       id="deletebutton"
-                      onClick={() => handleDelete(user.idUsuario, user.nombre)}
+                      onClick={() => handleDelete(idReal, user.nombre)} 
                     >
                       <img src={IMAGENES.DeleteButton} alt="Eliminar" />
                     </button>

@@ -13,7 +13,6 @@ export function useAuth() {
 const COOKIE_KEY = "auth:user";
 
 export function AuthProvider({ children }) {
-  // Inicializamos el estado leyendo la cookie INMEDIATAMENTE
   const [user, setUser] = useState(() => {
     const raw = Cookies.get(COOKIE_KEY);
     if (raw) {
@@ -21,11 +20,6 @@ export function AuthProvider({ children }) {
     }
     return null;
   });
-
-  useEffect(() => {
-    if (user) Cookies.set(COOKIE_KEY, JSON.stringify(user), { expires: 1 }); 
-    else Cookies.remove(COOKIE_KEY);
-  }, [user]);
 
   useEffect(() => {
     if (user) Cookies.set(COOKIE_KEY, JSON.stringify(user), { expires: 1 }); 
@@ -43,7 +37,17 @@ export function AuthProvider({ children }) {
       if (!response.ok) throw new Error("Usuario o contraseña incorrecta");
       
       const data = await response.json(); 
-      const userToSave = { name: data.username, token: data.jwt, rol: data.rol };
+      
+      const userToSave = { 
+        idUsuario: data.idUsuario, 
+        name: data.username, 
+        token: data.jwt, 
+        rol: data.rol,
+        correo: data.correo,       
+        direccion: data.direccion, 
+        imagen: data.imagen        
+      };
+      
       setUser(userToSave);
       return true;
     } catch (error) {
@@ -73,8 +77,16 @@ export function AuthProvider({ children }) {
     setUser(null); 
   };
 
+  const actualizarSesion = (nuevosDatos) => {
+    setUser(prev => {
+      const usuarioActualizado = { ...prev, ...nuevosDatos };
+      Cookies.set(COOKIE_KEY, JSON.stringify(usuarioActualizado), { expires: 1 });
+      return usuarioActualizado;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout, actualizarSesion }}>
       {children}
     </AuthContext.Provider>
   );

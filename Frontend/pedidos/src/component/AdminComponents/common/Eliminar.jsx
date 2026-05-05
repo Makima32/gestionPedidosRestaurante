@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "./eliminar.css";
 import { IMAGENES, SERVER } from "../../../utils/assets";
 import { BlinkBlur } from "react-loading-indicators";
-import Header_admin from "../common/headerAdmin";
+import Header_admin from "./headerAdmin.jsx";
 
 import { useApi } from "../../../hook/useApi/useApi.jsx";
 import { obtenerEntidades, eliminarEntidad } from "../../../service/api.js";
@@ -33,6 +33,21 @@ function Eliminar() {
       idKey: "idUsuario",
       folder: "Usuarios",
       singular: "cliente",
+    },
+    pedidos: {
+      idKey: "idPedido",
+      folder: "Pedidos",
+      singular: "pedido",
+    },
+    mesas: {
+      idKey: "idMesa",
+      folder: "Mesas",
+      singular: "mesa",
+    },
+    reservas: {
+      idKey: "idReserva",
+      folder: "Reservas",
+      singular: "reserva",
     },
   };
 

@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import "../common/Formularios.css"; 
+import { useNavigate } from "react-router-dom";
+import "../common/Formularios.css";
 import Header_admin from "../common/headerAdmin";
 import { crearUsuarioAPI } from "../../../service/api.js";
-AnadirUsuario() {
-  const navigate = useNavigate(); 
+
+// AQUI ESTABA EL ERROR: Faltaba la palabra "function"
+function AnadirUsuario() {
+  const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState({
     nombre: "",
     correo: "",
     rol: "user",
     password: "",
+    direccion: "",
   });
 
   const [archivoImagen, setArchivoImagen] = useState(null);
@@ -49,26 +52,24 @@ AnadirUsuario() {
     }
 
     try {
-        await crearUsuarioAPI(formData);
-        alert("Usuario " + usuario.nombre + " creado correctamente.");
-        navigate('/adminClientes'); 
+      await crearUsuarioAPI(formData);
+      alert("Usuario " + usuario.nombre + " creado correctamente.");
+      navigate("/adminClientes");
     } catch (error) {
-        console.error("Error al crear:", error);
-        alert(` Error al crear: ${error.message}`);
+      console.error("Error al crear:", error);
+      alert(` Error al crear: ${error.message}`);
     } finally {
-        setEnviando(false);
+      setEnviando(false);
     }
   };
 
   return (
     <>
-      <Header_admin/>
       <div className="div_father">
         <h2>Añadir Nuevo Usuario</h2>
 
         <div className="div_form">
           <form onSubmit={GuardarUsuario}>
-            
             <label htmlFor="nombre">Nombre de usuario</label>
             <input
               type="text"
@@ -88,15 +89,11 @@ AnadirUsuario() {
             />
 
             <label htmlFor="rol">Rol del usuario</label>
-            <select
-              name="rol"
-              value={usuario.rol}
-              onChange={handleInputChange}
-            >
+            <select name="rol" value={usuario.rol} onChange={handleInputChange}>
               <option value="user">Usuario (user)</option>
               <option value="admin">Administrador (admin)</option>
             </select>
-            
+
             <label htmlFor="password">Contraseña</label>
             <input
               type="password"
@@ -114,9 +111,15 @@ AnadirUsuario() {
               accept="image/png"
               onChange={handleImagenChange}
             />
-
+            <label>Dirección</label>
+            <input
+              type="text"
+              name="direccion"
+              value={usuario.direccion}
+              onChange={handleInputChange}
+            />
             <button type="submit" className="btn-submit" disabled={enviando}>
-                {enviando ? "Guardando..." : "Crear Usuario"}
+              {enviando ? "Guardando..." : "Crear Usuario"}
             </button>
           </form>
         </div>

@@ -100,7 +100,6 @@ function AgregarPlato() {
     try {
       await crearPlatoAPI(formData);
       alert(`Plato "${platoAEnviar.nombre}" añadido correctamente`);
-      // Resetear formulario
       setPlato({ nombre: "", descripcion: "", precio: "", ingredientes: [] });
       setArchivoImagen(null);
       document.getElementById("input-imagen").value = "";
@@ -147,7 +146,6 @@ function AgregarPlato() {
                 onChange={(e) => setIngredienteSeleccionado(e.target.value)}
               >
                 <option value="">-- Selecciona --</option>
-                {/* Encadenamiento opcional para evitar el error de undefined */}
                 {ingredientesApi?.map(ing => (
                   <option key={ing.idIngrediente} value={ing.idIngrediente}>
                     {ing.nombre}
