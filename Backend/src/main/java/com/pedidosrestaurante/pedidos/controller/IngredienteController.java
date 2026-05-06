@@ -70,7 +70,7 @@ public class IngredienteController {
             @RequestPart(value = "imagen", required = false) MultipartFile archivoImagen) {
         
         Optional<Ingrediente> opt = repo.findById(id);
-        if (opt.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ingrediente no encontrado");
+        if (opt.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No encontrado");
 
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -78,6 +78,7 @@ public class IngredienteController {
             Ingrediente ing = opt.get();
 
             guardarImagen(ing, archivoImagen);
+            
             if (cambios.getNombre() != null) ing.setNombre(cambios.getNombre());
             if (cambios.getDescripcion() != null) ing.setDescripcion(cambios.getDescripcion());
             if (cambios.getAlergenos() != null) ing.setAlergenos(cambios.getAlergenos());

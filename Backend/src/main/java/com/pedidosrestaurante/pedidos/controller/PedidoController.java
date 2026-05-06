@@ -50,7 +50,7 @@ public class PedidoController {
         nuevoPedido.setCliente(clienteReal);
         nuevoPedido.setTotal(request.getTotal());
         nuevoPedido.setTipoPedido(request.getTipoPedido());
-        nuevoPedido.setEstadoPago("pagado"); // Pago ficticio: lo marcamos como pagado al crear
+        nuevoPedido.setEstadoPago("pagado"); 
 
         if (request.getDetalles() != null) {
             for (DetallePedidoDTO detalleDTO : request.getDetalles()) {
