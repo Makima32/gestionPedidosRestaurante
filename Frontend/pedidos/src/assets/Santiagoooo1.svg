@@ -1,8 +1,0 @@
-<svg width="220" height="50" xmlns="http://www.w3.org/2000/svg">
-  <rect width="220" height="50" rx="25" fill="#f2ece1" />
-  <clipPath id="clip">
-    <circle cx="25" cy="25" r="18" />
-  </clipPath>
-  <image href="https://github.com/Santiagoooo1.png" x="7" y="7" width="36" height="36" clip-path="url(#clip)" />
-  <text x="55" y="31" font-family="Arial, sans-serif" font-size="16" fill="#333" font-weight="bold">Santiago</text>
-</svg>
