@@ -76,7 +76,7 @@ public class chatbotController {
 
         } catch (Exception e) {
             System.err.println("Error en la API: " + e.getMessage());
-            return "Scusa... la cocina está un poco caótica ahora mismo. ¿Podrías repetir tu pregunta?";
+            return "Ha habido un error en la peticion, intentalo de nuevo mas tarde";
         }
     }
 

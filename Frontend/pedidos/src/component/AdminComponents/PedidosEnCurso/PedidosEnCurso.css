@@ -1,0 +1,104 @@
+.kds-wrapper {
+  margin-top: 12.5vh;
+  padding: 30px;
+  min-height: 80vh;
+}
+
+.kds-header {
+  text-align: center;
+  color: #AC7E2F;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.kds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 60px;
+}
+
+.kds-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  
+  min-height: 650px; 
+  min-width: 400px;
+  border-top:10px solid #e65100; 
+  overflow: hidden;
+}
+
+.kds-card-header {
+  background-color: #fff3e0;
+  padding: 15px 20px;
+  border-bottom: 2px dashed #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kds-id {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e65100;
+}
+
+.kds-tipo {
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: #AC7E2F;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.kds-card-body {
+  padding: 20px;
+  flex-grow: 1; 
+  overflow-y: auto; 
+}
+
+.kds-plato-item {
+  font-size: 1.4rem; 
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  color: #333;
+}
+
+.kds-cantidad {
+  color: #AC7E2F;
+  margin-right: 15px;
+}
+
+.kds-card-footer {
+  padding: 20px;
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+.btn-listo {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background-color: #2e7d32; /* Verde éxito */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btn-listo:hover {
+  background-color: #1b5e20;
+}
+
+.btn-listo:active {
+  transform: scale(0.98);
+}

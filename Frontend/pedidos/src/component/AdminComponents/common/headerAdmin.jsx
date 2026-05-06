@@ -53,12 +53,7 @@ function Header_admin() {
           <Link to="/adminClientes" style={{ color: "black" }}>
             Clientes
           </Link>
-          <Link to="/adminMesas" style={{ color: "black" }}>
-            Mesas
-          </Link>
-          <Link to="/adminReservas" style={{ color: "black" }}>
-            Reservas
-          </Link>
+       
         </div>
 
         <div className="header_account_placeholder_admin"></div>

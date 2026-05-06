@@ -4,7 +4,6 @@ import "../common/Formularios.css";
 import Header_admin from "../common/headerAdmin";
 import { crearUsuarioAPI } from "../../../service/api.js";
 
-// AQUI ESTABA EL ERROR: Faltaba la palabra "function"
 function AnadirUsuario() {
   const navigate = useNavigate();
 
@@ -91,6 +90,8 @@ function AnadirUsuario() {
             <label htmlFor="rol">Rol del usuario</label>
             <select name="rol" value={usuario.rol} onChange={handleInputChange}>
               <option value="user">Usuario (user)</option>
+              <option value="chef">Cocinero (chef)</option>
+
               <option value="admin">Administrador (admin)</option>
             </select>
 

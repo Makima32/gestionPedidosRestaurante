@@ -64,7 +64,6 @@ function Chatbot() {
     }
   }
 
-  // FUNCIÓN PARA FORMATEAR EL TEXTO DE GEMINI (Negritas y saltos de línea)
   const formatearTextoIA = (texto) => {
     if (!texto) return { __html: "" };
     
@@ -77,7 +76,6 @@ function Chatbot() {
 
 return (
     <>
-      {/* El botón redondo solo se muestra si el chat está CERRADO */}
       {!isOpen && (
         <div className="chatbot_button" onClick={() => setIsOpen(true)}>
           <img src={IMAGENES.ChatbotIcon} alt="Bot" />
@@ -87,7 +85,6 @@ return (
       <div className={`chat_window ${isOpen ? "open" : ""}`}>
         <div className="chat_header">
           <h3>Asistente IA</h3>
-          {/* Botón de cerrar X */}
           <button className="close_chat" onClick={() => setIsOpen(false)}>×</button>
         </div>
 

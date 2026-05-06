@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { useEffect } from "react";
 
 import Home from "./pages/home";
@@ -32,26 +37,37 @@ import Layout from "./component/layout/layout";
 import ScrollToTop from "./utils/ScrollTop";
 import ErrorConexion from "./component/Common/ErrorConexion/ErrorConexion";
 import Header_home from "./component/layout/header/headerHome";
-import Header_admin from "./component/AdminComponents/common/headerAdmin"; 
+import Header_admin from "./component/AdminComponents/common/headerAdmin";
 import FooterWeb from "./component/layout/Footer/Footer";
 
-import { ConnectivityProvider, useConnectivity } from "./hook/Conectividad/ConnectivityContext";
+import {
+  ConnectivityProvider,
+  useConnectivity,
+} from "./hook/Conectividad/ConnectivityContext";
 import ProfileInfoPage from "./pages/ProfileInfoPage";
+import PedidoDomicilio from "./pages/PedidoPagoPage";
+import PedidoDomicilioPage from "./pages/PedidoPagoPage";
+import Ticket from "./component/pedidos_component/Ticket/Ticket";
+import PedidoPagoPage from "./pages/PedidoPagoPage";
+import PedidosEnCurso from "./component/AdminComponents/PedidosEnCurso/PedidosEnCurso";
+import PedidosEnCursoPage from "./pages/admin/PedidosEnCursoPage";
 
 function AppContent() {
   const { isOnline, retry } = useConnectivity();
   const location = useLocation();
 
-  const isAdminPath = 
-    location.pathname.startsWith('/admin') || 
-    location.pathname.startsWith('/visualizar') || 
-    location.pathname.startsWith('/eliminar') || 
-    location.pathname.startsWith('/anadir') || 
-    location.pathname.startsWith('/modificar') ||
-    location.pathname.startsWith('/editar-ingrediente') ||
-    location.pathname.startsWith('/editar-usuario');
+  const isAdminPath =
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/visualizar") ||
+    location.pathname.startsWith("/eliminar") ||
+    location.pathname.startsWith("/anadir") ||
+    location.pathname.startsWith("/modificar") ||
+    location.pathname.startsWith("/editar-ingrediente") ||
+    location.pathname.startsWith("/adminMenu") ||
+    location.pathname.startsWith("/editar-usuario");
 
-  
+    
+
   useEffect(() => {
     if (!isOnline) {
       retry();
@@ -62,8 +78,15 @@ function AppContent() {
     return (
       <>
         {isAdminPath ? <Header_admin /> : <Header_home />}
-        
-        <main style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+
+        <main
+          style={{
+            minHeight: "70vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <ErrorConexion onRetry={retry} />
         </main>
 
@@ -75,7 +98,7 @@ function AppContent() {
   return (
     <Routes>
       {/*Administración */}
-      <Route element={<ProtectedRoute />}>
+      <Route element={<ProtectedRoute rolesPermitidos={["admin"]} />}>
         <Route path="/adminIngredientes" element={<AdminIngredientePage />} />
         <Route path="/adminPlatos" element={<AdminPlatoPage />} />
         <Route path="/adminPedidos" element={<AdminPedidosPage />} />
@@ -85,7 +108,10 @@ function AppContent() {
         <Route path="/adminReservas" element={<AdminReservasPage />} />
         <Route path="/visualizar/:tipo" element={<VisualizarPage />} />
         <Route path="/eliminar/:tipo" element={<EliminarPage />} />
-        <Route path="/anadir/ingredientes" element={<AgregarIngredientePage />} />
+        <Route
+          path="/anadir/ingredientes"
+          element={<AgregarIngredientePage />}
+        />
         <Route path="/anadir/usuarios" element={<AgregarUsuarioPage />} />
         <Route path="/anadir/clientes" element={<AgregarUsuarioPage />} />
         <Route path="/adminMenu" element={<AdminMenuPage />} />
@@ -97,25 +123,32 @@ function AppContent() {
         <Route path="/modificar/plato/:id" element={<ModificarPlato />} />
       </Route>
 
+
+      {/* Cocina */}
+      <Route
+      
+        element={<ProtectedRoute rolesPermitidos={["chef"]} />}
+      >
+          <Route path="/cocina" element={<PedidosEnCursoPage />} />
+      </Route>
+
+      {/* Sin protección */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/aboutUs" element={<AboutUsPage />} />
         <Route path="/carta" element={<CartaPage />} />
         <Route path="/pedidos" element={<PedidosPage />} />
+        <Route path="/Pedido" element={<PedidoPagoPage />} />
+        <Route path="/ticket/:idPedido" element={<Ticket />} />
         <Route path="/finalizarPedido" element={<FinalizarPedidoPage />} />
         <Route path="/perfil" element={<ProfileInfoPage />} />
-        
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="*" element={<PageNotFound />} /> 
-      </Route>
 
-    
-      
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
     </Routes>
   );
 }
-
-
 
 function App() {
   return (

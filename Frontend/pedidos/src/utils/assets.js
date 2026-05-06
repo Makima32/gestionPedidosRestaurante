@@ -46,7 +46,8 @@ export const IMAGENES = {
   //Menu images
 
   MenuBanner: "/menu/bannerMenu.webp",
-
+  Domicilio: "/menu/Domicilio.webp",
+  Recoger: "/menu/Recoger.webp",
   //Chatbot
 
   ChatbotIcon: "/icons/chatbotIcon.webp",

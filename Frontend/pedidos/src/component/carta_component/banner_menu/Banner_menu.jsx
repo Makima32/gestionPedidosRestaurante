@@ -11,7 +11,7 @@ style={{ backgroundImage: `url(${IMAGENES.MenuBanner})` }}>
 
 
         <div className="BannerMenu_div_text">
-        <h2>Nuestro Menu</h2>
+        <h2>Nuestro Menú</h2>
         </div>
         </div>
         

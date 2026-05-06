@@ -15,7 +15,6 @@ function EditarUsuario() {
     correo: "",
     rol: "user",
     direccion: "", 
-    password: "", 
     imagenVieja: "", 
   });
 
@@ -34,7 +33,6 @@ function EditarUsuario() {
           correo: data.correo,
           rol: data.rol,
           direccion: data.direccion || "", 
-          password: "", 
           imagenVieja: data.imagen || "",
         });
       } catch (error) {
@@ -81,9 +79,6 @@ function EditarUsuario() {
       imagen: archivoImagen ? null : usuario.imagenVieja
     };
     
-    if (usuario.password) {
-      usuarioFinal.password = usuario.password;
-    }
 
     const formData = new FormData();
     formData.append("cambios", JSON.stringify(usuarioFinal));
@@ -146,6 +141,7 @@ function EditarUsuario() {
               onChange={handleInputChange}
             >
               <option value="user">Usuario (user)</option>
+              <option value="chef">Cocinero (chef)</option> 
               <option value="admin">Administrador (admin)</option>
             </select>
 
@@ -158,14 +154,6 @@ function EditarUsuario() {
               placeholder="Calle, número, piso..."
             />
             
-            <label htmlFor="password">Contraseña (dejar en blanco para no cambiar)</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Nueva contraseña"
-              value={usuario.password}
-              onChange={handleInputChange}
-            />
 
             <label>Subir Nueva Foto de Perfil (.png)</label>
             {usuario.imagenVieja && (

@@ -6,7 +6,7 @@ function AdminMenuPage() {
     return(
         <>
         
-
+        <Header_admin/>
         <AdminMenu/>
         </>
     )

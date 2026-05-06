@@ -58,7 +58,7 @@ function Pedidos() {
   return (
     <div className="div_father_pedidos">
       <header className="pedidos_header">
-        <h1 id="titulo">Hacer pedido</h1>
+        <h1 id="titulo">Realizar pedido</h1>
       </header>
 
       {!isCarritoVisible && (

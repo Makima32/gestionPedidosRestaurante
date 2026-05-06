@@ -1,0 +1,130 @@
+.ticket-page-container {
+  margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 40px 20px;
+    background-color: #f4f0e6; /* Fondo de tu paleta */
+}
+
+.ticket-wrapper {
+    background-color: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-top: 8px solid #b58946; /* Toque de color corporativo */
+}
+
+.ticket-header {
+    text-align: center;
+    border-bottom: 2px dashed #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.ticket-header h2 {
+    color: #4a3c23;
+    margin-bottom: 5px;
+}
+
+.ticket-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.ticket-items {
+    margin-top: 25px;
+}
+
+.ticket-items h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.ticket-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px dashed #ccc;
+    color: #b58946;
+}
+
+.ticket-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.btn-descargar {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-descargar:hover {
+    background-color: #555;
+}
+
+.btn-volver {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #b58946;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-volver:hover {
+    background-color: #b58946;
+    color: white;
+}
+
+/* =========================================
+   MAGIA PARA EL PDF (Solo se aplica al imprimir)
+   ========================================= */
+@media print {
+    body * {
+        visibility: hidden; /* Oculta toda la web (menús, footer, etc) */
+    }
+    
+    .ticket-wrapper, .ticket-wrapper * {
+        visibility: visible; /* Hace visible solo el ticket */
+    }
+    
+    .ticket-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        box-shadow: none; /* Quitamos sombras para el PDF */
+        border: none;
+        width: 100%;
+        max-width: none;
+    }
+
+    .no-print {
+        display: none !important; /* Oculta los botones de descargar y volver en el PDF */
+    }
+}

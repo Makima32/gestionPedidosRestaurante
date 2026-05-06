@@ -58,11 +58,9 @@ public class PlatoController {
             @RequestPart(value = "imagen", required = false) MultipartFile archivoImagen) {
         
         try {
-            // TRANSFORMAMOS EL STRING AL OBJETO PLATO
             ObjectMapper objectMapper = new ObjectMapper();
             Plato plato = objectMapper.readValue(platoJson, Plato.class);
 
-            // 1. Guardar la imagen en el directorio
             guardarImagen(plato, archivoImagen);
 
             if (plato.getIngredientes() != null) {

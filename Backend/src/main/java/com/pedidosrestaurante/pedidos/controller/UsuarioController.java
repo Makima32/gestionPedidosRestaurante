@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pedidosrestaurante.pedidos.models.Usuario;
@@ -106,4 +108,20 @@ public class UsuarioController {
             Files.copy(archivoImagen.getInputStream(), rutaArchivo, StandardCopyOption.REPLACE_EXISTING);
         }
     }
+
+    @PutMapping(value = "/perfil", consumes = { "multipart/form-data" })
+public ResponseEntity<?> modificarPropioPerfil(
+        @RequestPart("cambios") String cambiosJson,
+        @RequestPart(value = "imagen", required = false) MultipartFile archivoImagen) {
+    
+ Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //
+String username = auth.getName(); 
+    Optional<Usuario> userOptional = repository.findByNombre(username);
+    
+    if (userOptional.isPresent()) {
+        return modificarUsuarioMultipart(userOptional.get().getIdUsuario(), cambiosJson, archivoImagen);
+    }
+    
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No se pudo identificar al usuario");
+}
 }

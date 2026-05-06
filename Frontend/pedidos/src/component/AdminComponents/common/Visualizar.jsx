@@ -7,6 +7,8 @@ import Header_admin from "./headerAdmin.jsx";
 import { useApi } from "../../../hook/useApi/useApi.jsx";
 import { obtenerEntidades } from "../../../service/api.js";
 
+import ListarPedidos from "../Pedidos/ListaPedidos.jsx"; 
+
 function Visualizar() {
   const { tipo } = useParams();
 
@@ -38,11 +40,22 @@ function Visualizar() {
   const config = configDiccionario[tipo];
 
   useEffect(() => {
+
     if (config) {
       ejecutarFetch(() => obtenerEntidades(tipo));
     }
   }, [tipo]);
 
+
+  if (tipo === "pedidos") {
+    return (
+      <div>
+        <ListarPedidos />
+      </div>
+    );
+  }
+
+ 
   if (loading) {
     return (
       <>
@@ -90,7 +103,6 @@ function Visualizar() {
                   <div className="card_content_div">
                     <h2>{dato.nombre}</h2>
                     
-                    {/* SOLO muestra descripción si NO es usuario o cliente */}
                     {tipo !== "usuarios" && tipo !== "clientes" && (
                       <p>
                         <strong>Descripción:</strong> {dato.descripcion}

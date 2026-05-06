@@ -24,10 +24,7 @@ function redirigir(valor) {
          <button onClick={() => redirigir("Clientes")} id="ClientesButton"></button>
          </div>
      
-    <div className="adminMenu_div_contentPar">
-         <button onClick={() => redirigir("Mesas")} id="MesasButton"></button>
-         <button onClick={() => redirigir("Reservas")} id="ReservasButton"></button>
-         </div>
+   
      
 
 

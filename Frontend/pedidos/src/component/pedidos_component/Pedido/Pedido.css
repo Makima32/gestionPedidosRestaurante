@@ -1,0 +1,149 @@
+
+
+.pasarela-container {
+    margin-top: 12vh; 
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;     
+    min-height: 80vh;
+    width: 100vw;      
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.pasarela-card {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin: 0 auto !important; 
+}
+
+.pasarela-card h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+.resumen-total {
+    background-color: #f4f0e6;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    border: 1px solid #bcae91;
+}
+
+.resumen-total h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #4a3c23;
+}
+
+.resumen-total span {
+    display: block;
+    margin-top: 5px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #b58946;
+}
+
+.seccion-form {
+    margin-bottom: 30px;
+}
+
+.seccion-form h4 {
+    margin-bottom: 18px;
+    color: #b58946;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #666;
+    text-transform: uppercase;
+    text-align: left; 
+}
+
+.input-group input {
+    width: 100%; 
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    color: #333;
+    box-sizing: border-box; 
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #b58946;
+    box-shadow: 0 0 8px rgba(181, 137, 70, 0.2);
+}
+
+.input-disabled {
+    background-color: #f0f0f0 !important;
+    color: #777 !important;
+    cursor: not-allowed;
+}
+
+.fila-inputs {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.mitad {
+    flex: 1;
+}
+
+.btn-pagar {
+    width: 100%;
+    display: block;
+    padding: 16px;
+    background-color: #b58946;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(181, 137, 70, 0.3);
+}
+
+.btn-pagar:hover:not(:disabled) {
+    background-color: #9c7537;
+    transform: translateY(-2px);
+}
+
+.btn-pagar:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .fila-inputs {
+        flex-direction: column;
+        gap: 0;
+    }
+}

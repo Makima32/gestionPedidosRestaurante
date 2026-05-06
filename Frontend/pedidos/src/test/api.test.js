@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
-// 1. IMPORTANTE: Importamos la nueva función genérica
 import { obtenerEntidades } from '../service/api.js';
 
 describe('API - Peticiones al Servidor (Mocks)', () => {
@@ -8,7 +7,6 @@ describe('API - Peticiones al Servidor (Mocks)', () => {
     vi.clearAllMocks();
   });
 
-  // Limpiamos los mocks 
   afterEach(() => {
     vi.restoreAllMocks();
   });
