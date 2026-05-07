@@ -19,7 +19,6 @@
 
 ---
 
----
 
 ## Galería del Proyecto
 
