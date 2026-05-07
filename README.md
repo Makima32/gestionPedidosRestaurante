@@ -21,19 +21,19 @@
 
 ---
 
-## 📸 Galería del Proyecto
+## Galería del Proyecto
 
 Aquí tienes un vistazo de las interfaces principales que componen el ecosistema de **IL Rituale**:
 
 |  Home Principal |  Carta y Pedidos |
 | :---: | :---: |
-| <img src="./Documentacion/img/home.png" alt="Home" width="450"/> | <img src="./Documentacion/img/hacer_pedido.png" alt="Carta" width="450"/> |
+| <img src="./Documentacion/img/home.png" alt="Home" width="550"/> | <img src="./Documentacion/img/hacer_pedido.png" alt="Carta" width="550"/> |
 | *Escaparate digital con identidad visual propia.* | *Sistema de carrito dinámico y selección de platos.* |
 
 |  Perfil del Usuario | ⚙️ Gestión Administrativa |
 | :---: | :---: |
-| <img src="./Documentacion/img/dashboard_usuario.png" alt="Perfil" width="450"/> | <img src="./Documentacion/img/admin_platos.png" alt="CRUD" width="450"/> |
-| *Historial de pedidos y gestión de datos personales.* | *Control total del inventario, platos e ingredientes.* |
+| <img src="./Documentacion/img/dashboard_usuario.png" alt="Perfil" width="550"/> | <img src="./Documentacion/img/inicio_sesion.png" alt="CRUD" width="550"/> |
+| *Dashboard y datos del usuario.* | *Login de usuario.* |
 
 ---
 
