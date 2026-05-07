@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo_restaurante"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/fondo_app" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/overlay_dark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="vertical"
+            android:background="@drawable/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="12dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:id="@+id/btnBackIngredienteForm"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:text="‹"
+                    android:textColor="@color/accent_restaurant"
+                    android:textSize="42sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ingrediente"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/bg_header_bottom_line" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp"
+                android:background="@drawable/bg_form_card">
+
+                <EditText
+                    android:id="@+id/etNombreIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@null"
+                    android:hint="Nombre"
+                    android:inputType="text"
+                    android:padding="14dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint" />
+
+                <EditText
+                    android:id="@+id/etDescripcionIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@null"
+                    android:hint="Descripción"
+                    android:inputType="textCapSentences"
+                    android:padding="14dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint" />
+
+                <EditText
+                    android:id="@+id/etAlergenosIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@null"
+                    android:hint="Alérgenos"
+                    android:inputType="text"
+                    android:padding="14dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint" />
+
+                <EditText
+                    android:id="@+id/etStockIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@null"
+                    android:hint="Stock"
+                    android:inputType="number"
+                    android:padding="14dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint" />
+
+                <CheckBox
+                    android:id="@+id/cbVegano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:text="Es vegano"
+                    android:textColor="@color/input_hint"
+                    android:buttonTint="@color/accent_restaurant"
+                    android:layout_marginTop="12dp" />
+
+                <EditText
+                    android:id="@+id/etImagenIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@null"
+                    android:hint="URL o nombre de imagen"
+                    android:inputType="text"
+                    android:padding="14dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/input_hint" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnGuardarIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_button_primary"
+                    android:text="Guardar ingrediente"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEliminarIngrediente"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_button_delete"
+                    android:text="Eliminar ingrediente"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

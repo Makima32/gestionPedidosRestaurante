@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="primary_restaurant">#00695C</color>
+    <color name="primary_restaurant_dark">#004D40</color>
+    <color name="accent_restaurant">#D6A84F</color>
+
+    <color name="button_primary_start">#00897B</color>
+    <color name="button_primary_end">#004D40</color>
+    <color name="button_primary_pressed">#003D33</color>
+
+    <color name="delete_red">#D32F2F</color>
+    <color name="delete_red_pressed">#B71C1C</color>
+
+    <color name="input_background">#CC1F1A14</color>
+    <color name="input_border">#D6A84F</color>
+    <color name="input_text">#FFFFFF</color>
+    <color name="input_hint">#E6D6B8</color>
+
+    <color name="overlay_dark">#AA000000</color>
+
+</resources>
