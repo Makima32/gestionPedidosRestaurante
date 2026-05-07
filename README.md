@@ -29,7 +29,7 @@ Aquí tienes un vistazo de las interfaces principales que componen el ecosistema
 | <img src="./Documentacion/img/home.png" alt="Home" width="550"/> | <img src="./Documentacion/img/hacer_pedido.png" alt="Carta" width="550"/> |
 | *Escaparate digital con identidad visual propia.* | *Sistema de carrito dinámico y selección de platos.* |
 
-|  Perfil del Usuario | ⚙️ Gestión Administrativa |
+|  Perfil del Usuario | Inicio de sesion del usuario |
 | :---: | :---: |
 | <img src="./Documentacion/img/dashboard_usuario.png" alt="Perfil" width="550"/> | <img src="./Documentacion/img/inicio_sesion.png" alt="CRUD" width="550"/> |
 | *Dashboard y datos del usuario.* | *Login de usuario.* |
