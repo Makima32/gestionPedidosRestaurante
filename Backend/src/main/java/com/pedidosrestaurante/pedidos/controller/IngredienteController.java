@@ -113,4 +113,49 @@ public class IngredienteController {
         repo.deleteById(id);
         return ResponseEntity.ok("Eliminado");
     }
+
+       // ENDPOINT PARA ANDROID: CREAR CON JSON
+    @PostMapping(value = "/android", consumes = "application/json")
+    public ResponseEntity<String> crearIngredienteAndroid(@RequestBody Ingrediente ingrediente) {
+        repo.save(ingrediente);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Ingrediente creado correctamente");
+    }
+
+    // ENDPOINT PARA ANDROID: ACTUALIZAR CON JSON
+    @PutMapping(value = "/android/{id}", consumes = "application/json")
+    public ResponseEntity<String> actualizarIngredienteAndroid(
+            @PathVariable int id,
+            @RequestBody Ingrediente cambios) {
+
+        Optional<Ingrediente> opt = repo.findById(id);
+
+        if (opt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ingrediente no encontrado");
+        }
+
+        Ingrediente ing = opt.get();
+
+        if (cambios.getNombre() != null) {
+            ing.setNombre(cambios.getNombre());
+        }
+
+        if (cambios.getDescripcion() != null) {
+            ing.setDescripcion(cambios.getDescripcion());
+        }
+
+        if (cambios.getAlergenos() != null) {
+            ing.setAlergenos(cambios.getAlergenos());
+        }
+
+        if (cambios.getImagen() != null) {
+            ing.setImagen(cambios.getImagen());
+        }
+
+        ing.setStock(cambios.getStock());
+        ing.setEsVegano(cambios.isEsVegano());
+
+        repo.save(ing);
+        return ResponseEntity.ok("Ingrediente actualizado correctamente");
+    }
+    
 }

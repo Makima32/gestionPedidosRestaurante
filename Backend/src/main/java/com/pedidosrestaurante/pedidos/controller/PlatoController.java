@@ -157,4 +157,47 @@ public class PlatoController {
                     .body("No se puede eliminar: Este plato forma parte de un pedido existente.");
         }
     }
+
+    
+    // ENDPOINT PARA ANDROID: CREAR CON JSON
+    @PostMapping(value = "/android", consumes = "application/json")
+    public ResponseEntity<String> crearPlatoAndroid(@RequestBody Plato plato) {
+        platoRepo.save(plato);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Plato creado correctamente");
+    }
+
+    // ENDPOINT PARA ANDROID: ACTUALIZAR CON JSON
+    @PutMapping(value = "/android/{id}", consumes = "application/json")
+    public ResponseEntity<String> actualizarPlatoAndroid(
+            @PathVariable int id,
+            @RequestBody Plato cambios) {
+
+        Optional<Plato> opt = platoRepo.findById(id);
+
+        if (opt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Plato no encontrado");
+        }
+
+        Plato plato = opt.get();
+
+        if (cambios.getNombre() != null) {
+            plato.setNombre(cambios.getNombre());
+        }
+
+        if (cambios.getDescripcion() != null) {
+            plato.setDescripcion(cambios.getDescripcion());
+        }
+
+        if (cambios.getImagen() != null) {
+            plato.setImagen(cambios.getImagen());
+        }
+
+        if (cambios.getPrecio() != 0) {
+            plato.setPrecio(cambios.getPrecio());
+        }
+
+        platoRepo.save(plato);
+        return ResponseEntity.ok("Plato actualizado correctamente");
+    }
+
 }
